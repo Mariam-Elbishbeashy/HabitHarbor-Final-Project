@@ -1,0 +1,122 @@
+
+.main {
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 0.6fr 0.5fr 2.6fr 0.4fr 0.5fr 2.6fr 0.4fr; 
+    gap: 15px 0px; 
+    grid-template-areas: 
+      "creating-posts"
+      "user1-post"
+      "post-one"
+      "comment-section1"
+      "user2-post"
+      "post-two"
+      "comment-section2"; 
+    grid-area: main; 
+}
+.creating-posts {
+    display:flex;
+    grid-area: creating-posts;
+    border-bottom: 1px solid gray; 
+}
+
+#images-btn{
+    background-color: white;
+    border: none;
+}
+.input-field{
+    border:none;
+    width: 100%;
+}
+.user1-post { 
+    display: flex;
+    grid-area: user1-post; 
+}
+.post-one { grid-area: post-one; }
+.comment-section1 { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    grid-area: comment-section1;
+    border-bottom: 7px solid gray;  
+}
+
+.user2-post { 
+    display: flex;
+    grid-area: user2-post; 
+}
+.post-two { grid-area: post-two; }
+.comment-section2 {
+    border-bottom: 7px solid gray;
+    grid-area: comment-section2;
+}
+.comment-btn{
+    border: none;
+    background-color:#fbfafa;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+
+}
+
+.your-profile-pic{
+    height: 50px;
+    background-color: white;
+}
+.user-profile-pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.img2, .img1{
+    width: 100%; 
+}
+
+p{
+    font-size: 20px;
+}
+
+.comment-input {
+    display: none;
+    width: 100%;
+}
+
+.comment-input.show-comment-input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.comment-field , .comment-list{
+    border: none;
+    padding: 5px;
+    width: 100%;
+}
+
+.comment-send-btn {
+    border: none;
+    background-color: #88db02;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.comment-list {
+    border-top: 1px solid grey;
+    display: none; 
+}
+
+.show-comment-list {
+    display: block; 
+}
+.comment{
+    margin-top: 15px;
+}
+
+.input-field:focus{
+height: 90px;
+}
