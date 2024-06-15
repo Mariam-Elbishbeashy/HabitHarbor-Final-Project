@@ -1,0 +1,96 @@
+.switches {
+    display: flex;
+    flex-direction: row; /* Align children vertically */
+    justify-content: center; /* Center the children horizontally in the container */
+    align-items: center; /* Align the children vertically at the center */
+    width: 70px; /* Take full width to accommodate children */
+    gap: 10px;
+    margin-left: 525px;
+    border-radius: 15%;
+    padding:10px;
+    background-color: #0f1312;
+}
+.switch-container svg{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    border-radius: 50%;
+    color: white;
+}
+.switch-container:hover svg{
+    color: black;
+    background-color: #CAF746;
+}
+.switch-container.active svg{
+    color: #CAF746;
+    background-color: white;
+}
+
+.analysis {
+    display: flex;
+    flex-direction: column; /* Align children vertically */
+    justify-content: center; /* Center the children horizontally in the container */
+    align-items: center; /* Align the children vertically at the center */
+    width: 100%; /* Take full width to accommodate children */
+}
+.square-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: content;
+    width: 100%;
+}
+.square{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 12em;
+    height: 12em;
+    background-color: #0f1312;
+    box-shadow: 5px 5px 30px black;
+    margin: 20px;
+    border-radius: 30px;
+}
+.square1{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 20em;
+    height: 12em;
+    border-radius: 30px;
+    box-shadow: 5px 5px 30px black;
+    justify-content: left;
+    padding-right: 130px;
+    margin: 20px;
+}
+
+.square2{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 35em;
+    height: 15em;
+    border-radius: 30px;
+    box-shadow: 5px 5px 30px black;
+    justify-content: left;
+    margin: 20px;
+}
+
+.square-text{
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    font-size: x-large;
+    font-style: normal;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#num.square-text{
+    position: absolute;
+    margin-left: 70px;
+    line-height: 40px;
+    font-size: 125px;
+    font-style: normal;
+}
+#image1{
+    width: 450px;
+    height: 230px;
+}
