@@ -1,0 +1,160 @@
+.container {  
+    display: grid;
+    grid-template-columns: 0.05fr 1fr;
+    grid-template-rows: 0.25fr 3.4fr 0.2fr;
+    gap: 20px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Header Header Header"
+        "navbar main main"
+        "footer footer footer";
+    /*to control container default css*/        
+    height: 100vh;
+    margin: 0% !important;
+    max-width: 100% !important;
+    background-color: rgb(248, 246, 246);
+}
+
+/* main style */
+.main {
+    display: block; 
+    padding: 10px;
+}
+
+/* menu style */
+.admin-menu {
+    text-align: center;
+}
+.admin-btn{
+    border-radius: 30px;
+    border: none;
+    background-color: transparent
+}
+
+/* admin profile style */
+.admin-header {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 10px; 
+}
+
+.profile-pic {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    margin-right: 10px;
+}
+.welcome-message {
+    font-size: 40px; 
+    margin: 0; 
+}
+.admin-options {
+    display: flex; 
+    gap: 10px;
+}
+#users-btn, #activities-btn {
+    background: #caf746;
+    color: black;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    padding-right: 3.3em;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  #users-btn .icon, #activities-btn .icon {
+    background: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2em;
+    border-radius: 0.7em;
+    right: 0.3em;
+    transition: all 0.3s;
+  }
+  
+  #users-btn:hover .icon, #activities-btn:hover .icon {
+    width: calc(100% - 0.6em);
+  }
+  
+  #users-btn .icon svg, #activities-btn .icon svg{
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: black;
+  }
+  
+  #users-btn:hover .icon svg, #activities-btn:hover .icon svg {
+    transform: translateX(0.1em);
+  }
+  
+  #users-btn:active .icon, #activities-btn:active .icon {
+    transform: scale(0.95);
+  }
+  #edit-btn:hover, #remove-btn:hover {
+    background-color: grey;
+    color: white;
+}
+  
+.user-category, .challenges-category{
+    display: none;
+    border:1px solid #ccc ;
+    border-radius: 30px;
+    font-size: 20px;
+}
+.admin-btn {
+    transition: background-color 0.3s ease;
+}
+.admin-btn.active {
+    color: white;
+    background-color: black;
+}
+
+/* list style (user & activity) */
+.user-item, .admin-item, .activity-item {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc; 
+}
+
+/* edit, remove buttons style */
+.buttons-container {
+    display: flex; 
+    gap: 5px;
+}
+#add-btn{
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+    margin-top: 5px;
+    font-size: 17px;
+}
+#add-btn:hover {
+    letter-spacing: 2px;
+    background-color: #caf746;
+    color: white;
+    box-shadow: #caf746 0px 7px 29px 0px;
+}
+#add-btn:active {
+    letter-spacing: 2px;
+    background-color: #caf746;
+    color: white;
+    box-shadow: #caf746 0px 0px 0px 0px;
+    transform: scale(1.07);
+}
+
+.swal2-input[type="email"] {
+    width: 70%;
+    margin-left: 75px;
+}

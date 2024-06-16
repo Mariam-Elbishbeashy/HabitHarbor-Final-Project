@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Harbor</title>
+    <link href="../public/css/home.css" rel="stylesheet"/>
+    <link href="../public/css/admin.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <%- include("../partials/header.ejs") %>
+        <%- include("../partials/sidebar.ejs") %>
+        <%- include("../partials/navbar.ejs") %>
+        <div class="main">
+            <div class="main">
+                <!-- Admin Menu -->
+                <div class="admin-menu">
+                    <div class="admin-header">
+                        <img src="./images/profile-pic.png" alt="Profile Picture" class="profile-pic">
+                        <h3 class="welcome-message">Welcome, <span id="admin-name">Lara</span></h3>
+                    </div>
+                    <div class="admin-options">
+                        <button id="users-btn" class="admin-btn" onclick="showUserCategory()">
+                            Users
+                            <div class="icon">
+                                <svg
+                                  height="24"
+                                  width="24"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                  <path
+                                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                        fill="currentColor">
+                                 </path>
+                                </svg>
+                            </div>
+                        </button>
+                        
+                        <div class="user-category"> 
+                            <button id="admin-appear-btn" class="admin-btn" onclick="displayAdmins(); activateButton('admin-appear-btn')">Admin</button>
+                            <button id="user-appear-btn" class="admin-btn" onclick="displayUsers(); activateButton('user-appear-btn')">User</button>
+                        </div>
+                        <button id="activities-btn" class="admin-btn" onclick="showChallengesCategory()">Daily Challenges
+                            <div class="icon">
+                                <svg
+                                  height="24"
+                                  width="24"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                  <path
+                                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                        fill="currentColor">
+                                 </path>
+                                </svg>
+                            </div>
+                        </button>
+                        <div class="challenges-category">
+                            <button id="physical-appear-btn" class="admin-btn" onclick="displayDailyChallenges('Physical'); activateButton('physical-appear-btn')">Physical</button>
+                            <button id="wellbeing-appear-btn" class="admin-btn" onclick="displayDailyChallenges('WellBeing'); activateButton('wellbeing-appear-btn')">Well-being</button>
+                            <button id="nutrition-appear-btn" class="admin-btn" onclick="displayDailyChallenges('Nutrition'); activateButton('nutrition-appear-btn')">Nutrition</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin Content -->
+                <div id="admin-content">
+                    <!-- This div will be used to display either the user list or activity list with js -->
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <script src="../routes/admin.js"></script>
+    <script src="../routes/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+</body>
+</html>
