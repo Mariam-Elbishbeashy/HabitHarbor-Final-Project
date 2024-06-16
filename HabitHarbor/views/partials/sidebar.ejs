@@ -1,0 +1,96 @@
+<div class="sidebar">
+    <div class="profile">
+        <div class="profile-title"><h2 id="profile-title-h2">Profile</h2></div>
+        <div class="profile-picture centered">
+            <img src="./images/profile-pic.png" alt="profile picture" id="profile-pic"/>
+        </div>
+        <div class="age-title centered">Age</div>
+        <div class="height-title centered">Height</div>
+        <div class="weight-title centered">Weight</div>
+        <div class="age-value centered">--</div>
+        <div class="height-value centered">--</div>
+        <div class="weight-value centered">--</div>
+    </div>
+    <div class="calendar"> 
+        <div class="datepicker-top">
+            <div class="month-selector">
+                <button class="arrow"><i class="bi bi-caret-left-fill"></i> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                    </svg>
+                </button>
+
+                <span class="month-name">December 2020</span>
+                <button class="arrow"><i class="bi bi-caret-right-fill"></i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="datepicker-calendar">
+            <span class="day">Mo</span>
+            <span class="day">Tu</span>
+            <span class="day">We</span>
+            <span class="day">Th</span>
+            <span class="day">Fr</span>
+            <span class="day">Sa</span>
+            <span class="day">Su</span>
+            <button class="date faded">30</button>
+            <button class="date">1</button>
+            <button class="date">2</button>
+            <button class="date">3</button>
+            <button class="date">4</button>
+            <button class="date">5</button>
+            <button class="date">6</button>
+            <button class="date">7</button>
+            <button class="date">8</button>
+            <button class="date">9</button>
+            <button class="date">10</button>
+            <button class="date">11</button>
+            <button class="date">12</button>
+            <button class="date">13</button>
+            <button class="date">14</button>
+            <button class="date">15</button>
+            <button class="date">16</button>
+            <button class="date">17</button>
+            <button class="date">18</button>
+            <button class="date">19</button>
+            <button class="date">20</button>
+            <button class="date">21</button>
+            <button class="date">22</button>
+            <button class="date">23</button>
+            <button class="date">24</button>
+            <button class="date">25</button>
+            <button class="date">26</button>
+            <button class="date">27</button>
+            <button class="date">28</button>
+            <button class="date">29</button>
+            <button class="date">30</button>
+            <button class="date">31</button>
+            <button class="date faded">1</button>
+            <button class="date faded">2</button>
+            <button class="date faded">3</button>
+        </div>
+    </div>
+    <div class="badges-title">
+        <h2 id="badge-title">Badges</h2>
+        <i class="bi bi-plus-lg clickable" id="plus-badge"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+          </svg>
+        <button class="seeAll">SeeAll-></button>
+    </div>
+    <div class="badges">
+        <button class="first-badge" onClick="return modalForm(this);">
+            <h5 class="badge-title">100 days Physical Activity Badge</h5>
+            <img src="./images/gold-badge.png" alt="physical badge" id="img-badge1"/>
+        </button>
+        <button class="second-badge" onClick="return modalForm(this);">
+            <h5 class="badge-title">50 days Nutrition Activity Badge</h5>
+            <img src="./images/silver-badge.png" alt="nutrition badge" id="img-badge2"/>
+        </button>
+        <button class="third-badge" onClick="return modalForm(this);">
+            <h5 class="badge-title">10 days Reading Activity Badge</h5>
+            <img src="./images/bronze-badge.png" alt="reading badge" id="img-badge3"/>
+        </button>
+    </div>
+</div>
