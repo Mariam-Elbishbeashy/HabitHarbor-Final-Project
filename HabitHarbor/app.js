@@ -22,10 +22,18 @@ app.set('view engine', 'ejs');
 // app.use("/user", userRoutes);
 // app.use("/admin", adminRoutes);
 
+app.get('/home', (req, res) => {
+  res.render('home');
+});
 
 app.get('/posts', (req, res) => {
   res.render('posts');
 });
+
+app.get('/admin', (req, res) => {
+  res.render('admin');
+});
+
 
 //404 page
 // app.use((req, res) => {
