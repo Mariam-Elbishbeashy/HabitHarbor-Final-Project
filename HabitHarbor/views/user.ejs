@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="styles/user.css">
+    <link rel="stylesheet" href="..\public\css\user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,7 +128,7 @@
             <!--general-->
             <div id="generalContent" class="content">
               <div class="user-profile">
-                <img src="images/download.jpg" alt="Profile Picture" id="profilePic">
+                <img src="../public/images/download.jpg" alt="Profile Picture" id="profilePic">
                 <button onclick="changeProfile()">Change Profile</button>
               </div>
               <div class="user-profile">
@@ -418,11 +418,11 @@
             <h2 class="rate-title">Rate Us!</h2>
             <div class="emoji">
                 <div id="emojis">
-                <img src="images/poor.png">
-                <img src="images/bad.png">
-                <img src="images/okay.png">
-                <img src="images/good.png">
-                <img src="images/excellent.png">
+                <img src="../public/images/poor.png">
+                <img src="../public/images/bad.png">
+                <img src="../public/images/okay.png">
+                <img src="../public/images/good.png">
+                <img src="../public/images/excellent.png">
             </div>
             </div>
             <div class="rating">
@@ -603,8 +603,8 @@
     
     
 
-        <script src="../scripts/user.js"></script>
-        <script src="../scripts/home.js"></script> 
+        <script src="../routes/user.js"></script>
+        <script src="../routes/home.js"></script> 
         
         <script>
         showPassword('currentPassword', 'showCurrentPassword');
