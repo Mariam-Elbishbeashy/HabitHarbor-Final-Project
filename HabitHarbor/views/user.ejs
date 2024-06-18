@@ -1,0 +1,615 @@
+<!--Sondos-->
+<!--user.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="..\public\css\user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="Header">
+            <h1 class="website-name">HabitHarbor</h1>
+            
+            <div class="right-header">
+                <div class="input-container">
+                    <input type="text" placeholder="Search.. ">
+                </div>
+
+                <button class="notifications"> <!-- notifications  -->
+                    <i class="bi bi-bell"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                    </svg>
+                </button>
+
+                <button class="logout" onclick="logout()"> <!-- logout  -->
+                    Logout &#32; &#32;
+                    <i class="bi bi-box-arrow-right"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                </button>
+           </div>
+        </div>
+        <div class="navbar">
+            <img src="images/logo.png" alt="logo" id="logo"/>
+            <div class="icons">
+                <div class="icon-container">
+                    <a href="home.html"> <!-- Home url -->
+                        <i class="bi bi-house"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="icon-container">
+                    <a href="./analysis.html"> <!-- statistics url -->
+                        <i class="bi bi-clipboard-data clickable" id="home-btn"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z"/>
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="icon-container">
+                    <a href="resources.html"> <!-- resources url -->
+                        <i class="bi bi-book clickable" id="book-btn"></i> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="icon-container">
+                    <a href="posts.html"> <!-- community url -->
+                        <i class="bi bi-people-fill clickable" id="people-btn"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="icon-container">
+                    <a href="user.html"> <!-- user profile url -->
+                        <i class="bi bi-person-circle clickable" id="personal-btn"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle clickable" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>
+                    </a>
+                </div>
+                   
+            </div> 
+        </div>
+        
+        <!--User Profile-->
+        <div class="card">
+            <div class="top-panel">
+              <ul>
+                <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
+                <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
+                <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
+                <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
+                <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
+                <li><a href="#" id="feedbackLink" onclick="toggleFontWeight('feedbackLink'); toggleOption('feedback');">Feedback</a></li>
+              </ul>
+            </div>
+
+            <div class="top-panel-mobile">
+                <ul>
+                  <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
+                  <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
+                  <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
+                  <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
+                 </ul>
+              </div>
+
+              <div class="bottom-panel-mobile">
+                <ul>
+                  <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                  <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
+                  <li><a href="#" id="feedbackLink" onclick="toggleFontWeight('feedbackLink'); toggleOption('feedback');">Feedback</a></li>
+                </ul>
+              </div>
+
+            <!--general-->
+            <div id="generalContent" class="content">
+              <div class="user-profile">
+                <img src="../public/images/download.jpg" alt="Profile Picture" id="profilePic">
+                <button onclick="changeProfile()">Change Profile</button>
+              </div>
+              <div class="user-profile">
+                <div class="general">
+                  <div class="general-section">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" value="Ali" readonly>
+                  </div>
+                  <div class="general-section">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" value="Ahmed" readonly>
+                  </div>
+                </div>
+                <div class="general">
+                  <div class="general-section">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" value="ali123" readonly>
+                  </div>
+                </div>
+                <div class="general">
+                  <div class="general-section">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" value="Ali@gmail.com" readonly>
+                  </div>
+                </div>
+                <button onclick="editGeneralInfo()">Edit</button>
+              </div>
+            </div>
+
+            <div id="infoContent" class="content">
+                <div class="ageNumber">
+                <label for="age"><b>Age:</b></label>
+                <input type="text" id="age" value="25" readonly>
+                            
+                <label for="phoneNumber"><b>Phone Number:</b></label>
+                <input type="text" id="phoneNumber" value="+20 1123456789" readonly>
+                <div class="Space"></div>
+                        
+                <button onclick="editInfo()" id="editButton3">Edit</button> 
+                <div class="space"></div> 
+            </div>  
+                <label for="gender"><b>Gender:</b></label>
+                <div id="gender">
+                    <input type="radio" id="male" name="gender" value="male" checked> 
+                    <label for="male" class="gender-label"><i class="fa-solid fa-person"></i> Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female" class="gender-label"><i class="fa-solid fa-person-dress"></i> Female</label>
+                </div>
+                <div class="space"></div>         
+                <label for="country"><b>Country:</b></label>
+                <select id="country">
+                    <option value="Argentina">Argentina</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Chile">Chile</option>
+                    <option value="China">China</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Egypt" selected>Egypt</option>
+                    <option value="Finland">Finland</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Hong Kong">Hong Kong</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="India">India</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Iran">Iran</option>
+                    <option value="Iraq">Iraq</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Vietnam">Vietnam</option>
+                </select>
+                 
+                <div class="user-profile custom-info">
+                    <p>Please choose your gender and country and click "Save Changes" to ensure they are saved.</p>
+                    <h6>Please choose your gender and country and <br> click "Save Changes" to ensure they are saved. </h6>
+                </div>
+                <button onclick="saveGenderCountryChanges()" id="saveChangesButton">Save Changes</button>
+                <button id="editGenderButton" onclick="editGenderCountry()" style="display: none;">Edit</button>
+            </div>
+            
+            
+            <!-- BMI Content -->
+            <div id="bmiContent" class="content" style="display: none;">
+                <div class="user-profile">
+                    <div class="heightWeight">
+                        <label for="height">Height (cm):</label>
+                        <input type="text" id="heightCm" value="176 cm" readonly>
+                    </div>
+                    <div class="heightWeight">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="text" id="weightKg" value="84 kg" readonly>
+                    </div>
+                </div>
+                <div class="user-profile">
+                    <div class="heightWeight">
+                        <label for="height">Height (ft):</label>
+                        <input type="text" id="heightFt" value="5.77 ft" readonly>
+                    </div>
+                    <div class="heightWeight">
+                        <label for="weight">Weight (lbs):</label>
+                        <input type="text" id="weightLbs" value="187.39 lbs" readonly>
+                    </div>
+                </div>
+                <section class="output">
+                    <h3>Your BMI is</h3>
+                    <p id="bmi">0</p>
+                    <p id="desc">N/A</p>
+                </section>
+                <section class="bmi-scale">
+                    <div style="--color:var(--underweight)">
+                        <h4>UnderWeight</h4>
+                        <p>&lt; 18.5</p>
+                    </div>
+                    <div style="--color:var(--normal)">
+                        <h4>Normal</h4>
+                        <p>18.5-25</p>
+                    </div>
+                    <div style="--color:var(--overweight)">
+                        <h4>OverWeight</h4>
+                        <p>25-30</p>
+                    </div>
+
+                    <div style="--color:var(--obese)">
+                        <h4>Obese</h4>
+                        <p>≥ 30</p>
+                    </div>
+
+                </section>
+                <button onclick="weightHeightModal()">Edit Weight and Height</button>
+            </div>
+            
+
+    <!--health info-->
+    <div id="healthInfoContent" class="content" style="display: none;">
+        <div class="user-profile">
+            <label for="healthIssues">Health Issues:</label>
+            <textarea id="health-issues" name="health-issues" rows="3" cols="50" placeholder="Enter your health issues here..."></textarea>
+        </div>
+        <div class="info2-section">
+            <label for="habits-goals">Health/Habit Goals:</label>
+        </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="goal1" name="goal1" class="checkbox-custom">
+                <label class="checkbox-label" for="goal1">Weight Loss</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="goal2" name="goal2" class="checkbox-custom">
+                <label class="checkbox-label" for="goal2">Healthy Eating</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="goal3" name="goal3" class="checkbox-custom">
+                <label class="checkbox-label" for="goal3">Hydration Goals</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="goal4" name="goal4" class="checkbox-custom">
+                <label class="checkbox-label" for="goal4">Healthy Sleep Patterns</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="goal5" name="goal5" class="checkbox-custom" onchange="toggleOtherTextArea()">
+                <label class="checkbox-label" for="goal5">Other</label>
+            </div>
+            
+            <div class="user-profile" id="otherGoalTextArea" style="display: none;">
+                <label for="otherGoal">Other Goal:</label>
+                <textarea id="otherGoal" name="otherGoal" rows="2" cols="50" placeholder="Write here"></textarea>
+            </div>
+           
+            <div class="user-profile custom-info">
+                <p>Please check the boxes for the health goals needed and click "Save Changes" to ensure they are saved.</p>
+              </div>
+
+              <div class="user-profile">
+                <button onclick="saveHealthInfoChanges()">Save Changes</button>
+                <button id="editHealthInfoButton" onclick="editHealthInfo()" style="display: none;">Edit Health Info</button>
+            </div> 
+    </div>
+    
+    <!--social links-->
+ <div id="socialLinksContent" class="content">
+    <div class="user-profile">
+        <div class="social-links">
+            <i class="fa-brands fa-facebook"></i>
+            <input type="text" id="facebookLink" placeholder="Enter your facebook link">
+            <a href="#" onclick="openLink('facebookLink')">Open</a>
+            <div class="error" id="facebookLinkError"></div>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands fa-twitter "></i>
+            <input type="text" id="twitterLink" placeholder="Enter your twitter link">
+            <a href="#" onclick="openLink('twitterLink')">Open</a>
+            <div class="error" id="twitterLinkError"></div>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands fa-instagram"></i>
+            <input type="text" id="instagramLink" placeholder="Enter your instagram link">
+            <a href="#" onclick="openLink('instagramLink')">Open</a>
+            <div class="error" id="instagramLinkError"></div>
+        </div>
+        <div class="social-links">
+            <i class="fa-brands fa-linkedin"></i>
+            <input type="text" id="linkedinLink" placeholder="Enter your linkedin link">
+            <a href="#" onclick="openLink('linkedinLink')">Open</a>
+            <div class="error" id="linkedinLinkError"></div>
+        </div>
+        <div class="user-profile">
+            <button id="saveChangesButton" onclick="saveSocialLinksChanges()">Save Changes</button>
+            <button id="editButton2" style="display: none;" onclick="editSocialLinks()">Edit</button>
+        </div>
+    </div>
+</div>
+
+  <!--password-->
+  <div id="passwordContent" class="content">
+    <div class="user-profile">
+        <div class="password-section">
+            <label for="currentPassword">Current Password:</label>
+            <div class="password-container">
+                <input type="password" id="currentPassword" name="currentPassword">
+                <div class="password-checkbox-container">
+                    <input type="checkbox" id="showCurrentPassword" class="checkbox-custom">
+                    <label for="showCurrentPassword" class="checkbox-label">Show Password</label>
+                </div>
+                <div class="error" id="currentPasswordError"></div>
+            </div>
+        </div>
+        <div class="password-section">
+            <label for="newPassword">New Password:</label>
+            <div class="password-container">
+                <input type="password" id="newPassword" name="newPassword">
+                <div class="password-checkbox-container">
+                    <input type="checkbox" id="showNewPassword" class="checkbox-custom">
+                    <label for="showNewPassword" class="checkbox-label">Show Password</label>
+                </div>
+                <div class="error" id="newPasswordError"></div> 
+            </div>
+        </div>
+        <div class="password-section">
+            <label for="confirmPassword">Confirm Password:</label>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword">
+                <div class="password-checkbox-container">
+                    <input type="checkbox" id="showConfirmPassword" class="checkbox-custom">
+                    <label for="showConfirmPassword" class="checkbox-label">Show Password</label>
+                </div>
+                <div class="error" id="confirmPasswordError"></div> 
+            </div>
+        </div>
+        <button onclick="changePassword()">Save Changes</button>
+    </div>
+</div>
+
+    
+    <!--feedback-->
+    <div id="feedbackContent" class="content" style="display: none;">
+        <div class ="feedback-section">
+            <h2 class="rate-title">Rate Us!</h2>
+            <div class="emoji">
+                <div id="emojis">
+                <img src="../public/images/poor.png">
+                <img src="../public/images/bad.png">
+                <img src="../public/images/okay.png">
+                <img src="../public/images/good.png">
+                <img src="../public/images/excellent.png">
+            </div>
+            </div>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="feedback-textarea">
+                <label for="feedback"><b>Feedback:</b></label>
+                <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Enter feedback here..."></textarea>
+            </div>
+           <button id="submitBtn" onclick="displayFeedbackModal()">Submit</button>
+           <div id="feedbackSubmitButton" style="display: none;">
+            <button onclick="changeRatingButton()">Change rating</button>
+    </div>
+    </div>
+    
+    </div>
+   
+  </div>
+
+    <!--modal-->
+    <div id="saveChanges-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Changes saved successfully!</p>
+          <button id="closeModalBtn">Close</button>
+        </div>
+      </div>
+
+      <!--feedback modal-->
+      <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Thank you for your feedback!</p>
+            <button id="closeFeedbackModalBtn">Close</button>
+        </div>
+    </div>
+
+    <!--editModal-->
+    <div id="editModal" class="editModal">
+        <div class="edit-modal-content">
+          <span class="close" onclick="closeEditModal()">&times;</span>
+          <h2>Edit General Info</h2>
+          <form id="editForm">
+            <div class="input-group">
+              <label for="editFirstName">First Name:</label>
+              <input type="text" id="editFirstName" name="editFirstName">
+              <div class="error" id="firstNameError"></div>
+            </div>
+            <div class="input-group">
+              <label for="editLastName">Last Name:</label>
+              <input type="text" id="editLastName" name="editLastName">
+              <div class="error" id="lastNameError"></div>
+            </div>
+            <div class="input-group">
+              <label for="editUsername">Username:</label>
+              <input type="text" id="editUsername" name="editUsername">
+              <div class="error" id="usernameError"></div>
+            </div>
+            <div class="input-group">
+              <label for="editEmail">Email:</label>
+              <input type="text" id="editEmail" name="editEmail">
+              <div class="error" id="emailError"></div>
+            </div>
+            <div class="button-group">
+                <button type="button" id="save" onclick="validateForm(editForm)">Save Changes</button>
+              <button type="button" onclick="closeEditModal()" class="cancel-button">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="weightHeightModal" class="modal">
+        <div class="weight-height-content">
+            <span class="close" onclick="closeWeightHeightModal()">&times;</span>
+            <h2>Edit Weight and Height</h2>
+            <div>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weightInput" step="0.1">
+                <div class="error" id="weightError"></div>
+                <select id="weightUnit">
+                    <option value="kg">kg</option>
+                    <option value="lbs">lbs</option>
+                </select>
+            </div>
+            <div>
+                <label for="height">Height:</label>
+                <input type="number" id="heightInput" step="0.1">
+                <div class="error" id="heightError"></div>
+                <select id="heightUnit">
+                    <option value="cm">cm</option>
+                    <option value="feet">feet</option>
+                </select>
+            </div>
+            <button onclick="saveWeightHeight()">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <!-- Edit info modal -->
+    <div id="editInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditInfoModal()">&times;</span>
+            <h2>Edit Info</h2>
+            <label for="editAge"><b>Age:</b></label>
+            <input type="text" id="editAge" value="">
+            <div class="error" id="ageError"></div>
+            <div class="space"></div>
+            <label for="editPhoneNumber"><b>Phone Number:</b></label>
+            <div class="Space"></div>
+            <div class="phone-input">
+                <select id="countryCode">
+                    <option value="+1">+1 (United States)</option>
+                    <option value="+7">+7 (Russia)</option>
+                    <option value="+20">+20 (Egypt)</option>
+                    <option value="+27">+27 (South Africa)</option>
+                    <option value="+30">+30 (Greece)</option>
+                    <option value="+31">+31 (Netherlands)</option>
+                    <option value="+32">+32 (Belgium)</option>
+                    <option value="+33">+33 (France)</option>
+                    <option value="+34">+34 (Spain)</option>
+                    <option value="+36">+36 (Hungary)</option>
+                    <option value="+39">+39 (Italy)</option>
+                    <option value="+40">+40 (Romania)</option>
+                    <option value="+41">+41 (Switzerland)</option>
+                    <option value="+43">+43 (Austria)</option>
+                    <option value="+44">+44 (United Kingdom)</option>
+                    <option value="+45">+45 (Denmark)</option>
+                    <option value="+46">+46 (Sweden)</option>
+                    <option value="+47">+47 (Norway)</option>
+                    <option value="+48">+48 (Poland)</option>
+                    <option value="+49">+49 (Germany)</option>
+                    <option value="+51">+51 (Peru)</option>
+                    <option value="+52">+52 (Mexico)</option>
+                    <option value="+53">+53 (Cuba)</option>
+                    <option value="+54">+54 (Argentina)</option>
+                    <option value="+55">+55 (Brazil)</option>
+                    <option value="+56">+56 (Chile)</option>
+                    <option value="+57">+57 (Colombia)</option>
+                    <option value="+58">+58 (Venezuela)</option>
+                    <option value="+60">+60 (Malaysia)</option>
+                    <option value="+61">+61 (Australia)</option>
+                    <option value="+62">+62 (Indonesia)</option>
+                    <option value="+63">+63 (Philippines)</option>
+                    <option value="+64">+64 (New Zealand)</option>
+                    <option value="+65">+65 (Singapore)</option>
+                    <option value="+66">+66 (Thailand)</option>
+                    <option value="+81">+81 (Japan)</option>
+                    <option value="+82">+82 (South Korea)</option>
+                    <option value="+84">+84 (Vietnam)</option>
+                    <option value="+86">+86 (China)</option>
+                    <option value="+90">+90 (Turkey)</option>
+                    <option value="+91">+91 (India)</option>
+                    <option value="+92">+92 (Pakistan)</option>
+                    <option value="+93">+93 (Afghanistan)</option>
+                    <option value="+94">+94 (Sri Lanka)</option>
+                    <option value="+95">+95 (Myanmar)</option>
+                    <option value="+98">+98 (Iran)</option>
+                    <option value="+234">+234 (Nigeria)</option>
+                    <option value="+251">+251 (Ethiopia)</option>
+                    <option value="+254">+254 (Kenya)</option>
+                    <option value="+255">+255 (Tanzania)</option>
+                    <option value="+256">+256 (Uganda)</option>
+                    <option value="+260">+260 (Zambia)</option>
+                    <option value="+263">+263 (Zimbabwe)</option>
+                </select>
+                <div class="Space"></div>
+                <input type="text" id="editPhoneNumber" value="">
+                <div class="error" id="numberError"></div>
+            </div>
+            <div class="space"></div>
+            <button onclick="saveEditedInfo()">Save</button>
+        </div>
+    </div>
+    
+    
+
+        <script src="../routes/user.js"></script>
+        <script src="../routes/home.js"></script> 
+        
+        <script>
+        showPassword('currentPassword', 'showCurrentPassword');
+        showPassword('newPassword', 'showNewPassword');
+        showPassword('confirmPassword', 'showConfirmPassword');
+        </script>
+</body>
+</html>
