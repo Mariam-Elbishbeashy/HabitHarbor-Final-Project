@@ -17,9 +17,11 @@
         <%- include("partials/sidebar.ejs") %>
         <%- include("partials/navbar.ejs") %>
         <div class="main">
+          <form id="search-form" action="/search" method="get">
             <div class="search-area">
                 <textarea placeholder="&#x1F50E; Let's find what you're looking for... " class="input-field"></textarea>
             </div>
+          </form>
             <div class="categories-area">
                 <button class="categories-btn training-btn">Training</button>
                 <button class="categories-btn nutrition-btn">Nutrition</button>
@@ -44,113 +46,37 @@
                         <a href="#">Read More</a>
                       </p>
                     </div>
+                  </div>        
+                <% data.forEach(resource => { %>
+                  <div class="card">
+                      <div class="image">
+                          <img src="<%= resource.Image %>" alt="<%= resource.Title %>"/>
+                      </div>
+                        <div class="content">
+                          <a href="<%= resource.URL %>">
+                            <span class="title">
+                              <%= resource.Title %>
+                            </span>
+                          </a>
+                          <p class="desc">
+                            <%= resource.Paragraph %>
+                          </p>
+                        </div>
                   </div>
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/1__Z1EqT5ZsKKMkoEkeKY9Bg.webp" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://www.harborcomputerservices.net/the-value-of-training/">
-                         <span class="title">
-                            Top 10 Types of Employee Training Programs at Workplace
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                   
-                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/featured-2.png" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://www.chrmp.com/benefits-of-employee-training/">
-                         <span class="title">
-                            12 Benefits of Employee Training: Why is Employee Training Important?.
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                   
-                     </div>
-                </div>
-               
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/Corporate-Training.jpg" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://www.protechpropertysolutions.co.uk/company/training/">
-                         <span class="title">
-                            Training
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                    </div>
-                </div>
-                 
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/what-is-refresher-training.webp" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://samelane.com/blog/what-is-refresher-training/">
-                         <span class="title">
-                            What is refresher training, and how can it benefit your organization?
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/training.png" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://www.harborcomputerservices.net/the-value-of-training/">
-                         <span class="title">
-                            The Value of Training
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="image">
-                        <img src="./images/HiRes-768x410.jpg" alt="training"/>
-                    </div>
-                     <div class="content">
-                       <a href="https://www.litmos.com/blog/blended-learning/7-top-blended-learning-benefits-for-corporate-training">
-                         <span class="title">
-                            7 Top Blended Learning Benefits For Corporate Training
-                         </span>
-                       </a>
-                       <p class="desc">
-                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-                         dolores, possimus pariatur animi temporibus nesciunt praesentium 
-                       </p>
-                    </div>
-                </div>
-            </div>
+                  <% }) %>
+              </div>
         </div>
         <div class="footer"></div>
     </div>
     <script src="../scripts/home.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.getElementById('search-input').addEventListener('keydown', function(event) {
+          if (event.key === 'Enter') {
+              event.preventDefault();
+              document.getElementById('search-form').submit();
+          }
+      });
+  </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
 const Resource = require('./models/resourcedb');
-const data = require('./models/resourcedata');
+const data = require('./config/resourcedata');
 
 // express app
 const app = express();
@@ -47,10 +47,29 @@ app.get('/admin', (req, res) => {
   res.render('admin');
 });
 
-app.get('/resources', (req, res) => {
-  res.render('resources');
+app.get('/resources', async (req, res) => {
+  try {
+    const resources = await Resource.find({});
+    res.render('resources', { data: resources });
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
+
+app.get('/', async (req, res) => {
+  const searchKey = req.query.key;
+  try {
+    const data = await Resource.find({
+      "$or": [
+        { Category: { $regex: searchKey, $options: 'i' } }
+      ]
+    });
+    res.render('resources', { data });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 //404 page
 // app.use((req, res) => {
