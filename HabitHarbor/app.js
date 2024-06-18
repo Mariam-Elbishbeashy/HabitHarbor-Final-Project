@@ -6,6 +6,8 @@ const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
+const Activities = require('./models/activitydb');
+const Activitydata = require('./config/activitydata');
 
 // express app
 const app = express();
@@ -22,6 +24,10 @@ mongoose.connect(dbURI)
     await Users.deleteMany({}); 
     const result1 = await Users.insertMany(Userdata);
     console.log(`${result1.length} documents inserted successfully`);
+
+    await Activities.deleteMany({}); 
+    const result2 = await Activities.insertMany(Activitydata);
+    console.log(`${result2.length} documents inserted successfully`);
 
 
     // Start express server after inserting data
