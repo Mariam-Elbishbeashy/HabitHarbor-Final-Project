@@ -4,7 +4,6 @@ activityData =[
     "content": "30-minute morning yoga session to improve flexibility.",
     "ageRange": { "min": 18, "max": 65 },
     "bmiRange": { "min": 18.5, "max": 24.9 },
-    "duration": 30,
     "intensity": "low"
     },
     {
@@ -12,7 +11,6 @@ activityData =[
     "content": "10-minute guided meditation for relaxation.",
     "ageRange": { "min": 12, "max": 80 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 10,
     "intensity": "low"
     },
     {
@@ -20,7 +18,6 @@ activityData =[
     "content": "Healthy breakfast recipe with oats and fruits.",
     "ageRange": { "min": 5, "max": 70 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 15,
     "intensity": "low"
     },
     {
@@ -28,7 +25,6 @@ activityData =[
     "content": "High-intensity interval training (HIIT) workout.",
     "ageRange": { "min": 18, "max": 40 },
     "bmiRange": { "min": 18.5, "max": 29.9 },
-    "duration": 20,
     "intensity": "high"
     },
     {
@@ -36,7 +32,6 @@ activityData =[
     "content": "45-minute brisk walking session.",
     "ageRange": { "min": 25, "max": 75 },
     "bmiRange": { "min": 18.5, "max": 30.0 },
-    "duration": 45,
     "intensity": "medium"
     },
     {
@@ -44,7 +39,6 @@ activityData =[
     "content": "20-minute mindfulness meditation.",
     "ageRange": { "min": 15, "max": 80 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 20,
     "intensity": "low"
     },
     {
@@ -52,7 +46,6 @@ activityData =[
     "content": "Low-carb lunch recipe: Grilled chicken salad.",
     "ageRange": { "min": 18, "max": 70 },
     "bmiRange": { "min": 18.0, "max": 35.0 },
-    "duration": 30,
     "intensity": "low"
     },
     {
@@ -60,7 +53,6 @@ activityData =[
     "content": "60-minute swimming session.",
     "ageRange": { "min": 12, "max": 50 },
     "bmiRange": { "min": 18.0, "max": 28.0 },
-    "duration": 60,
     "intensity": "medium"
     },
     {
@@ -68,7 +60,6 @@ activityData =[
     "content": "15-minute stretching routine.",
     "ageRange": { "min": 10, "max": 80 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 15,
     "intensity": "low"
     },
     {
@@ -76,7 +67,6 @@ activityData =[
     "content": "30-minute breathing exercises for stress relief.",
     "ageRange": { "min": 20, "max": 65 },
     "bmiRange": { "min": 16.0, "max": 35.0 },
-    "duration": 30,
     "intensity": "low"
     },
     {
@@ -84,7 +74,6 @@ activityData =[
     "content": "High-protein dinner recipe: Baked salmon with veggies.",
     "ageRange": { "min": 18, "max": 65 },
     "bmiRange": { "min": 18.0, "max": 30.0 },
-    "duration": 40,
     "intensity": "low"
     },
     {
@@ -92,7 +81,6 @@ activityData =[
     "content": "20-minute Pilates session.",
     "ageRange": { "min": 18, "max": 60 },
     "bmiRange": { "min": 18.0, "max": 25.0 },
-    "duration": 20,
     "intensity": "medium"
     },
     {
@@ -100,7 +88,6 @@ activityData =[
     "content": "30-minute strength training with dumbbells.",
     "ageRange": { "min": 20, "max": 50 },
     "bmiRange": { "min": 18.5, "max": 30.0 },
-    "duration": 30,
     "intensity": "high"
     },
     {
@@ -108,7 +95,6 @@ activityData =[
     "content": "15-minute progressive muscle relaxation.",
     "ageRange": { "min": 15, "max": 70 },
     "bmiRange": { "min": 16.0, "max": 35.0 },
-    "duration": 15,
     "intensity": "low"
     },
     {
@@ -116,7 +102,6 @@ activityData =[
     "content": "Smoothie recipe: Spinach and banana smoothie.",
     "ageRange": { "min": 5, "max": 60 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 10,
     "intensity": "low"
     },
     {
@@ -124,7 +109,6 @@ activityData =[
     "content": "10-minute jump rope session.",
     "ageRange": { "min": 12, "max": 35 },
     "bmiRange": { "min": 18.5, "max": 29.9 },
-    "duration": 10,
     "intensity": "high"
     },
     {
@@ -132,7 +116,6 @@ activityData =[
     "content": "25-minute Tai Chi session for balance and flexibility.",
     "ageRange": { "min": 20, "max": 70 },
     "bmiRange": { "min": 16.0, "max": 35.0 },
-    "duration": 25,
     "intensity": "low"
     },
     {
@@ -140,7 +123,6 @@ activityData =[
     "content": "Vegetarian dinner recipe: Quinoa and vegetable stir-fry.",
     "ageRange": { "min": 15, "max": 65 },
     "bmiRange": { "min": 18.0, "max": 30.0 },
-    "duration": 35,
     "intensity": "low"
     },
     {
@@ -148,7 +130,6 @@ activityData =[
     "content": "Cycling: 30-minute ride at a moderate pace.",
     "ageRange": { "min": 18, "max": 50 },
     "bmiRange": { "min": 18.0, "max": 28.0 },
-    "duration": 30,
     "intensity": "medium"
     },
     {
@@ -156,7 +137,6 @@ activityData =[
     "content": "10-minute gratitude journaling session.",
     "ageRange": { "min": 10, "max": 80 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 10,
     "intensity": "low"
     },
     {
@@ -164,7 +144,6 @@ activityData =[
     "content": "Healthy snack recipe: Greek yogurt with berries and nuts.",
     "ageRange": { "min": 5, "max": 70 },
     "bmiRange": { "min": 16.0, "max": 40.0 },
-    "duration": 5,
     "intensity": "low"
     },
     {
@@ -172,7 +151,6 @@ activityData =[
     "content": "20-minute beginner's dance workout.",
     "ageRange": { "min": 15, "max": 50 },
     "bmiRange": { "min": 18.0, "max": 30.0 },
-    "duration": 20,
     "intensity": "medium"
     },
     {
@@ -180,7 +158,6 @@ activityData =[
     "content": "30-minute guided imagery for relaxation and stress reduction.",
     "ageRange": { "min": 18, "max": 70 },
     "bmiRange": { "min": 16.0, "max": 35.0 },
-    "duration": 30,
     "intensity": "low"
     },
     {
@@ -188,7 +165,6 @@ activityData =[
     "content": "Vegan lunch recipe: Chickpea and quinoa salad.",
     "ageRange": { "min": 18, "max": 60 },
     "bmiRange": { "min": 16.0, "max": 35.0 },
-    "duration": 25,
     "intensity": "low"
     },
     {
@@ -196,7 +172,6 @@ activityData =[
     "content": "15-minute core strengthening exercises.",
     "ageRange": { "min": 20, "max": 45 },
     "bmiRange": { "min": 18.0, "max": 28.0 },
-    "duration": 15,
     "intensity": "high"
     }
 ]

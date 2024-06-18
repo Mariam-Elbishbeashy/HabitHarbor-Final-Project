@@ -252,16 +252,38 @@ function addChallenge(form) {
     Swal.fire({
         title: "Add challenge",
         html: `
-            <label>Select a category:</label>
-            <select id="category-select" class="swal2-select" style="width: 80%;">
-                <option value="physical">Select</option>
-                <option value="physical">Physical</option>
-                <option value="well_being">Well-being</option>
-                <option value="nutrition">Nutrition</option>
-            </select>
-            <label>Challenge:</label>
-            <input id="swal-input1" class="swal2-input" style="width: 80%;">
+            <form id="challenge-form">
+                <label>Select a category:</label>
+                <select id="category-select" class="swal2-select" style="width: 80%;">
+                    <option value="physical">Select</option>
+                    <option value="physical">Physical</option>
+                    <option value="well_being">Well-being</option>
+                    <option value="nutrition">Nutrition</option>
+                </select>
+                <label>Challenge:</label>
+                <input id="swal-input1" class="swal2-input" style="width: 80%;">
+                <label>Age Range:</label>
+                <div style="display: flex; justify-content: centre; width: 80%;">
+                    <input id="age-min" name="age_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
+                    <input id="age-max" name="age_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
+                </div>
+                
+                <label>BMI Range:</label>
+                <div style="display: flex; justify-content: centre; width: 80%;">
+                    <input id="bmi-min" name="bmi_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
+                    <input id="bmi-max" name="bmi_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
+                </div>
+                
+                <label>Intensity:</label>
+                <select id="intensity-select" name="intensity" class="swal2-select" style="width: 80%;">
+                    <option value="" disabled selected>Select</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </form>
         `,
+        
         showCancelButton: true,
         confirmButtonText: '<swal-button type="confirm">Save As</swal-button>',
         cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
@@ -269,18 +291,67 @@ function addChallenge(form) {
         preConfirm: () => {
             const category = document.getElementById("category-select").value;
             const challenge = document.getElementById("swal-input1").value;
+            const ageMin = document.getElementById("age-min").value;
+            const ageMax = document.getElementById("age-max").value;
+            const bmiMin = document.getElementById("bmi-min").value;
+            const bmiMax = document.getElementById("bmi-max").value;
+            const intensity = document.getElementById("intensity-select").value;
 
-            if (!category || !challenge) {
-                Swal.showValidationMessage("Please enter both category and challenge.");
+            if (!category || !challenge || !ageMin || !ageMax || !bmiMin || !bmiMax || !intensity) {
+                Swal.showValidationMessage("Please fill in all fields.");
                 return false;
-            }  
+            } 
     
-            return { category, challenge };
+            return { category, challenge, ageMin, ageMax, bmiMin, bmiMax, intensity };
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            const { category, challenge } = result.value;
-            Swal.fire(`Category: ${category}, Challenge: ${challenge}`, "", "success");
+            const { category, challenge, ageMin, ageMax, bmiMin, bmiMax, intensity } = result.value;
+
+            Swal.fire(`Category: ${category}, Challenge: ${challenge}, Age Range ${ageMin}-${ageMax}, BMI Range ${bmiMin}-${bmiMax}, Intensity: ${intensity}`, "", "success");
+            const form = document.createElement('form');
+            form.action = '/admin';
+            form.method = 'post';
+            form.style.display = 'none';
+
+            const categoryInput = document.createElement('input');
+            categoryInput.name = 'category';
+            categoryInput.value = category;
+            form.appendChild(categoryInput);
+
+            const challengeInput = document.createElement('input');
+            challengeInput.name = 'content';
+            challengeInput.value = challenge;
+            form.appendChild(challengeInput);
+
+            const ageMinInput = document.createElement('input');
+            ageMinInput.name = 'ageRange.min';
+            ageMinInput.value = ageMin;
+            form.appendChild(ageMinInput);
+
+            const ageMaxInput = document.createElement('input');
+            ageMaxInput.name = 'ageRange.max';
+            ageMaxInput.value = ageMax;
+            form.appendChild(ageMaxInput);
+
+            const bmiMinInput = document.createElement('input');
+            bmiMinInput.name = 'bmiRange.min';
+            bmiMinInput.value = bmiMin;
+            form.appendChild(bmiMinInput);
+
+            const bmiMaxInput = document.createElement('input');
+            bmiMaxInput.name = 'bmiRange.max';
+            bmiMaxInput.value = bmiMax;
+            form.appendChild(bmiMaxInput);
+
+            const intensityInput = document.createElement('input');
+            intensityInput.name = 'intensity';
+            intensityInput.value = intensity;
+            form.appendChild(intensityInput);
+
+            document.body.appendChild(form);
+            form.submit();
+
         } else if (result.isDenied) {
             Swal.fire("Changes discarded", "", "info");
         }

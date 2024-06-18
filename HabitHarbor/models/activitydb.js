@@ -18,10 +18,6 @@ const activitySchema = new mongoose.Schema({
         min: {type: Number, required: true},
         max: {type: Number, required: true}
     },
-    duration: {
-        type: Number,
-        required: true
-    },
     intensity: {
         type: String,
         required: true

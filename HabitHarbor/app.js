@@ -9,6 +9,7 @@ const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
 
+
 // express app
 const app = express();
 const port = 3000;
@@ -59,6 +60,21 @@ app.get('/posts', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
+
+app.post('/admin', (req, res) => {
+  console.log(req.body)
+
+  const activity = new Activities(req.body);
+  activity.save().then(() =>{
+    res.redirect("/admin")
+  }).catch((err)=>{
+    console.log(err);
+  });
+
+  
+});
+
+
 app.get('/', (req, res) => {
   res.render('front');
 });
@@ -72,6 +88,8 @@ app.get('/resources', async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+
 
 
 app.get('/', async (req, res) => {
