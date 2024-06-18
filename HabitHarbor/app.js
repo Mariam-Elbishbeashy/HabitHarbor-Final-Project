@@ -46,6 +46,9 @@ app.get('/posts', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
+app.get('/', (req, res) => {
+  res.render('front');
+});
 
 app.get('/resources', async (req, res) => {
   try {
