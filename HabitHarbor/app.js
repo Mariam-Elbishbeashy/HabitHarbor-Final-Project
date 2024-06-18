@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
+const Users = require('./models/userdb');
+const Userdata = require('./config/userdata');
 
 // express app
 const app = express();
@@ -16,6 +18,11 @@ mongoose.connect(dbURI)
     await Resource.deleteMany({}); 
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
+
+    await Users.deleteMany({}); 
+    const result1 = await Users.insertMany(Userdata);
+    console.log(`${result1.length} documents inserted successfully`);
+
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -49,6 +56,7 @@ app.get('/admin', (req, res) => {
 app.get('/', (req, res) => {
   res.render('front');
 });
+
 
 app.get('/resources', async (req, res) => {
   try {
