@@ -57,26 +57,21 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
-
+let searchTerms = [];
 app.get('/resources', async (req, res) => {
-  try {
-    const resources = await Resource.find({});
-    res.render('resources', { data: resources });
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-
-app.get('/', async (req, res) => {
   const searchKey = req.query.key;
   try {
-    const data = await Resource.find({
-      "$or": [
-        { Category: { $regex: searchKey, $options: 'i' } }
-      ]
-    });
-    res.render('resources', { data });
+    let resources;
+
+    resources = await Resource.find(searchKey ? { Category: { $regex: searchKey, $options: 'i' } } : {});
+  
+    const message = resources.length === 0 ? 'No data found.' : null;
+
+    if (searchKey && resources.length > 0 && !searchTerms.includes(searchKey)) {
+      searchTerms.push(searchKey);
+    }
+
+    res.render('resources', { data: resources, message, searchTerms}); 
   } catch (err) {
     res.status(500).send(err);
   }

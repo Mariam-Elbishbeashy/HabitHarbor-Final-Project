@@ -123,8 +123,14 @@ img {
 
 .blog-card{
     max-width: 620px;
+    width: 100%;
 }
 
 h2{
     margin-top: 10px !important;
+    font-size: 30px !important;
+}
+
+.read-more:hover{
+    text-decoration: underline;
 }
