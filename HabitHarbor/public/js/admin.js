@@ -63,7 +63,7 @@ function displayUsers() {
                 `;
 
                 removeUserBtn.addEventListener('click', function() {
-                    deleteForm(user);
+                    deleteUserForm(user);
                 });
 
                 addButton.addEventListener('click', function() {
@@ -149,7 +149,7 @@ function displayAdmins() {
                 `;
 
                 removeAdminBtn.addEventListener('click', function() {
-                    deleteForm(admin);
+                    deleteUserForm(admin);
                 });
 
                 addButton.addEventListener('click', function() {
@@ -221,7 +221,7 @@ async function displayResources() {
                 </svg>
             `;
             removeResourceBtn.addEventListener('click', function() {
-                deleteForm(resource); 
+                deleteResourceForm(resource); 
             });
 
             addButton.addEventListener('click', function() {
@@ -297,7 +297,7 @@ async function displayDailyChallenges(category) {
         `;
         removeActivityBtn.addEventListener('click', function() {
           // Call deleteForm with the necessary parameters
-          deleteForm(activity.content); // Assuming 'name' is unique
+          deleteActivityForm(activity); // Assuming 'name' is unique
         });
   
         addButton.addEventListener('click', function() {
@@ -355,7 +355,18 @@ function activateButton(buttonId) {
     const activeButton = document.getElementById(buttonId);
     activeButton.classList.add('active');
 }
-function deleteForm(form){
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.delete-user-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const userId = event.target.getAttribute('data-user-id');
+
+            deleteForm({ _id: userId });
+        });
+    });
+});
+
+function deleteUserForm(user) {
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -366,14 +377,135 @@ function deleteForm(form){
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-        Swal.fire({
-            title: "Deleted!",
-            text: "Activity has been deleted.",
-            icon: "success"
-        });
+            console.log("User confirmed deletion");
+
+            const form = document.createElement('form');
+            form.action = `/admin/deleteusers/${user._id}?_method=DELETE`; 
+            form.method = 'POST'; 
+
+            const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+            form.appendChild(methodInput);
+
+            const userIdInput = document.createElement('input');
+            userIdInput.type = 'hidden';
+            userIdInput.name = '_id';
+            userIdInput.value = user._id;
+            form.appendChild(userIdInput);
+
+            document.body.appendChild(form);
+
+            form.submit();
+            console.log("Form submitted");
+
+        } else {
+            console.log("User canceled deletion");
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.delete-activity-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const activityId = event.target.getAttribute('data-activity-id');
+
+            deleteActivityForm({ _id: activityId });
+        });
+    });
+});
+
+function deleteActivityForm(activity) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("User confirmed deletion");
+
+            const form = document.createElement('form');
+            form.action = `/admin/deleteactivities/${activity._id}?_method=DELETE`; 
+            form.method = 'POST'; 
+
+            const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+            form.appendChild(methodInput);
+
+            const activityIdInput = document.createElement('input');
+            activityIdInput.type = 'hidden';
+            activityIdInput.name = '_id';
+            activityIdInput.value = activity._id;
+            form.appendChild(activityIdInput);
+
+            document.body.appendChild(form);
+
+            form.submit();
+            console.log("Form submitted");
+
+        } else {
+            console.log("User canceled deletion");
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.delete-resource-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const resourceId = event.target.getAttribute('data-resource-id');
+
+            deleteResourceForm({ _id: resourceId });
+        });
+    });
+});
+
+function deleteResourceForm(resource) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("User confirmed deletion");
+
+            const form = document.createElement('form');
+            form.action = `/admin/deleteresources/${resource._id}?_method=DELETE`; 
+            form.method = 'POST'; 
+
+            const methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+            form.appendChild(methodInput);
+
+            const resourceIdInput = document.createElement('input');
+            resourceIdInput.type = 'hidden';
+            resourceIdInput.name = '_id';
+            resourceIdInput.value = resource._id;
+            form.appendChild(resourceIdInput);
+
+            document.body.appendChild(form);
+
+            form.submit();
+            console.log("Form submitted");
+
+        } else {
+            console.log("User canceled deletion");
+        }
+    });
+}
+
+
 function addResource(form) {
     Swal.fire({
         title: "Add Resource",
@@ -753,81 +885,6 @@ function editChallenge(form) {
         }
     });
 }
-
-// function addUser(form) {
-//     Swal.fire({
-//         title: "Add User",
-//         input: "email",
-//         inputLabel: "Your email address",
-//         inputPlaceholder: "Enter your email address",
-//         html: `
-//             <label>First Name:</label>
-//             <input id="swal-input1" class="swal2-input" style="width: 80%;">
-//             <label>Last Name:</label>
-//             <input id="swal-input2" class="swal2-input" style="width: 80%;">
-//         `,
-//         showCancelButton: true,
-//         confirmButtonText: '<swal-button type="confirm">Save As</swal-button>',
-//         cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
-//         focusConfirm: false,
-//         preConfirm: () => {
-//             const email = Swal.getPopup().querySelector('[type="email"]').value;
-//             const input1 = document.getElementById("swal-input1").value;
-//             const input2 = document.getElementById("swal-input2").value;
-    
-//             if (!email || !input1 || !input2) {
-//                 Swal.showValidationMessage("Please enter all fields.");
-//             }
-    
-//             return { email, input1, input2 };
-//         }
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             const { email, input1, input2 } = result.value;
-//             Swal.fire(`Email: ${email}, First Name: ${input1}, Last Name: ${input2}`, "", "success");
-//         } else if (result.isDenied) {
-//             Swal.fire("Changes discarded", "", "info");
-//         }
-//     });  
-// }
-
-// function editUser(form) {
-//     Swal.fire({
-//         title: "Edit User",
-//         input: "email",
-//         inputLabel: "Your email address",
-//         inputPlaceholder: "Enter your email address",
-//         html: `
-//             <label>First Name:</label>
-//             <input id="swal-input1" class="swal2-input" style="width: 80%;">
-//             <label>Last Name:</label>
-//             <input id="swal-input2" class="swal2-input" style="width: 80%;">
-//         `,
-//         showCancelButton: true,
-//         confirmButtonText: '<swal-button type="confirm">Save As</swal-button>',
-//         cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
-//         focusConfirm: false,
-//         preConfirm: () => {
-//             const email = Swal.getPopup().querySelector('[type="email"]').value;
-//             const input1 = document.getElementById("swal-input1").value;
-//             const input2 = document.getElementById("swal-input2").value;
-    
-//             if (!email || !input1 || !input2) {
-//                 Swal.showValidationMessage("Please enter all fields.");
-//             }
-    
-//             return { email, input1, input2 };
-//         }
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             const { email, input1, input2 } = result.value;
-//             Swal.fire(`Email: ${email}, First Name: ${input1}, Last Name: ${input2}`, "", "success");
-//         } else if (result.isDenied) {
-//             Swal.fire("Changes discarded", "", "info");
-//         }
-//     });
-    
-// }
 
 function addAdmin(form) {
     Swal.fire({

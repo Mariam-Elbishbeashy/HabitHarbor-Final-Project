@@ -2,6 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
+const methodOverride = require('method-override');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const Users = require('./models/userdb');
@@ -42,6 +43,7 @@ mongoose.connect(dbURI)
 
 
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
@@ -71,16 +73,25 @@ app.get('/admin', (req, res) => {
 app.post('/admin', AdminController.saveActivity);
 //displaying activities
 app.get('/api/activities', AdminController.getActivities);
+//deleting activities
+app.delete('/admin/deleteactivities/:id', AdminController.deleteActivity);
 //saving new users to database
 app.post('/admin/adduser', AdminController.saveUser);
 //displaying users
 app.get('/api/users', AdminController.getUsers);
 //displaying admins
 app.get('/api/admins', AdminController.getUsers);
+//deleting users
+app.delete('/admin/deleteusers/:id', AdminController.deleteUser);
 //saving new resources to database
 app.post('/admin/saverecource', AdminController.saveRecource);
 //displaying resources
 app.get('/api/resources', AdminController.getResources);
+//deleting resources
+app.delete('/admin/deleteresources/:id', AdminController.deleteResource);
+
+
+
 
 app.get('/', (req, res) => {
   res.render('front');
