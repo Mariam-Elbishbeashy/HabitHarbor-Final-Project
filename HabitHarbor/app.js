@@ -15,14 +15,13 @@ const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
 // Connect to MongoDB
 mongoose.connect(dbURI)
   .then(async () => {
-    await Resource.deleteMany({}); 
+    await Resource.deleteMany({});
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
 
-    await Users.deleteMany({}); 
+    await Users.deleteMany({});
     const result1 = await Users.insertMany(Userdata);
     console.log(`${result1.length} documents inserted successfully`);
-
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -31,16 +30,10 @@ mongoose.connect(dbURI)
   })
   .catch(err => console.log(err));
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-
-
-// app.use("/", indexRoutes);
-// app.use("/user", userRoutes);
-// app.use("/admin", adminRoutes);
 
 app.get('/home', (req, res) => {
   res.render('home');
@@ -53,14 +46,20 @@ app.get('/posts', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
+
 app.get('/front', (req, res) => {
   res.render('front');
 });
 
-app.get('/user', (req, res) => {
-  res.render('user');
+app.get('/user', async (req, res) => {
+  try {
+    const users = await Users.find();
+    res.render('user', { arr: users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving data');
+  }
 });
-
 
 app.get('/resources', async (req, res) => {
   try {
@@ -71,8 +70,7 @@ app.get('/resources', async (req, res) => {
   }
 });
 
-
-app.get('/', async (req, res) => {
+app.get('/search', async (req, res) => {
   const searchKey = req.query.key;
   try {
     const data = await Resource.find({
@@ -85,8 +83,3 @@ app.get('/', async (req, res) => {
     res.status(500).send(err);
   }
 });
-
-//404 page
-// app.use((req, res) => {
-//   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
-// });

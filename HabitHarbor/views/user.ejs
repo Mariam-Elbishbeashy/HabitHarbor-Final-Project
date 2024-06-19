@@ -49,172 +49,172 @@
                 </ul>
               </div>
 
-            <!--general-->
-            <div id="generalContent" class="content">
-              <div class="user-profile">
-                <img src="/images/download.jpg" alt="Profile Picture" id="profilePic">
-                <button onclick="changeProfile()">Change Profile</button>
-              </div>
-              <div class="user-profile">
-                <div class="general">
-                  <div class="general-section">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" value="Ali" readonly>
-                  </div>
-                  <div class="general-section">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" value="Ahmed" readonly>
-                  </div>
-                </div>
-                <div class="general">
-                  <div class="general-section">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" value="ali123" readonly>
-                  </div>
-                </div>
-                <div class="general">
-                  <div class="general-section">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" value="Ali@gmail.com" readonly>
-                  </div>
-                </div>
-                <button onclick="editGeneralInfo()">Edit</button>
-              </div>
-            </div>
+             <!-- general -->
+ <div id="generalContent" class="content">
+    <div class="user-profile">
+      <img src="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" alt="Profile Picture" id="profilePic">
+      <button onclick="changeProfile()">Change Profile</button>
+    </div>
+    <div class="user-profile">
+      <div class="general">
+        <div class="general-section">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" value="<%= arr.length > 0 ? arr[arr.length - 1].Firstname : '' %>" readonly>
+        </div>
+        <div class="general-section">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" value="<%= arr.length > 0 ? arr[arr.length - 1].Lastname : '' %>" readonly>
+        </div>
+      </div>
+      <div class="general">
+        <div class="general-section">
+          <label for="username">Username:</label>
+          <input type="text" id="username" value="<%= arr.length > 0 ? arr[arr.length - 1].Username : '' %>" readonly>
+        </div>
+      </div>
+      <div class="general">
+        <div class="general-section">
+          <label for="email">Email:</label>
+          <input type="email" id="email" value="<%= arr.length > 0 ? arr[arr.length - 1].Email : '' %>" readonly>
+        </div>
+      </div>
+      <button onclick="editGeneralInfo()">Edit</button>
+    </div>
+  </div>
 
-            <div id="infoContent" class="content">
-                <div class="ageNumber">
-                <label for="age"><b>Age:</b></label>
-                <input type="text" id="age" value="25" readonly>
-                            
-                <label for="phoneNumber"><b>Phone Number:</b></label>
-                <input type="text" id="phoneNumber" value="+20 1123456789" readonly>
-                <div class="Space"></div>
-                        
-                <button onclick="editInfo()" id="editButton3">Edit</button> 
-                <div class="space"></div> 
-            </div>  
-                <label for="gender"><b>Gender:</b></label>
-                <div id="gender">
-                    <input type="radio" id="male" name="gender" value="male" checked> 
-                    <label for="male" class="gender-label"><i class="fa-solid fa-person"></i> Male</label>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female" class="gender-label"><i class="fa-solid fa-person-dress"></i> Female</label>
-                </div>
-                <div class="space"></div>         
-                <label for="country"><b>Country:</b></label>
-                <select id="country">
-                    <option value="Argentina">Argentina</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Austria">Austria</option>
-                    <option value="Belgium">Belgium</option>
-                    <option value="Brazil">Brazil</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Chile">Chile</option>
-                    <option value="China">China</option>
-                    <option value="Colombia">Colombia</option>
-                    <option value="Czech Republic">Czech Republic</option>
-                    <option value="Denmark">Denmark</option>
-                    <option value="Egypt" selected>Egypt</option>
-                    <option value="Finland">Finland</option>
-                    <option value="France">France</option>
-                    <option value="Germany">Germany</option>
-                    <option value="Greece">Greece</option>
-                    <option value="Hong Kong">Hong Kong</option>
-                    <option value="Hungary">Hungary</option>
-                    <option value="India">India</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="Iran">Iran</option>
-                    <option value="Iraq">Iraq</option>
-                    <option value="Ireland">Ireland</option>
-                    <option value="Italy">Italy</option>
-                    <option value="Japan">Japan</option>
-                    <option value="Malaysia">Malaysia</option>
-                    <option value="Mexico">Mexico</option>
-                    <option value="Netherlands">Netherlands</option>
-                    <option value="New Zealand">New Zealand</option>
-                    <option value="Norway">Norway</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="Philippines">Philippines</option>
-                    <option value="Poland">Poland</option>
-                    <option value="Portugal">Portugal</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="South Africa">South Africa</option>
-                    <option value="South Korea">South Korea</option>
-                    <option value="Spain">Spain</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="Switzerland">Switzerland</option>
-                    <option value="Taiwan">Taiwan</option>
-                    <option value="Thailand">Thailand</option>
-                    <option value="Turkey">Turkey</option>
-                    <option value="Ukraine">Ukraine</option>
-                    <option value="United Arab Emirates">United Arab Emirates</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="United States">United States</option>
-                    <option value="Vietnam">Vietnam</option>
-                </select>
-                 
-                <div class="user-profile custom-info">
-                    <p>Please choose your gender and country and click "Save Changes" to ensure they are saved.</p>
-                    <h6>Please choose your gender and country and <br> click "Save Changes" to ensure they are saved. </h6>
-                </div>
-                <button onclick="saveGenderCountryChanges()" id="saveChangesButton">Save Changes</button>
-                <button id="editGenderButton" onclick="editGenderCountry()" style="display: none;">Edit</button>
-            </div>
+  <div id="infoContent" class="content">
+    <div class="ageNumber">
+    <label for="age"><b>Age:</b></label>
+    <input type="text" id="age" value="25" readonly>
+                
+    <label for="phoneNumber"><b>Phone Number:</b></label>
+    <input type="text" id="phoneNumber" value="+20 1123456789" readonly>
+    <div class="Space"></div>
             
-            
-            <!-- BMI Content -->
-            <div id="bmiContent" class="content" style="display: none;">
-                <div class="user-profile">
-                    <div class="heightWeight">
-                        <label for="height">Height (cm):</label>
-                        <input type="text" id="heightCm" value="176 cm" readonly>
-                    </div>
-                    <div class="heightWeight">
-                        <label for="weight">Weight (kg):</label>
-                        <input type="text" id="weightKg" value="84 kg" readonly>
-                    </div>
-                </div>
-                <div class="user-profile">
-                    <div class="heightWeight">
-                        <label for="height">Height (ft):</label>
-                        <input type="text" id="heightFt" value="5.77 ft" readonly>
-                    </div>
-                    <div class="heightWeight">
-                        <label for="weight">Weight (lbs):</label>
-                        <input type="text" id="weightLbs" value="187.39 lbs" readonly>
-                    </div>
-                </div>
-                <section class="output">
-                    <h3>Your BMI is</h3>
-                    <p id="bmi">0</p>
-                    <p id="desc">N/A</p>
-                </section>
-                <section class="bmi-scale">
-                    <div style="--color:var(--underweight)">
-                        <h4>UnderWeight</h4>
-                        <p>&lt; 18.5</p>
-                    </div>
-                    <div style="--color:var(--normal)">
-                        <h4>Normal</h4>
-                        <p>18.5-25</p>
-                    </div>
-                    <div style="--color:var(--overweight)">
-                        <h4>OverWeight</h4>
-                        <p>25-30</p>
-                    </div>
+    <button onclick="editInfo()" id="editButton3">Edit</button> 
+    <div class="space"></div> 
+</div>  
+    <label for="gender"><b>Gender:</b></label>
+    <div id="gender">
+        <input type="radio" id="male" name="gender" value="male" checked> 
+        <label for="male" class="gender-label"><i class="fa-solid fa-person"></i> Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female" class="gender-label"><i class="fa-solid fa-person-dress"></i> Female</label>
+    </div>
+    <div class="space"></div>         
+    <label for="country"><b>Country:</b></label>
+    <select id="country">
+        <option value="Argentina">Argentina</option>
+        <option value="Australia">Australia</option>
+        <option value="Austria">Austria</option>
+        <option value="Belgium">Belgium</option>
+        <option value="Brazil">Brazil</option>
+        <option value="Canada">Canada</option>
+        <option value="Chile">Chile</option>
+        <option value="China">China</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Czech Republic">Czech Republic</option>
+        <option value="Denmark">Denmark</option>
+        <option value="Egypt" selected>Egypt</option>
+        <option value="Finland">Finland</option>
+        <option value="France">France</option>
+        <option value="Germany">Germany</option>
+        <option value="Greece">Greece</option>
+        <option value="Hong Kong">Hong Kong</option>
+        <option value="Hungary">Hungary</option>
+        <option value="India">India</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Iran">Iran</option>
+        <option value="Iraq">Iraq</option>
+        <option value="Ireland">Ireland</option>
+        <option value="Italy">Italy</option>
+        <option value="Japan">Japan</option>
+        <option value="Malaysia">Malaysia</option>
+        <option value="Mexico">Mexico</option>
+        <option value="Netherlands">Netherlands</option>
+        <option value="New Zealand">New Zealand</option>
+        <option value="Norway">Norway</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Poland">Poland</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Russia">Russia</option>
+        <option value="Saudi Arabia">Saudi Arabia</option>
+        <option value="Singapore">Singapore</option>
+        <option value="South Africa">South Africa</option>
+        <option value="South Korea">South Korea</option>
+        <option value="Spain">Spain</option>
+        <option value="Sweden">Sweden</option>
+        <option value="Switzerland">Switzerland</option>
+        <option value="Taiwan">Taiwan</option>
+        <option value="Thailand">Thailand</option>
+        <option value="Turkey">Turkey</option>
+        <option value="Ukraine">Ukraine</option>
+        <option value="United Arab Emirates">United Arab Emirates</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="United States">United States</option>
+        <option value="Vietnam">Vietnam</option>
+    </select>
+     
+    <div class="user-profile custom-info">
+        <p>Please choose your gender and country and click "Save Changes" to ensure they are saved.</p>
+        <h6>Please choose your gender and country and <br> click "Save Changes" to ensure they are saved. </h6>
+    </div>
+    <button onclick="saveGenderCountryChanges()" id="saveChangesButton">Save Changes</button>
+    <button id="editGenderButton" onclick="editGenderCountry()" style="display: none;">Edit</button>
+</div>
 
-                    <div style="--color:var(--obese)">
-                        <h4>Obese</h4>
-                        <p>≥ 30</p>
-                    </div>
 
-                </section>
-                <button onclick="weightHeightModal()">Edit Weight and Height</button>
-            </div>
-            
+<!-- BMI Content -->
+<div id="bmiContent" class="content" style="display: none;">
+    <div class="user-profile">
+        <div class="heightWeight">
+            <label for="height">Height (cm):</label>
+            <input type="text" id="heightCm" value="176 cm" readonly>
+        </div>
+        <div class="heightWeight">
+            <label for="weight">Weight (kg):</label>
+            <input type="text" id="weightKg" value="84 kg" readonly>
+        </div>
+    </div>
+    <div class="user-profile">
+        <div class="heightWeight">
+            <label for="height">Height (ft):</label>
+            <input type="text" id="heightFt" value="5.77 ft" readonly>
+        </div>
+        <div class="heightWeight">
+            <label for="weight">Weight (lbs):</label>
+            <input type="text" id="weightLbs" value="187.39 lbs" readonly>
+        </div>
+    </div>
+    <section class="output">
+        <h3>Your BMI is</h3>
+        <p id="bmi">0</p>
+        <p id="desc">N/A</p>
+    </section>
+    <section class="bmi-scale">
+        <div style="--color:var(--underweight)">
+            <h4>UnderWeight</h4>
+            <p>&lt; 18.5</p>
+        </div>
+        <div style="--color:var(--normal)">
+            <h4>Normal</h4>
+            <p>18.5-25</p>
+        </div>
+        <div style="--color:var(--overweight)">
+            <h4>OverWeight</h4>
+            <p>25-30</p>
+        </div>
+
+        <div style="--color:var(--obese)">
+            <h4>Obese</h4>
+            <p>≥ 30</p>
+        </div>
+
+    </section>
+    <button onclick="weightHeightModal()">Edit Weight and Height</button>
+</div>
+
 
     <!--health info-->
     <div id="healthInfoContent" class="content" style="display: none;">
