@@ -53,8 +53,12 @@ app.get('/posts', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
-app.get('/', (req, res) => {
+app.get('/front', (req, res) => {
   res.render('front');
+});
+
+app.get('/user', (req, res) => {
+  res.render('user');
 });
 
 

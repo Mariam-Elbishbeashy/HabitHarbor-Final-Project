@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="..\public\css\user.css">
+    <link rel="stylesheet" href="/css/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,84 +15,8 @@
 </head>
 <body>
     <div class="container">
-        <div class="Header">
-            <h1 class="website-name">HabitHarbor</h1>
-            
-            <div class="right-header">
-                <div class="input-container">
-                    <input type="text" placeholder="Search.. ">
-                </div>
-
-                <button class="notifications"> <!-- notifications  -->
-                    <i class="bi bi-bell"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-                    </svg>
-                </button>
-
-                <button class="logout" onclick="logout()"> <!-- logout  -->
-                    Logout &#32; &#32;
-                    <i class="bi bi-box-arrow-right"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                    </svg>
-                </button>
-           </div>
-        </div>
-        <div class="navbar">
-            <img src="images/logo.png" alt="logo" id="logo"/>
-            <div class="icons">
-                <div class="icon-container">
-                    <a href="home.html"> <!-- Home url -->
-                        <i class="bi bi-house"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="icon-container">
-                    <a href="./analysis.html"> <!-- statistics url -->
-                        <i class="bi bi-clipboard-data clickable" id="home-btn"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z"/>
-                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="icon-container">
-                    <a href="resources.html"> <!-- resources url -->
-                        <i class="bi bi-book clickable" id="book-btn"></i> 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
-                            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="icon-container">
-                    <a href="posts.html"> <!-- community url -->
-                        <i class="bi bi-people-fill clickable" id="people-btn"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
-                        </svg>
-                    </a>
-                </div>
-
-                <div class="icon-container">
-                    <a href="user.html"> <!-- user profile url -->
-                        <i class="bi bi-person-circle clickable" id="personal-btn"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle clickable" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                        </svg>
-                    </a>
-                </div>
-                   
-            </div> 
-        </div>
+        <%- include("partials/header.ejs") %>
+        <%- include("partials/navbar.ejs") %>
         
         <!--User Profile-->
         <div class="card">
@@ -128,7 +52,7 @@
             <!--general-->
             <div id="generalContent" class="content">
               <div class="user-profile">
-                <img src="../public/images/download.jpg" alt="Profile Picture" id="profilePic">
+                <img src="/images/download.jpg" alt="Profile Picture" id="profilePic">
                 <button onclick="changeProfile()">Change Profile</button>
               </div>
               <div class="user-profile">
@@ -418,11 +342,11 @@
             <h2 class="rate-title">Rate Us!</h2>
             <div class="emoji">
                 <div id="emojis">
-                <img src="../public/images/poor.png">
-                <img src="../public/images/bad.png">
-                <img src="../public/images/okay.png">
-                <img src="../public/images/good.png">
-                <img src="../public/images/excellent.png">
+                <img src="/images/poor.png">
+                <img src="/images/bad.png">
+                <img src="/images/okay.png">
+                <img src="/images/good.png">
+                <img src="/images/excellent.png">
             </div>
             </div>
             <div class="rating">
@@ -601,9 +525,13 @@
         </div>
     </div>
     
-    
+<!--     
         <script src="../public/js/user.js"></script>
-        <script src="../public/js/home.js"></script> 
+        <script src="../public/js/home.js"></script>  -->
+
+        
+        <script src="\js\user.js"></script>
+        <script src="\js/home.js"></script> 
         
         <script>
         showPassword('currentPassword', 'showCurrentPassword');
