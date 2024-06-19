@@ -166,25 +166,38 @@
             </div>
             
             
+            <!-- BMI Content -->
             <div id="bmiContent" class="content" style="display: none;">
                 <div class="user-profile">
                     <div class="heightWeight">
                         <label for="height">Height (cm):</label>
-                        <input type="text" id="heightCm" value="176 cm" readonly>
+                        <input type="text" id="heightCm" value="<%= arr.length > 0 ? arr[arr.length - 1].Height : '' %>" readonly>
                     </div>
                     <div class="heightWeight">
                         <label for="weight">Weight (kg):</label>
-                        <input type="text" id="weightKg" value="84 kg" readonly>
+                        <input type="text" id="weightKg" value="<%= arr.length > 0 ? arr[arr.length - 1].Weight : '' %>" readonly>
                     </div>
-                </div>
-                <div class="user-profile">
-                    <div class="heightWeight">
-                        <label for="height">Height (ft):</label>
-                        <input type="text" id="heightFt" value="5.77 ft" readonly>
-                    </div>
-                    <div class="heightWeight">
-                        <label for="weight">Weight (lbs):</label>
-                        <input type="text" id="weightLbs" value="187.39 lbs" readonly>
+                    <div class="user-profile">
+                        <div class="heightWeight">
+                            <label for="height">Height (ft):</label>
+                            <% if (arr.length > 0) { %>
+                                <% const heightCm = arr[arr.length - 1].Height; %>
+                                <% const heightFt = (heightCm * 0.0328084).toFixed(1); %>
+                                <input type="text" id="heightFt" value="<%= heightFt %>" readonly>
+                            <% } else { %>
+                                <input type="text" id="heightFt" value="" readonly>
+                            <% } %>
+                        </div>
+                        <div class="heightWeight">
+                            <label for="weight">Weight (lbs):</label>
+                            <% if (arr.length > 0) { %>
+                                <% const weightKg = arr[arr.length - 1].Weight; %>
+                                <% const weightLbs = (weightKg * 2.20462).toFixed(2); %>
+                                <input type="text" id="weightLbs" value="<%= weightLbs %> lbs" readonly>
+                            <% } else { %>
+                                <input type="text" id="weightLbs" value="" readonly>
+                            <% } %>
+                        </div>
                     </div>
                 </div>
                 <section class="output">
