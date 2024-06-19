@@ -94,7 +94,7 @@
   #users-btn:active .icon, #activities-btn:active .icon {
     transform: scale(0.95);
   }
-  #edit-btn:hover, #remove-btn:hover {
+  #edit-btn:hover, #remove-btn:hover, #view-btn:hover  {
     background-color: grey;
     color: white;
 }

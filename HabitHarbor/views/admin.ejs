@@ -61,10 +61,25 @@
                             </div>
                         </button>
                         <div class="challenges-category">
-                            <button id="physical-appear-btn" class="admin-btn" onclick="displayDailyChallenges('Physical'); activateButton('physical-appear-btn')">Physical</button>
-                            <button id="wellbeing-appear-btn" class="admin-btn" onclick="displayDailyChallenges('WellBeing'); activateButton('wellbeing-appear-btn')">Well-being</button>
-                            <button id="nutrition-appear-btn" class="admin-btn" onclick="displayDailyChallenges('Nutrition'); activateButton('nutrition-appear-btn')">Nutrition</button>
+                            <button id="physical-appear-btn" class="admin-btn" onclick="displayDailyChallenges('physical'); activateButton('physical-appear-btn')">Physical</button>
+                            <button id="wellbeing-appear-btn" class="admin-btn" onclick="displayDailyChallenges('well-being'); activateButton('wellbeing-appear-btn')">Well-being</button>
+                            <button id="nutrition-appear-btn" class="admin-btn" onclick="displayDailyChallenges('nutrition'); activateButton('nutrition-appear-btn')">Nutrition</button>
                         </div>
+                        <button id="activities-btn" class="admin-btn" onclick="displayResources(); hideOtherCategories()">Resources
+                            <div class="icon">
+                                <svg
+                                  height="24"
+                                  width="24"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M0 0h24v24H0z" fill="none"></path>
+                                  <path
+                                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                        fill="currentColor">
+                                 </path>
+                                </svg>
+                            </div>
+                        </button>
                     </div>
                 </div>
                 <!-- Admin Content -->

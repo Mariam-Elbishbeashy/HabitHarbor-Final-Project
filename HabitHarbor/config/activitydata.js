@@ -1,7 +1,7 @@
 activityData =[
     {
     "category": "physical",
-    "content": "30-minute morning yoga session to improve flexibility.",
+    "content": "30-minute morning yoga session.",
     "ageRange": { "min": 18, "max": 65 },
     "bmiRange": { "min": 18.5, "max": 24.9 },
     "intensity": "low"
