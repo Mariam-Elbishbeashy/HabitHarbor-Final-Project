@@ -4,9 +4,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
-const Users = require("./models/userdb");
-const Userdata = require("./config/userdata");
-const bcrypt = require('bcryptjs'); // for password hashing
 const session=require('express-session');
 const userRoutes=require('./routes/user');
 
@@ -39,10 +36,26 @@ mongoose.connect(dbURI)
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'Your_Secret_Key' }))
+app.use(session({
+   secret: 'Your_Secret_Key',
+  resave:false,
+saveUninitialized:false,
+cookie:{maxAge:60000} }));
 app.set('view engine', 'ejs');
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+app.get('/set-session', (req, res) => {
+  req.session.testValue = 'Session is working!';
+  res.send('Session value set!');
+});
 
+app.get('/get-session', (req, res) => {
+  const sessionValue = req.session.testValue || 'No session value found';
+  res.send(`Session value: ${sessionValue}`);
+});
 
 
 
@@ -53,11 +66,7 @@ app.set('view engine', 'ejs');
 
 //get requests
 app.get('/home', (req, res) => {
-  res.render('home');
-});
-
-app.get('/posts', (req, res) => {
-  res.render('posts');
+  res.render('home',{user:req.session.user});
 });
 
 app.get('/admin', (req, res) => {
@@ -78,30 +87,6 @@ app.get('/signup', (req, res) => {
 app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
-
-app.get('/resources', async (req, res) => {
-  try {
-    const resources = await Resource.find({});
-    res.render('resources', { data: resources });
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.get('/', async (req, res) => {
-  const searchKey = req.query.key;
-  try {
-    const data = await Resource.find({
-      "$or": [
-        { Category: { $regex: searchKey, $options: 'i' } }
-      ]
-    });
-    res.render('resources', { data });
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
 
 
 //404 page
