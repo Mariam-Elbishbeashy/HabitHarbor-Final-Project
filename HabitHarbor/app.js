@@ -11,6 +11,8 @@ const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
+const Posts = require('./models/postsdb');
+const Postdata = require('./config/postsdata');
 
 //importing routes
 const adminRoutes = require('./routes/admin')
@@ -32,6 +34,13 @@ mongoose.connect(dbURI)
     const result2 = await Activities.insertMany(Activitydata);
     console.log(`${result2.length} documents inserted successfully`);
 
+    await Posts.deleteMany({}); 
+    const result3 = await Posts.insertMany(Postdata);
+    console.log(`${result3.length} documents inserted successfully`);
+
+    await Users.deleteMany({}); 
+    const result4 = await Users.insertMany(Userdata);
+    console.log(`${result4.length} documents inserted successfully`);
 
     // Start express server after inserting data
     app.listen(port, () => {
