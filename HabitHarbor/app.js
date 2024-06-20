@@ -6,8 +6,9 @@ const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const session=require('express-session');
 const userRoutes=require('./routes/user');
-
-
+const Users = require('./models/userdb');
+const Userdata = require('./config/userdata');
+const indexRoutes = require('./routes/index');
 
 // express app
 const app = express();
@@ -47,34 +48,21 @@ app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
-app.get('/set-session', (req, res) => {
-  req.session.testValue = 'Session is working!';
-  res.send('Session value set!');
-});
-
-app.get('/get-session', (req, res) => {
-  const sessionValue = req.session.testValue || 'No session value found';
-  res.send(`Session value: ${sessionValue}`);
-});
-
-
-
-// app.use("/", indexRoutes);
  app.use("/", userRoutes);
-// app.use("/admin", adminRoutes);
+ app.use("/", indexRoutes);
 
 
 //get requests
 app.get('/home', (req, res) => {
   res.render('home',{user:req.session.user});
 });
-
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
 app.get('/', (req, res) => {
   res.render('front');
 });
+
 
 app.get('/login', (req, res) => {
   res.render('login');
@@ -88,11 +76,10 @@ app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
 
-
 //404 page
-// app.use((req, res) => {
-//   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
-// });
+ app.use((req, res) => {
+   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
+ });
 
 
 

@@ -71,7 +71,7 @@
 }
 
 .card {
-    max-width: 300px;
+    max-width: 310px;
     border-radius: 0.5rem;
     background-color: #fff;
     box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
@@ -122,9 +122,15 @@ img {
 }
 
 .blog-card{
-    max-width: 620px;
+    max-width: 640px;
+    width: 100%;
 }
 
 h2{
     margin-top: 10px !important;
+    font-size: 30px !important;
+}
+
+.read-more:hover{
+    text-decoration: underline;
 }
