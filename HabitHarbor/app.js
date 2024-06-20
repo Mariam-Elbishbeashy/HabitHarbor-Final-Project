@@ -6,6 +6,8 @@ const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
+const UserController = require('./controllers/User');
+
 
 // express app
 const app = express();
@@ -41,14 +43,14 @@ app.set('view engine', 'ejs');
 // app.use("/", indexRoutes);
 // app.use("/user", userRoutes);
 // app.use("/admin", adminRoutes);
+//app.use('/posts', router);
 
 app.get('/home', (req, res) => {
   res.render('home');
 });
-
-app.get('/posts', (req, res) => {
-  res.render('posts');
-});
+app.post('/posts/saveposts', UserController.savePost);
+app.post('/posts/:id/comment', UserController.commentPost);
+app.get('/posts', UserController.getPosts);
 
 app.get('/admin', (req, res) => {
   res.render('admin');
