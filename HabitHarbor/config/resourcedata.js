@@ -174,6 +174,70 @@ data =[{
     URL: "https://www.ucf.edu/news/your-mental-health-matters-take-advantage-of-ucfs-resources/",
     Category: "health",
     type: "resource"
+  },
+  {
+    Title: "Importance Of Physical Wellbeing During This Lockdown",
+    Image: "images/imageP1.png",
+    Paragraph: "It is the perfect opportunity to come out of this sedentary lifestyle even while being at home and indulge into self-care and exercise",
+    URL: "https://www.entrepreneur.com/en-in/lifestyle/importance-of-physical-wellbeing-during-this-lockdown/353697",
+    Category: "physical",
+    type: "blog"
+  },
+  {
+    Title: "Bachelor of Physical Education - B.P.Ed",
+    Image: "images/imageP2.jpg",
+    Paragraph: "With our world realising the importance of a healthy lifestyle in ensuring the wellbeing of mind and body,...",
+    URL: "https://leverageedu.com/blog/bachelor-of-physical-education/",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "How to Improve Physical Activity and Health for All Children and Families",
+    Image: "images/imageP4.jpg",
+    Paragraph: "Physical activity is critical for healthy development in the young, but many children are being left behind.",
+    URL: "https://ssir.org/articles/entry/how_to_improve_physical_activity_and_health_for_all_children_and_families",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "How Much Should I Move?",
+    Image: "images/imageP3.png",
+    Paragraph: "Being physically activity is one of the most important actions a person can take to improve their health. ",
+    URL: "https://www.mondaycampaigns.org/move-it-monday/how-much-should-i-move",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "Understanding the difference between Fitness and Wellness",
+    Image: "images/imageP5.png",
+    Paragraph: "Whether you're a seasoned athlete or just starting out on your fitness journey, this article is for you. So, let's dive in and learn more about how we can achieve optimal health and well-being.",
+    URL: "https://indiacsr.in/understanding-the-difference-between-fitness-and-wellness/",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "5 HEALTH BENEFITS OF PHYSICAL ACTIVITY",
+    Image: "images/imagesP6.png",
+    Paragraph: "For many, this year has been difficult to focus on fitness and health due to internal and external variables that have either made it difficult,...",
+    URL: "https://www.gebauer.com/instant-ice/blog/5-health-benefits-of-physical-activity",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "Physical Activity And Health",
+    Image: "images/image7.png",
+    Paragraph: "The contribution of physical activity to good health and quality of life has been known for centuries.",
+    URL: "https://www.eufic.org/en/healthy-living/article/physical-activity-and-health",
+    Category: "physical",
+    type: "resource"
+  },
+  {
+    Title: "Daily Routine Of A Student | 12 Best Steps in 2024",
+    Image: "images/imageR1.png",
+    Paragraph: "Why is daily routine of a student daily routine of a student important?.",
+    URL: "https://ahaslides.com/blog/daily-routine-of-a-student/",
+    Category: "routine",
+    type: "resource"
   }
   ]
 
