@@ -17,68 +17,69 @@
         <%- include("partials/sidebar.ejs") %>
         <%- include("partials/navbar.ejs") %>
         <div class="main">
-            <div class="creating-posts">
-                <img src="./images/profile-pic.png" alt="your profile pic" class="your-profile-pic"/>
-                <textarea placeholder="What's on your mind?" class="input-field"></textarea>
-               
-                <button id="images-btn">
-                    <i class="bi bi-images"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
-                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div class="user1-post">
-                <img src="./images/pngtree-gray-avatar-placeholder-png-image_3416697.jpg" alt="users-profile-pic" class="user-profile-pic"/>
-                <h3 class="user-name">User Name</h3>
-            </div>
-            <div class="post-one">
-                <p>A simple explanation of how nutrition works</p>
-                <img src="./images/download.avif" alt="nutrition" class="img1"/>
-            </div>
-            <div class="comment-section1">
-                <button class="comment-btn"><i class="bi bi-chat-right-dots"></i>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
-                        <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
-                        <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                      </svg> Comment
-                </button>
-                <div class="comment-list"></div>
-                <div class="comment-input">
-                    <input type="text" placeholder="Write a comment..." class="comment-field">
-                    <button class="comment-send-btn">Send</button>
+            <form id="post-form"  method="post" enctype="multipart/form-data" action="/posts/saveposts">
+                <div class="creating-posts">
+                    <img src="./images/profile-pic.png" alt="your profile pic" class="your-profile-pic"/>
+                    <textarea placeholder="What's on your mind?" class="input-field" name="text"></textarea>
+                    <input type="file" id="image-input" name="image" accept="image/*" style="display:none"/>
+                    <label for="image-input" id="images-btn">
+                        <i class="bi bi-images"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </label>
+                    <div id="image-preview"></div>
+                    <input type="file" id="image-input" name="image" accept="image/*" style="display:none"/>
+                    <button class="submit-btn" type="submit">Post</button>
                 </div>
-                
-            </div>
-            <div class="user2-post">
-                <img src="./images/pngtree-gray-avatar-placeholder-png-image_3416697.jpg" alt="users-profile-pic" class="user-profile-pic"/>
-                <h3 class="user-name">User Name</h3>
-            </div>
-            <div class="post-two">
-                <p>Explaining running to someone who doesn’t run is like speaking a foreign language to someone else. It’s nearly impossible to understand each other.</p>
-                <img src="./images/1_W00gBaMPsh81QRP21wg3tQ.jpg" alt="running" class="img2"/>
-            </div>
-            <div class="comment-section2">
-                <div class="comment-section1">
-                    <button class="comment-btn"><i class="bi bi-chat-right-dots"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
-                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
-                            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                          </svg> Comment
-                    </button>
-                    <div class="comment-list"></div>
-                    <div class="comment-input">
-                        <input type="text" placeholder="Write a comment..." class="comment-field">
-                        <button class="comment-send-btn">Send</button>
+            </form>
+            
+            <% posts.forEach(function(post) { %>
+                <div class="user-post" data-post-id="<%= post._id %>">
+                    <div class="user1-post">
+                        <img src="<%= post.userProfile %>" alt="users-profile-pic" class="user-profile-pic"/>
+                        <h3 class="user-name"><%= post.userName %></h3>
                     </div>
-            </div>
-        </div>
+                    <div class="post-one">
+                        <p><%= post.text %></p>
+                        <% if (post.imageUploaded) { %>
+                            <img src="<%= post.imageUploaded %>" alt="uploaded image" class="img1"/>
+                        <% } %>
+                    </div>
+                    <div class="comment-section1">
+                        <button class="comment-btn"><i class="bi bi-chat-right-dots"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-dots" viewBox="0 0 16 16">
+                                <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+                                <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg> Comment
+                        </button>
+                        
+                            <div class="comment-list">
+                                <% post.comments.forEach(function(comment) { %>
+                                    <div class="comment">
+                                        <img src="<%= comment.userProfile %>" alt="user-profile-pic" name="userProfile" class="comment-profile-pic"/>
+                                        <div class="comment-content">
+                                            <h4 class="comment-user-name" name="userName"><%= comment.userName %></h4>
+                                            <p class="comment-text" name="commentText"><%= comment.commentText %></p>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        <form method="post" action="/posts/<%= post._id %>/comment" style="width: 100%;">
+                            <div class="comment-input">
+                                <input type="text" placeholder="Write a comment..." name="commentText" class="comment-field">
+                                <button class="comment-send-btn" type="submit">Send</button>
+                            </div>
+                        </form>
+                    </div>             
+                </div>
+            <% }); %> 
+        </div>  
 
         <div class="footer"></div>
     </div>
-    <script src="/scripts/posts.js" charset="UTF-8"></script>
+    <script src="js/posts.js" charset="UTF-8"></script>
     <script src="/scripts/home.js" charset="UTF-8"></script> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

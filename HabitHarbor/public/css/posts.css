@@ -23,6 +23,11 @@
 #images-btn{
     background-color: white;
     border: none;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
 }
 .input-field{
     border:none;
@@ -64,7 +69,7 @@
     height: 50px;
     background-color: white;
 }
-.user-profile-pic{
+.user-profile-pic, .comment-profile-pic{
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -104,6 +109,7 @@ p{
 .user-name {
     font-weight: bold;
     margin-right: 5px;
+    margin-left: 10px;
 }
 .comment-list {
     border-top: 1px solid grey;
@@ -119,4 +125,9 @@ p{
 
 .input-field:focus{
 height: 90px;
+}
+.submit-btn{
+    border: none;
+    background-color: white;
+    border-left: 1px solid black;
 }
