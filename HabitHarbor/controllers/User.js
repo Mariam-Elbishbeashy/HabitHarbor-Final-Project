@@ -1,5 +1,6 @@
 const Postdb = require('../models/postsdb');
 const Users = require('../models/userdb');
+const Resource = require('../models/resourcedb');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
@@ -63,15 +64,37 @@ const commentPost = (req, res) => {
 
 const getPosts = (req, res) => {
     Postdb.find()
+        .sort({ createdAt: -1 }) 
         .then((posts) => {
-            res.render("posts", {posts});
+            res.render("posts", { posts });
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json({ error: 'Failed to fetch posts' });
         });
 };
+
+let searchTerms = []; 
+const getResources = async (req, res) => {
+    const searchKey = req.query.key;
+    try {
+      let resources;
+  
+      resources = await Resource.find(searchKey ? { Category: { $regex: searchKey, $options: 'i' } } : {});
+    
+      const message = resources.length === 0 ? 'No data found.' : null;
+  
+      if (searchKey && resources.length > 0 && !searchTerms.includes(searchKey)) {
+        searchTerms.push(searchKey);
+      }
+  
+      res.render('resources', { data: resources, message, searchTerms }); 
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
 module.exports = {
+   getResources,
    savePost,
    commentPost,
    getPosts

@@ -1,18 +1,18 @@
 postsData =[{
-    "userName": "Bob",
+    "userName": "Alice",
     "userProfile": "/images/profile-pic.png",
-    "text": "This is a new post about my recent trip!",
-    "imageUploaded": "/images/1_W00gBaMPsh81QRP21wg3tQ.jpg",
+    "text": "Nourish your body, mind, and soul.",
+    "imageUploaded": "/images/postH1.png",
     "comments": [
       {
-        "userName": "Alice",
+        "userName": "Bob",
         "userProfile": "/images/profile-pic.png",
-        "commentText": "Looks like you had an amazing time!"
+        "commentText": "Agree!"
       },
       {
         "userName": "Charlie",
         "userProfile": "/images/profile-pic.png",
-        "commentText": "Beautiful scenery!"
+        "commentText": "Totally!"
       }
     ]    
 },

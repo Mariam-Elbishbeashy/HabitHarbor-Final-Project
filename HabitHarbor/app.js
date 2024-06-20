@@ -6,8 +6,7 @@ const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
-const UserController = require('./controllers/User');
-
+const indexRoutes = require('./routes/index');
 
 // express app
 const app = express();
@@ -40,43 +39,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 
-// app.use("/", indexRoutes);
+ app.use("/", indexRoutes);
 // app.use("/user", userRoutes);
 // app.use("/admin", adminRoutes);
-//app.use('/posts', router);
 
 app.get('/home', (req, res) => {
   res.render('home');
 });
-app.post('/posts/saveposts', UserController.savePost);
-app.post('/posts/:id/comment', UserController.commentPost);
-app.get('/posts', UserController.getPosts);
 
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
 app.get('/', (req, res) => {
   res.render('front');
-});
-
-let searchTerms = [];
-app.get('/resources', async (req, res) => {
-  const searchKey = req.query.key;
-  try {
-    let resources;
-
-    resources = await Resource.find(searchKey ? { Category: { $regex: searchKey, $options: 'i' } } : {});
-  
-    const message = resources.length === 0 ? 'No data found.' : null;
-
-    if (searchKey && resources.length > 0 && !searchTerms.includes(searchKey)) {
-      searchTerms.push(searchKey);
-    }
-
-    res.render('resources', { data: resources, message, searchTerms}); 
-  } catch (err) {
-    res.status(500).send(err);
-  }
 });
 
 //404 page

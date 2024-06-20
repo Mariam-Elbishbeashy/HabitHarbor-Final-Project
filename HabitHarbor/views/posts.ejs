@@ -29,11 +29,12 @@
                             <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
                         </svg>
                     </label>
+                    <div id="image-preview"></div>
                     <input type="file" id="image-input" name="image" accept="image/*" style="display:none"/>
                     <button class="submit-btn" type="submit">Post</button>
                 </div>
             </form>
-        
+            
             <% posts.forEach(function(post) { %>
                 <div class="user-post" data-post-id="<%= post._id %>">
                     <div class="user1-post">
@@ -65,7 +66,7 @@
                                     </div>
                                 <% }); %>
                             </div>
-                        <form method="post" action="/posts/<%= post._id %>/comment">
+                        <form method="post" action="/posts/<%= post._id %>/comment" style="width: 100%;">
                             <div class="comment-input">
                                 <input type="text" placeholder="Write a comment..." name="commentText" class="comment-field">
                                 <button class="comment-send-btn" type="submit">Send</button>
