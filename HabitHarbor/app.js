@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
+const session=require('express-session');
+const userRoutes=require('./routes/user');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const indexRoutes = require('./routes/index');
@@ -20,9 +22,8 @@ mongoose.connect(dbURI)
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
 
-    await Users.deleteMany({}); 
-    const result1 = await Users.insertMany(Userdata);
-    console.log(`${result1.length} documents inserted successfully`);
+   
+
 
 
     // Start express server after inserting data
@@ -36,17 +37,25 @@ mongoose.connect(dbURI)
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+   secret: 'Your_Secret_Key',
+  resave:false,
+saveUninitialized:false,
+cookie:{maxAge:60000} }));
 app.set('view engine', 'ejs');
 
-
- app.use("/", indexRoutes);
-// app.use("/user", userRoutes);
-// app.use("/admin", adminRoutes);
-
-app.get('/home', (req, res) => {
-  res.render('home');
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
 });
+ app.use("/", userRoutes);
+ app.use("/", indexRoutes);
 
+
+//get requests
+app.get('/home', (req, res) => {
+  res.render('home',{user:req.session.user});
+});
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
@@ -54,7 +63,25 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+app.get('/forgetpass', (req, res) => {
+  res.render('forgetpass');
+});
+
 //404 page
-// app.use((req, res) => {
-//   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
-// });
+ app.use((req, res) => {
+   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
+ });
+
+
+
+
+

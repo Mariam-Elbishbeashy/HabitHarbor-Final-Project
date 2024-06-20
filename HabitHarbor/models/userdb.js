@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   DataType:{
     type:String,
-    required:true,
+    required:false,
   },
   Firstname: {
     type: String,
@@ -24,8 +24,8 @@ const userSchema = new Schema({
     required: true,
     unique:true,
   },
-  DateofBirth: {
-    type: String,
+  age: {
+    type: Number,
     required: true,
   },
   Gender: {
@@ -51,7 +51,7 @@ const userSchema = new Schema({
   },
   Image: {
     type: String,
-    required: true,
+    required: false,
   }
 }, { timestamps: true });
 
