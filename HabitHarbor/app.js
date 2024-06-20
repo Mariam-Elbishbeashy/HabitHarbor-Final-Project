@@ -28,9 +28,6 @@ mongoose.connect(dbURI)
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
 
-   
-
-
     await Activities.deleteMany({}); 
     const result2 = await Activities.insertMany(Activitydata);
     console.log(`${result2.length} documents inserted successfully`);
@@ -74,14 +71,13 @@ app.get('/home', (req, res) => {
   
 });
 
+app.get('/home', (req, res) => {
   res.render('home',{user:req.session.user});
-
 });
+
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
-
-
 
 app.get('/', (req, res) => {
   res.render('front');
@@ -102,11 +98,6 @@ app.get('/forgetpass', (req, res) => {
 });
 
 //404 page
- app.use((req, res) => {
-   res.status(404).render('404', { user: (req.session.user === undefined ? "" : req.session.user) });
- });
-
-
-
-
-
+//  app.use((req, res) => {
+//    res.status(404).render('404', {user:req.session.user});
+//  });
