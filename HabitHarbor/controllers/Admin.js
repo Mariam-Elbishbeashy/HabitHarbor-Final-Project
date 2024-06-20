@@ -45,6 +45,21 @@ const deleteActivity = (req, res) => {
             res.status(500).send('Error deleting user');
         });
 };
+// Function to edit activity
+const editActivity = (req, res) => {
+    const activityId = req.params.id;
+    const updatedData = req.body;
+
+    Activities.findByIdAndUpdate(activityId, updatedData, { new: true })
+        .then(() => {
+            console.log(`activity with ID ${activityId} edited successfully`);
+            res.redirect('/admin'); // Redirect to appropriate page after update
+        })
+        .catch((err) => {
+            console.error(`Error updating activity with ID ${activityId}:`, err);
+            res.status(500).send('Error updating activity');
+        });
+};
 
 // Function to save user
 const saveUser = (req, res) => {
@@ -71,6 +86,7 @@ const getUsers = (req, res) => {
             res.status(500).json({ error: 'Failed to fetch users' });
         });
 };
+
 // Function to delete users
 const deleteUser = (req, res) => {
     const userId = req.params.id;
@@ -83,6 +99,22 @@ const deleteUser = (req, res) => {
         .catch((err) => {
             console.error(`Error deleting user with ID ${userId}:`, err);
             res.status(500).send('Error deleting user');
+        });
+}
+
+// Function to edit users
+const editUser = (req, res) => {
+    const userId = req.params.id;
+    const updatedData = req.body;
+
+    Users.findByIdAndUpdate(userId, updatedData, { new: true })
+        .then(() => {
+            console.log(`User with ID ${userId} edited successfully`);
+            res.redirect('/admin'); // Redirect to appropriate page after update
+        })
+        .catch((err) => {
+            console.error(`Error updating user with ID ${userId}:`, err);
+            res.status(500).send('Error updating user');
         });
 };
 
@@ -112,6 +144,7 @@ const getResources = (req, res) => {
             res.status(500).json({ error: 'Failed to fetch resources' });
         });
 };
+
 // Function to delete resource
 const deleteResource = (req, res) => {
     const resourceId = req.params.id;
@@ -126,15 +159,35 @@ const deleteResource = (req, res) => {
             res.status(500).send('Error deleting user');
         });
 };
+// Function to edit resource
+const editResource = (req, res) => {
+    const resourceId = req.params.id;
+    const updatedData = req.body;
+
+    console.log("Received update data:", updatedData); // Add logging to debug
+
+    Resource.findByIdAndUpdate(resourceId, updatedData, { new: true })
+        .then(() => {
+            console.log(`Resource with ID ${resourceId} edited successfully`);
+            res.redirect('/admin'); // Redirect to appropriate page after update
+        })
+        .catch((err) => {
+            console.error(`Error updating resource with ID ${resourceId}:`, err);
+            res.status(500).send('Error updating resource');
+        });
+};
 
 module.exports = {
     saveActivity,
     getActivities,
     deleteActivity,
+    editActivity,
     saveUser,
     getUsers,
+    editUser,
     deleteUser,
     saveRecource,
     getResources,
+    editResource,
     deleteResource,
 };

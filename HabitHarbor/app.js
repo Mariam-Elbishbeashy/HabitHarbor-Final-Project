@@ -75,6 +75,8 @@ app.post('/admin', AdminController.saveActivity);
 app.get('/api/activities', AdminController.getActivities);
 //deleting activities
 app.delete('/admin/deleteactivities/:id', AdminController.deleteActivity);
+//editing activities
+app.put('/admin/editactivity/:id', AdminController.editActivity);
 //saving new users to database
 app.post('/admin/adduser', AdminController.saveUser);
 //displaying users
@@ -83,12 +85,16 @@ app.get('/api/users', AdminController.getUsers);
 app.get('/api/admins', AdminController.getUsers);
 //deleting users
 app.delete('/admin/deleteusers/:id', AdminController.deleteUser);
+//editing users
+app.put('/admin/editusers/:id', AdminController.editUser);
 //saving new resources to database
 app.post('/admin/saverecource', AdminController.saveRecource);
 //displaying resources
 app.get('/api/resources', AdminController.getResources);
 //deleting resources
 app.delete('/admin/deleteresources/:id', AdminController.deleteResource);
+//editing resources
+app.put('/admin/editresource/:id', AdminController.editResource);
 
 
 
