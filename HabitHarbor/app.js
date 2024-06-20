@@ -2,12 +2,18 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
+const methodOverride = require('method-override');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const session=require('express-session');
 const userRoutes=require('./routes/user');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
+const Activities = require('./models/activitydb');
+const Activitydata = require('./config/activitydata');
+
+//importing routes
+const adminRoutes = require('./routes/admin')
 const indexRoutes = require('./routes/index');
 
 // express app
@@ -25,6 +31,10 @@ mongoose.connect(dbURI)
    
 
 
+    await Activities.deleteMany({}); 
+    const result2 = await Activities.insertMany(Activitydata);
+    console.log(`${result2.length} documents inserted successfully`);
+
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -35,6 +45,7 @@ mongoose.connect(dbURI)
 
 
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
@@ -50,15 +61,28 @@ app.use((req, res, next) => {
 });
  app.use("/", userRoutes);
  app.use("/", indexRoutes);
-
+ app.use("/", adminRoutes);
 
 //get requests
 app.get('/home', (req, res) => {
+  
+  Activities.find().then((activities)=>{
+    res.render('home',{activities:activities});
+  }).catch((err)=>{
+    console.log(err);
+  })
+  
+});
+
   res.render('home',{user:req.session.user});
+
 });
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
+
+
+
 app.get('/', (req, res) => {
   res.render('front');
 });
@@ -71,6 +95,7 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('signup');
 });
+
 
 app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');

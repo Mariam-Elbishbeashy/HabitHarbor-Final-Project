@@ -38,7 +38,12 @@
                                 </button>
                             </div>
                             <div class="description">
-                                No sugar for today
+                                <% for (let i=0;i<activities.length;i++){ %>
+                               <% if(activities[i].category==="nutrition"){%>
+                               <%= activities[i].content %>
+                               <% break %>
+                                <%}%>
+                               <% }%>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
@@ -68,7 +73,12 @@
                                 </button>
                             </div>
                             <div class="description">
-                                Run for an hour
+                                <% for (let i=0;i<activities.length;i++){ %>
+                                    <% if(activities[i].category==="physical"){%>
+                                    <%= activities[i].content %>
+                                    <% break %>
+                                     <%}%>
+                                 <% }%>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
@@ -97,7 +107,12 @@
                                 </button>
                             </div>
                             <div class="description">
-                                Meditate for 20 minutes
+                                <% for (let i=0;i<activities.length;i++){ %>
+                                    <% if(activities[i].category==="well-being"){%>
+                                    <%= activities[i].content %>
+                                    <% break %>
+                                     <%}%>
+                                 <% }%>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
@@ -219,7 +234,7 @@
         </div>
         <div class="footer"></div>
     </div>
-    <script src="js/home.js"></script> 
+    <script src="/js/home.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
