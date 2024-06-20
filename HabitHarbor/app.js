@@ -6,6 +6,7 @@ const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
+const indexRoutes = require('./routes/index');
 
 // express app
 const app = express();
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 
-// app.use("/", indexRoutes);
+ app.use("/", indexRoutes);
 // app.use("/user", userRoutes);
 // app.use("/admin", adminRoutes);
 
@@ -46,40 +47,11 @@ app.get('/home', (req, res) => {
   res.render('home');
 });
 
-app.get('/posts', (req, res) => {
-  res.render('posts');
-});
-
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
 app.get('/', (req, res) => {
   res.render('front');
-});
-
-
-app.get('/resources', async (req, res) => {
-  try {
-    const resources = await Resource.find({});
-    res.render('resources', { data: resources });
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-
-app.get('/', async (req, res) => {
-  const searchKey = req.query.key;
-  try {
-    const data = await Resource.find({
-      "$or": [
-        { Category: { $regex: searchKey, $options: 'i' } }
-      ]
-    });
-    res.render('resources', { data });
-  } catch (err) {
-    res.status(500).send(err);
-  }
 });
 
 //404 page

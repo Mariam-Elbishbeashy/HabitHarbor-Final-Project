@@ -21,6 +21,10 @@ const resourceSchema = new Schema({
     type: String,
     required: true,
   },
+  type: { 
+    type: String, 
+    required: true 
+  }
 }, { timestamps: true });
 
 const Resourcedb = mongoose.model('resourcesdb', resourceSchema);
