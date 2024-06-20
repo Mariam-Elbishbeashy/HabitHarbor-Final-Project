@@ -10,8 +10,8 @@ const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
 
-//Importing controllers
-const AdminController = require('./controllers/Admin');
+//importing routes
+const adminRoutes = require('./routes/admin')
 
 // express app
 const app = express();
@@ -51,7 +51,7 @@ app.set('view engine', 'ejs');
 
 // app.use("/", indexRoutes);
 // app.use("/user", userRoutes);
-// app.use("/admin", adminRoutes);
+ app.use("/", adminRoutes);
 
 app.get('/home', (req, res) => {
   Activities.find().then((activities)=>{
@@ -69,33 +69,6 @@ app.get('/posts', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin');
 });
-//saving new activities to database
-app.post('/admin', AdminController.saveActivity);
-//displaying activities
-app.get('/api/activities', AdminController.getActivities);
-//deleting activities
-app.delete('/admin/deleteactivities/:id', AdminController.deleteActivity);
-//editing activities
-app.put('/admin/editactivity/:id', AdminController.editActivity);
-//saving new users to database
-app.post('/admin/adduser', AdminController.saveUser);
-//displaying users
-app.get('/api/users', AdminController.getUsers);
-//displaying admins
-app.get('/api/admins', AdminController.getUsers);
-//deleting users
-app.delete('/admin/deleteusers/:id', AdminController.deleteUser);
-//editing users
-app.put('/admin/editusers/:id', AdminController.editUser);
-//saving new resources to database
-app.post('/admin/saverecource', AdminController.saveRecource);
-//displaying resources
-app.get('/api/resources', AdminController.getResources);
-//deleting resources
-app.delete('/admin/deleteresources/:id', AdminController.deleteResource);
-//editing resources
-app.put('/admin/editresource/:id', AdminController.editResource);
-
 
 
 
