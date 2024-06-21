@@ -246,13 +246,12 @@ body{
     flex-wrap: wrap;
     gap: 10px 0px;
     grid-area: badges;
-    flex-direction: column;
+    overflow-y: auto;
 }
 
-.first-badge, .second-badge, .third-badge {
+.badge {
     background-color: white;
-    width: auto;
-    height: 55px;
+    height: 60px;
     border-radius: 20px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.10);
     display: flex;
@@ -262,9 +261,10 @@ body{
     border: none; 
     cursor: pointer; 
     transition: box-shadow 0.3s ease;
+    width: 100%;
 }
 
-.first-badge:hover, .second-badge:hover, .third-badge:hover {
+.badge:hover {
     box-shadow: 8px 6px 10px rgba(0, 0, 0, 0.30); 
 }
 
@@ -272,11 +272,12 @@ body{
     font-size: 12px;
     text-shadow: 2px 2px 5px rgb(187, 187, 187);
     margin: 0;
+    color: black;
 }
 
-#img-badge1, #img-badge2, #img-badge3 {
-    width: 50px;
-    height: 50px;
+.img-badge{
+    width: 40px;
+    height: 40px;
 }
 
  /*navbar style */

@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
 const Resource = require('./models/resourcedb');
+const Badgesdb = require('./models/badgesdb');
+const badgesData = require('./config/badgesdata');
 const data = require('./config/resourcedata');
 const session=require('express-session');
 const userRoutes=require('./routes/user');
@@ -30,9 +32,9 @@ mongoose.connect(dbURI)
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
 
-    // await Activities.deleteMany({}); 
-    // const result2 = await Activities.insertMany(Activitydata);
-    // console.log(`${result2.length} documents inserted successfully`);
+     await Badgesdb.deleteMany({}); 
+     const result2 = await Badgesdb.insertMany(badgesData);
+     console.log(`${result2.length} documents inserted successfully`);
 
     // await Posts.deleteMany({}); 
     // const result3 = await Posts.insertMany(Postdata);
@@ -66,14 +68,15 @@ app.use((req, res, next) => {
  app.use("/", adminRoutes);
 
 //get requests
-app.get('/home', (req, res) => {
-  
-  Activities.find().then((activities)=>{
-    res.render('home',{activities:activities});
-  }).catch((err)=>{
+app.get('/home', async (req, res) => {
+  try {
+    const activities = await Activities.find();
+    const badges = await Badgesdb.find();
+    res.render('home', { activities, badges, user: req.session.user });
+  } catch (err) {
     console.log(err);
-  })
-  
+    res.status(500).send('Server Error');
+  }
 });
 
 app.get('/home', (req, res) => {
@@ -88,8 +91,9 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
-app.get('/analysis', (req, res) => {
-  res.render('analysis');
+app.get('/analysis', async (req, res) => {
+  const badges = await Badgesdb.find();
+  res.render('analysis', {badges, user: req.session.user});
 });
 
 app.get('/login', (req, res) => {
