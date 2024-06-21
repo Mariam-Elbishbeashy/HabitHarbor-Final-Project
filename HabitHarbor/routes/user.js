@@ -3,6 +3,9 @@ const userRoutes = express.Router();
 const UserController = require('../controllers/User');
 const Users=require('../models/userdb');
 
+var methodOverride = require('method-override')
+userRoutes.use(methodOverride('_method'))
+
 userRoutes.post('/login', async (req, res) => {
   try {
     console.log(req.body);
@@ -56,5 +59,24 @@ userRoutes.post('/logout', (req, res) => {
     res.clearCookie('connect.sid');
     res.redirect('/');
   });
+});
+
+userRoutes.put('/editUser/:id', async (req, res) => {
+  const userId = req.params.id;
+  try {
+   // Example: Updating session user data after edit
+const updatedUser = await Users.findOneAndUpdate(
+  { _id: userId },
+  { $set: req.body },
+  { new: true }
+);
+// Update session data
+req.session.user = updatedUser;
+
+    res.redirect("/user"); // Redirect to appropriate page after update
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to update user" + err.message);
+  }
 });
 module.exports = userRoutes;

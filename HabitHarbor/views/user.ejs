@@ -53,29 +53,29 @@
  <!-- General -->
  <div id="generalContent" class="content">
     <div class="user-profile">
-      <img src="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" alt="Profile Picture" id="profilePic">
+      <img src="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" value="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" alt="Profile Picture" id="profilePic">
     </div>
     <div class="user-profile">
       <div class="general">
         <div class="general-section">
           <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" value="<%= arr.length > 0 ? arr[arr.length - 1].Firstname : '' %>" readonly>
+          <input type="text" id="firstName" value="<%= user.Firstname %>" readonly>
         </div>
         <div class="general-section">
           <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" value="<%= arr.length > 0 ? arr[arr.length - 1].Lastname : '' %>" readonly>
+          <input type="text" id="lastName" value="<%= user.Lastname %>" readonly>
         </div>
       </div>
       <div class="general">
         <div class="general-section">
           <label for="username">Username:</label>
-          <input type="text" id="username" value="<%= arr.length > 0 ? arr[arr.length - 1].Username : '' %>" readonly>
+          <input type="text" id="username" value="<%= user.Username %>" readonly>
         </div>
       </div>
       <div class="general">
         <div class="general-section">
           <label for="email">Email:</label>
-          <input type="email" id="email" value="<%= arr.length > 0 ? arr[arr.length - 1].Email : '' %>" readonly>
+          <input type="email" id="email" value="<%= user.Email%>" readonly>
         </div>
       </div>
      
@@ -88,7 +88,7 @@
                 <input type="text" id="age" value="25" readonly>
                             
                 <label for="phoneNumber"><b>Phone Number:</b></label>
-                <input type="text" id="phoneNumber" value="<%= arr.length > 0 ? arr[arr.length - 1].phone : '' %>" readonly>
+                <input type="text" id="phoneNumber" value="<%= user.phone %>" readonly>
                 <div class="Space"></div>
                         
                <div class="space"></div> 

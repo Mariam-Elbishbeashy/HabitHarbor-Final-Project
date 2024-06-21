@@ -13,6 +13,7 @@ const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
 const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
+const multer = require('multer');
 
 // Importing routes
 const adminRoutes = require('./routes/admin');
@@ -38,12 +39,14 @@ mongoose.connect(dbURI)
     await Users.deleteMany({});
     await Users.insertMany(Userdata);
 
+    console.log('MongoDB connected');
+
     // Start express server after inserting data
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
   })
-  .catch(err => console.log(err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -131,6 +134,7 @@ app.get('/editUser', async (req, res) => {
   }
 });
 
+// Uncomment and modify this route in app.js
 app.put("/editUser/:id", async (req, res) => {
   const userId = req.params.id;
   try {
@@ -139,9 +143,10 @@ app.put("/editUser/:id", async (req, res) => {
           { $set: req.body },
           { new: true }
       );
-      res.redirect("/user"); // Redirect to home or appropriate page after update
+      res.redirect("/user"); // Redirect to appropriate page after update
   } catch (err) {
       console.log(err);
-      res.status(500).send("Error updating user health information");
+      res.status(500).send("Error updating user information");
   }
 });
+
