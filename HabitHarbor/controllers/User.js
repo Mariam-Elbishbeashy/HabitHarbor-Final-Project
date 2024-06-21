@@ -88,7 +88,7 @@ const getResources = async (req, res) => {
         searchTerms.push(searchKey);
       }
   
-      res.render('resources', { data: resources, message, searchTerms }); 
+      res.render('resources', { data: resources, message, searchTerms },{user:req.session.user}); 
     } catch (err) {
       res.status(500).send(err);
     }
