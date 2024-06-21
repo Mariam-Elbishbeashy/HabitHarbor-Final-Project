@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/editUser.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <%- include("partials/header.ejs") %>
+        <%- include("partials/navbar.ejs") %>
+        
+        <form action="/editUser/<%= arr[arr.length - 1]._id %>?_method=PUT" method="post" id="editForm" onsubmit="return validateForm()">
+            <fieldset>
+                <legend>Personal Information</legend>
+                <label for="profile_image">Profile Image:</label><br>
+                <input type="file" id="profile_image" name="profile_image" class="profile-image-input" onchange="previewImage(event)"><br>
+                <img name="Image" id="profile-image-preview" src="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" alt="Profile Image Preview" class="profile-image-preview"><br><br>
+
+                <label for="firstname">First Name:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Firstname : '' %>" type="text" id="firstname" name="Firstname"><br><br>
+                <div class="error" id="firstnameError"></div>
+
+                <label for="lastname">Last Name:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Lastname : '' %>" type="text" id="lastname" name="Lastname"><br><br>
+                <div class="error" id="lastnameError"></div>
+
+                <label for="username">Username:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Username : '' %>" type="text" id="username" name="Username"><br><br>
+                <div class="error" id="usernameError"></div>
+
+                <label for="email">Email:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Email : '' %>" type="text" id="email" name="Email"><br><br>
+                <div class="error" id="emailError"></div>
+
+                <label for="age">Age:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].age : '' %>" type="text" id="age" name="age"><br><br>
+                <div class="error" id="ageError"></div>
+
+                <label for="phone">Phone Number:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].phone : '' %>" type="text" id="phone" name="phone"><br><br>
+                <div class="error" id="phoneError"></div>
+
+                <label>Gender:</label><br>
+                <input type="radio" id="male" name="Gender" value="male" 
+                    <%= arr.length > 0 && arr[arr.length - 1].Gender.trim().toLowerCase() === 'male' ? 'checked' : '' %> >
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="Gender" value="female" 
+                    <%= arr.length > 0 && arr[arr.length - 1].Gender.trim().toLowerCase() === 'female' ? 'checked' : '' %> >
+                <label for="female">Female</label><br>
+
+                <label for="country">Country:</label>
+                <select id="country" name="country">
+                    <option value="us" <%= arr.length > 0 && arr[arr.length - 1].country === 'us' ? 'selected' : '' %> >United States</option>
+                    <option value="ca" <%= arr.length > 0 && arr[arr.length - 1].country === 'ca' ? 'selected' : '' %> >Canada</option>
+                    <option value="uk" <%= arr.length > 0 && arr[arr.length - 1].country === 'uk' ? 'selected' : '' %> >United Kingdom</option>
+                    <!-- Add more countries as needed -->
+                </select><br><br>
+                <div class="error" id="countryError"></div>
+
+                <label for="height">Height (cm):</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Height : '' %>" type="number" id="height" name="Height"><br><br>
+                <div class="error" id="heightError"></div>
+
+                <label for="weight">Weight (kg):</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Weight : '' %>" type="number" id="weight" name="Weight"><br><br>
+                <div class="error" id="weightError"></div>
+
+                <label for="health_issues">Health Issues:</label><br>
+                <textarea id="health_issues" name="health_issues" rows="4" cols="50"><%= arr.length > 0 ? arr[arr.length - 1].health_issues : '' %></textarea><br><br>
+
+                <label>Health/Habit Goals:</label><br>
+                <input type="checkbox" id="sleep" name="goals" value="sleep" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('sleep') ? 'checked' : '' %> >
+                <label for="sleep">Healthy sleep patterns</label><br>
+                <input type="checkbox" id="weight_loss" name="goals" value="weight_loss" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('weight_loss') ? 'checked' : '' %> >
+                <label for="weight_loss">Weight loss</label><br>
+                <input type="checkbox" id="hydration" name="goals" value="hydration" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('hydration') ? 'checked' : '' %> >
+                <label for="hydration">Hydration goals</label><br>
+                <input type="checkbox" id="eating" name="goals" value="eating" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('eating') ? 'checked' : '' %> >
+                <label for="eating">Healthy Eating</label><br>
+                <input type="checkbox" id="flexibility" name="goals" value="flexibility" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('flexibility') ? 'checked' : '' %> >
+                <label for="flexibility">Flexibility training</label><br>
+                <input type="checkbox" id="strength" name="goals" value="strength" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('strength') ? 'checked' : '' %> >
+                <label for="strength">Strength training</label><br>
+                <input type="checkbox" id="cardio" name="goals" value="cardio" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('cardio') ? 'checked' : '' %> >
+                <label for="cardio">Cardiovascular health</label><br><br>
+            </fieldset>
+
+            <fieldset>
+                <legend>Social Links</legend>
+                <label for="facebook">Facebook:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].facebook : '' %>" type="text" id="facebook" name="facebook"><br><br>
+                <div class="error" id="facebookError"></div>
+
+                <label for="instagram">Instagram:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].instagram : '' %>" type="text" id="instagram" name="instagram"><br><br>
+                <div class="error" id="instagramError"></div>
+
+                <label for="twitter">Twitter:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].twitter : '' %>" type="text" id="twitter" name="twitter"><br><br>
+                <div class="error" id="twitterError"></div>
+
+                <label for="linkedin">LinkedIn:</label>
+                <input value="<%= arr.length > 0 ? arr[arr.length - 1].linkedin : '' %>" type="text" id="linkedin" name="linkedin"><br><br>
+                <div class="error" id="linkedinError"></div>
+            </fieldset>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script src="/js/editUser.js"></script>
+    <script src="/js/home.js"></script>
+    
+</body>
+</html>

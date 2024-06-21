@@ -3,10 +3,10 @@ const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
+const session = require('express-session');
 const Resource = require('./models/resourcedb');
 const data = require('./config/resourcedata');
-const session=require('express-session');
-const userRoutes=require('./routes/user');
+const userRoutes = require('./routes/user');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
@@ -14,11 +14,11 @@ const Activitydata = require('./config/activitydata');
 const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
 
-//importing routes
-const adminRoutes = require('./routes/admin')
+// Importing routes
+const adminRoutes = require('./routes/admin');
 const indexRoutes = require('./routes/index');
 
-// express app
+// Express app
 const app = express();
 const port = 3000;
 const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
@@ -26,21 +26,17 @@ const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
 // Connect to MongoDB
 mongoose.connect(dbURI)
   .then(async () => {
-    await Resource.deleteMany({}); 
-    const result = await Resource.insertMany(data);
-    console.log(`${result.length} documents inserted successfully`);
+    await Resource.deleteMany({});
+    await Resource.insertMany(data);
 
-    await Activities.deleteMany({}); 
-    const result2 = await Activities.insertMany(Activitydata);
-    console.log(`${result2.length} documents inserted successfully`);
+    await Activities.deleteMany({});
+    await Activities.insertMany(Activitydata);
 
-    await Posts.deleteMany({}); 
-    const result3 = await Posts.insertMany(Postdata);
-    console.log(`${result3.length} documents inserted successfully`);
+    await Posts.deleteMany({});
+    await Posts.insertMany(Postdata);
 
-    await Users.deleteMany({}); 
-    const result4 = await Users.insertMany(Userdata);
-    console.log(`${result4.length} documents inserted successfully`);
+    await Users.deleteMany({});
+    await Users.insertMany(Userdata);
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -49,39 +45,35 @@ mongoose.connect(dbURI)
   })
   .catch(err => console.log(err));
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-   secret: 'Your_Secret_Key',
-  resave:false,
-saveUninitialized:false,
-cookie:{maxAge:60000} }));
+  secret: 'Your_Secret_Key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}));
 app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
- app.use("/", userRoutes);
- app.use("/", indexRoutes);
- app.use("/", adminRoutes);
 
-//get requests
-app.get('/home', (req, res) => {
-  
-  Activities.find().then((activities)=>{
-    res.render('home',{activities:activities});
-  }).catch((err)=>{
+app.use("/", userRoutes);
+app.use("/", indexRoutes);
+app.use("/", adminRoutes);
+
+// Get requests
+app.get('/home', async (req, res) => {
+  try {
+    const activities = await Activities.find();
+    res.render('home', { activities });
+  } catch (err) {
     console.log(err);
-  })
-  
-});
-
-app.get('/home', (req, res) => {
-  res.render('home',{user:req.session.user});
+  }
 });
 
 app.get('/admin', (req, res) => {
@@ -92,7 +84,6 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
-
 app.get('/login', (req, res) => {
   res.render('login');
 });
@@ -101,12 +92,56 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-
 app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
 
-//404 page
-//  app.use((req, res) => {
-//    res.status(404).render('404', {user:req.session.user});
-//  });
+
+app.get('/user', async (req, res) => {
+  try {
+    const users = await Users.find();
+    res.render('user', { arr: users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving data');
+  }
+});
+
+app.get('/search', async (req, res) => {
+  const searchKey = req.query.key;
+  try {
+    const data = await Resource.find({
+      "$or": [
+        { Category: { $regex: searchKey, $options: 'i' } }
+      ]
+    });
+    res.render('resources', { data });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/editUser', async (req, res) => {
+  try {
+    const users = await Users.find();
+    res.render('editUser', { arr: users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving data');
+  }
+});
+
+app.put("/editUser/:id", async (req, res) => {
+  const userId = req.params.id;
+  try {
+      const updatedUser = await Users.findOneAndUpdate(
+          { _id: userId },
+          { $set: req.body },
+          { new: true }
+      );
+      res.redirect("/user"); // Redirect to home or appropriate page after update
+  } catch (err) {
+      console.log(err);
+      res.status(500).send("Error updating user health information");
+  }
+});
