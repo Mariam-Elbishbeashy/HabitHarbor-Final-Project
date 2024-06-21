@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
 const Resource = require('./models/resourcedb');
+const Badgesdb = require('./models/badgesdb');
+const badgesData = require('./config/badgesdata');
 const data = require('./config/resourcedata');
 const session=require('express-session');
 const userRoutes=require('./routes/user');
@@ -21,7 +23,7 @@ const indexRoutes = require('./routes/index');
 // express app
 const app = express();
 const port = 3000;
-const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
+const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
@@ -30,13 +32,13 @@ mongoose.connect(dbURI)
     const result = await Resource.insertMany(data);
     console.log(`${result.length} documents inserted successfully`);
 
-    await Activities.deleteMany({}); 
-    const result2 = await Activities.insertMany(Activitydata);
-    console.log(`${result2.length} documents inserted successfully`);
+     await Badgesdb.deleteMany({}); 
+     const result2 = await Badgesdb.insertMany(badgesData);
+     console.log(`${result2.length} documents inserted successfully`);
 
-    await Posts.deleteMany({}); 
-    const result3 = await Posts.insertMany(Postdata);
-    console.log(`${result3.length} documents inserted successfully`);
+    // await Posts.deleteMany({}); 
+    // const result3 = await Posts.insertMany(Postdata);
+    // console.log(`${result3.length} documents inserted successfully`);
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -52,10 +54,10 @@ app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
    secret: 'Your_Secret_Key',
-  resave:false,
+  resave: true,
 saveUninitialized:false,
-cookie:{maxAge:60000} }));
-app.set('view engine', 'ejs');
+cookie:{maxAge:72000000} }));
+app.set('view engine', 'ejs');     
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
@@ -66,14 +68,15 @@ app.use((req, res, next) => {
  app.use("/", adminRoutes);
 
 //get requests
-app.get('/home', (req, res) => {
-  
-  Activities.find().then((activities)=>{
-    res.render('home',{activities:activities});
-  }).catch((err)=>{
+app.get('/home', async (req, res) => {
+  try {
+    const activities = await Activities.find();
+    const badges = await Badgesdb.find();
+    res.render('home', { activities, badges, user: req.session.user });
+  } catch (err) {
     console.log(err);
-  })
-  
+    res.status(500).send('Server Error');
+  }
 });
 
 app.get('/home', (req, res) => {
@@ -88,8 +91,9 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
-app.get('/analysis', (req, res) => {
-  res.render('analysis');
+app.get('/analysis', async (req, res) => {
+  const badges = await Badgesdb.find();
+  res.render('analysis', {badges, user: req.session.user});
 });
 
 app.get('/login', (req, res) => {
@@ -108,6 +112,6 @@ app.get('/forgetpass', (req, res) => {
 
 
 //404 page
-//  app.use((req, res) => {
-//    res.status(404).render('404', {user:req.session.user});
-//  });
+ app.use((req, res) => {
+   res.status(404).render('404', {user: req.session.user});
+ });
