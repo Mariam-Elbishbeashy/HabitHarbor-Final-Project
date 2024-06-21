@@ -1,6 +1,7 @@
 const Postdb = require('../models/postsdb');
 const Users = require('../models/userdb');
 const Resource = require('../models/resourcedb');
+const Activities = require('../models/activitydb');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
@@ -43,6 +44,55 @@ const savePost = (req, res) => {
             });
     });
 };
+// function removeDuplicates(user) {
+//     // Check if user.customChallenge exists and is an array
+//     if (!user.customChallenge || !Array.isArray(user.customChallenge)) {
+//         return user; // Return user object as is if customChallenge is not valid
+//     }
+
+//     // Filter out duplicates based on unique identifiers (e.g., _id)
+//     user.customChallenge = user.customChallenge.filter((challenge, index, self) =>
+//         index === self.findIndex((t) => (
+//             t._id === challenge._id
+//         ))
+//     );
+
+//     return user;
+// }
+
+const customActivity = (req, res) => {
+    const { id } = req.params;
+    const { Title, Content } = req.body;
+
+    Users.findByIdAndUpdate(
+        id,
+        { $push: { customChallenge: { Title, Content } } },
+        { new: true }
+    )
+    .then(updatedUser => {
+        Activities.find()
+        .then(activities => {
+            console.log("Custom activity added successfully");
+
+            // Clear input fields after successful submission
+            req.body.Title = '';
+            req.body.Content = '';
+            // const uniqueActivities = removeDuplicates(user);
+            // console.log(uniqueActivities);
+             res.redirect("/home");
+        })
+        .catch(err => {
+            console.error("Failed to fetch activities:", err);
+            res.status(500).json({ error: 'Failed to fetch activities' });
+        });
+    })
+    .catch(err => {
+        console.error("Error saving custom activity:", err);
+        res.status(500).send("Error saving custom activity");
+    });
+};
+
+
 
 const commentPost = (req, res) => {
     const { id } = req.params;
@@ -88,7 +138,7 @@ const getResources = async (req, res) => {
         searchTerms.push(searchKey);
       }
   
-      res.render('resources', { data: resources, message, searchTerms },{user:req.session.user}); 
+      res.render('resources', { data: resources, message, searchTerms }); 
     } catch (err) {
       res.status(500).send(err);
     }
@@ -97,5 +147,6 @@ module.exports = {
    getResources,
    savePost,
    commentPost,
-   getPosts
+   getPosts,
+   customActivity
 };

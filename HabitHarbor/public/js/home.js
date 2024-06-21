@@ -190,6 +190,232 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+function addDailyCustomChallenge() {
+    const title = document.getElementById('input-title').value.trim();
+    const content = document.getElementById('input-content').value.trim();
+
+    const newActivityContainer = document.createElement('div');
+    newActivityContainer.classList.add('activity-container');
+
+    const activityCard = document.createElement('div');
+    activityCard.classList.add('activity', 'activity-custom');
+
+    const frontSide = document.createElement('div');
+    frontSide.classList.add('front');
+    frontSide.textContent = title;
+
+    const gifContainer = document.createElement('div');
+    gifContainer.classList.add('gif-container'); 
+
+    frontSide.appendChild(gifContainer);
+
+    const backSide = document.createElement('div');
+    backSide.classList.add('back');
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('trash-btn');
+    deleteButton.setAttribute('onClick', 'return deleteForm(this);');
+    deleteButton.innerHTML = `
+        <i class="bi bi-trash"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        </svg>
+    `;
+
+    const descriptionDiv = document.createElement('div');
+    descriptionDiv.classList.add('description');
+    descriptionDiv.textContent = content;
+
+    const checkboxWrapper = document.createElement('div');
+    checkboxWrapper.classList.add('checkbox-wrapper');
+
+    const roundCheckbox = document.createElement('div');
+    roundCheckbox.classList.add('round');
+
+    const checkboxInput = document.createElement('input');
+    checkboxInput.setAttribute('type', 'checkbox');
+    checkboxInput.setAttribute('id', 'custom-checkbox');
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.setAttribute('for', 'custom-checkbox');
+
+    roundCheckbox.appendChild(checkboxInput);
+    roundCheckbox.appendChild(checkboxLabel);
+
+    checkboxWrapper.appendChild(roundCheckbox);
+
+    backSide.appendChild(deleteButton);
+    backSide.appendChild(descriptionDiv);
+    backSide.appendChild(checkboxWrapper);
+
+    activityCard.appendChild(frontSide);
+    activityCard.appendChild(backSide);
+
+    newActivityContainer.appendChild(activityCard);
+
+    // Insert new activity container before the "Add your custom challenge" container
+    const dailyChallengesContainer = document.querySelector('.daily-challenges');
+    const addCustomChallengeContainer = dailyChallengesContainer.querySelector('.activity-container:last-child');
+
+    dailyChallengesContainer.insertBefore(newActivityContainer, addCustomChallengeContainer);
+
+    // document.getElementById('input-title').value = '';
+    // document.getElementById('input-content').value = '';
+}
+
+function addWeeklyCustomChallenge() {
+    // Get input value
+    const content = document.getElementById('custom-activity').value.trim();
+
+    // Validate input
+    if (content === '') {
+        alert('Please enter the content for your custom weekly challenge.');
+        return;
+    }
+
+    // Create new activity container
+    const newActivityContainer = document.createElement('div');
+    newActivityContainer.classList.add('activity-container');
+
+    // Create activity card structure
+    const activityCard = document.createElement('div');
+    activityCard.classList.add('wactivity');
+    activityCard.style.setProperty('--progress-value', '0%');
+
+    // Create challenge content div
+    const challengeContent = document.createElement('div');
+    challengeContent.classList.add('wchallenge-content');
+    challengeContent.textContent = content;
+
+    // Create delete button
+    // const deleteButton = document.createElement('button');
+    // deleteButton.classList.add('trash-btn');
+    // deleteButton.setAttribute('onClick', 'return deleteForm(this);');
+    // deleteButton.innerHTML = `
+    //     <i class="bi bi-trash"></i>
+    //     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+    //         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+    //         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+    //     </svg>
+    // `;
+
+    // Create loader div and set it to be hidden initially
+    const loaderDiv = document.createElement('div');
+    loaderDiv.classList.add('loader');
+    loaderDiv.style.display = 'none';
+
+    // Create progress div and set it to be hidden initially
+    const progressDiv = document.createElement('div');
+    progressDiv.classList.add('progress');
+    progressDiv.textContent = '0%';
+    progressDiv.style.display = 'none';
+
+    // Create completion button
+    const completionButton = document.createElement('button');
+    completionButton.classList.add('activity-btn');
+    completionButton.setAttribute('id', 'start-btn');
+    completionButton.textContent = "Let's go!!";
+    completionButton.addEventListener('click', function() {
+        loaderDiv.style.display = 'block';
+        progressDiv.style.display = 'block';
+        completionButton.textContent = 'Day 0';
+        completionButton.setAttribute('id', 'completion-btn');
+    });
+
+    // Append elements to activity card
+    activityCard.appendChild(challengeContent);
+    //activityCard.appendChild(deleteButton);
+    activityCard.appendChild(loaderDiv);
+    activityCard.appendChild(progressDiv);
+    activityCard.appendChild(completionButton);
+
+    // Append activity card to activity container
+    newActivityContainer.appendChild(activityCard);
+
+    // Insert new activity container before the "Add Weekly challenge" container
+    const weeklyChallengesContainer = document.querySelector('.weekly-challenges');
+    const addWeeklyChallengeContainer = weeklyChallengesContainer.querySelector('.activity-container:last-child');
+
+    weeklyChallengesContainer.insertBefore(newActivityContainer, addWeeklyChallengeContainer);
+
+    // Clear the input field
+    document.getElementById('custom-activity').value = '';
+}
+
+function addMonthlyCustomChallenge() {
+    // Get input value
+    const content = document.getElementById('custom-activitym').value.trim();
+
+    // Validate input
+    if (content === '') {
+        alert('Please enter the content for your custom monthly challenge.');
+        return;
+    }
+
+    // Create new activity container
+    const newActivityContainer = document.createElement('div');
+    newActivityContainer.classList.add('activity-container');
+
+    // Create activity card structure
+    const activityCard = document.createElement('div');
+    activityCard.classList.add('mactivity');
+    activityCard.style.setProperty('--progress-value', '0%');
+
+    // Create challenge content div
+    const challengeContent = document.createElement('div');
+    challengeContent.classList.add('mchallenge-content');
+    challengeContent.textContent = content;
+
+    // Create loader div and set it to be hidden initially
+    const loaderDiv = document.createElement('div');
+    loaderDiv.classList.add('loader');
+    loaderDiv.style.display = 'none';
+
+    // Create progress div and set it to be hidden initially
+    const progressDiv = document.createElement('div');
+    progressDiv.classList.add('progress');
+    progressDiv.textContent = '0%';
+    progressDiv.style.display = 'none';
+
+    // Create completion button
+    const completionButton = document.createElement('button');
+    completionButton.classList.add('activity-btn');
+    completionButton.textContent = "Let's go!!";
+    completionButton.addEventListener('click', function() {
+        loaderDiv.style.display = 'block';
+        progressDiv.style.display = 'block';
+        completionButton.textContent = 'Day 0';
+        completionButton.setAttribute('id', 'completion-btn');
+    });
+
+    // Append elements to activity card
+    activityCard.appendChild(challengeContent);
+    activityCard.appendChild(loaderDiv);
+    activityCard.appendChild(progressDiv);
+    activityCard.appendChild(completionButton);
+
+    // Append activity card to activity container
+    newActivityContainer.appendChild(activityCard);
+
+    // Insert new activity container before the "Add Monthly challenge" container
+    const monthlyChallengesContainer = document.querySelector('.monthly-challenges');
+    const addMonthlyChallengeContainer = monthlyChallengesContainer.querySelector('.activity-container:last-child');
+
+    monthlyChallengesContainer.insertBefore(newActivityContainer, addMonthlyChallengeContainer);
+
+    // Clear the input field
+    document.getElementById('custom-activity').value = '';
+}
+
+
+// fetch('/api/activities')
+//         .then(response => response.json())
+//         .then(activities => {
+//             activities.forEach(activity => {
+                
+//             });
+//         })
+//         .catch(err => console.error('Error fetching users:', err));
 
 function logout(){
     window.location.href = "../index.html";

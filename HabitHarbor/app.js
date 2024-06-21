@@ -21,22 +21,26 @@ const indexRoutes = require('./routes/index');
 // express app
 const app = express();
 const port = 3000;
-const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
+const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
   .then(async () => {
-    await Resource.deleteMany({}); 
-    const result = await Resource.insertMany(data);
-    console.log(`${result.length} documents inserted successfully`);
+    // await Resource.deleteMany({}); 
+    // const result = await Resource.insertMany(data);
+    // console.log(`${result.length} documents inserted successfully`);
 
-    await Activities.deleteMany({}); 
-    const result2 = await Activities.insertMany(Activitydata);
-    console.log(`${result2.length} documents inserted successfully`);
+    // await Activities.deleteMany({}); 
+    // const result2 = await Activities.insertMany(Activitydata);
+    // console.log(`${result2.length} documents inserted successfully`);
 
-    await Posts.deleteMany({}); 
-    const result3 = await Posts.insertMany(Postdata);
-    console.log(`${result3.length} documents inserted successfully`);
+    // await Posts.deleteMany({}); 
+    // const result3 = await Posts.insertMany(Postdata);
+    // console.log(`${result3.length} documents inserted successfully`);
+
+    await Users.deleteMany({}); 
+    const result4 = await Users.insertMany(Userdata);
+    console.log(`${result4.length} documents inserted successfully`);
 
   
 
@@ -61,6 +65,7 @@ app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
+  res.setHeader('Cache-Control', 'no-store');
   next();
 });
  app.use("/", userRoutes);

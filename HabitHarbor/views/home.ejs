@@ -15,13 +15,14 @@
         <%- include("partials/header.ejs") %>
         <%- include("partials/sidebar.ejs") %>
         <%- include("partials/navbar.ejs") %>
+        <% const userBMI = ((user.Weight/(user.Height * user.Height ))*10000); %>
         <div class="main">
             <div class="title">
                 <h2>Daily Challenges</h2>
             </div>
             <div class="daily-challenges">
                 <div class="activity-container">
-                    <div class="activity activity-one">
+                    <div class="activity activity-three">
                         <div class="front">
                             Nutrition challenge
                             <div class="gif-container"><img src="/images/food.gif" id="food"></div>
@@ -38,12 +39,26 @@
                                 </button>
                             </div>
                             <div class="description">
-                                <% for (let i=0;i<activities.length;i++){ %>
-                               <% if(activities[i].category==="nutrition"){%>
-                               <%= activities[i].content %>
-                               <% break %>
-                                <%}%>
-                               <% }%>
+                                <% 
+                                const now = new Date();
+                                const currentMinute = now.getMinutes();
+                            
+                                let filteredActivities = activities.filter(activity => 
+                                    activity.category === "nutrition" && 
+                                    activity.bmiRange.min <= userBMI && 
+                                    activity.bmiRange.max >= userBMI && 
+                                    activity.ageRange.min <= user.age && 
+                                    activity.ageRange.max >= user.age
+                                );
+                            
+                                if (filteredActivities.length > 0) {
+                                    const index = currentMinute % filteredActivities.length;
+                                    const selectedActivity = filteredActivities[index];
+                                    %>
+                                    <%= selectedActivity.content %>
+                                    <% 
+                                }
+                                %>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
@@ -56,7 +71,7 @@
                 </div>
 
                 <div class="activity-container">
-                    <div class="activity activity-two">
+                    <div class="activity activity-one">
                         <div class="front">
                             Physical Challenge
                             <div class="gif-container"><img src="/images/runner.gif" id="runner"></div>
@@ -74,7 +89,7 @@
                             </div>
                             <div class="description">
                                 <% for (let i=0;i<activities.length;i++){ %>
-                                    <% if(activities[i].category==="physical"){%>
+                                    <% if(activities[i].category==="physical" && activities[i].bmiRange.min <= userBMI && activities[i].bmiRange.max >= userBMI && activities[i].ageRange.min <= user.age && activities[i].ageRange.max >= user.age){%>
                                     <%= activities[i].content %>
                                     <% break %>
                                      <%}%>
@@ -108,7 +123,7 @@
                             </div>
                             <div class="description">
                                 <% for (let i=0;i<activities.length;i++){ %>
-                                    <% if(activities[i].category==="well-being"){%>
+                                    <% if(activities[i].category==="well-being" && activities[i].bmiRange.min <= userBMI && activities[i].bmiRange.max >= userBMI && activities[i].ageRange.min <= user.age && activities[i].ageRange.max >= user.age){%>
                                     <%= activities[i].content %>
                                     <% break %>
                                      <%}%>
@@ -123,21 +138,53 @@
                         </div>
                     </div>
                 </div>
+                 <% for(let j = 0; j < user.customChallenge.length; j++){ %>
+                <div class="activity-container">
+                    <div class="activity activity-two">
+                        <div class="front">
+                            <%=user.customChallenge[j].Title%>
+                        </div>
+
+                        <div class="back">
+                            <div>
+                                <button class="trash-btn" onClick="return deleteForm(this);">
+                                    <i class="bi bi-trash"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="description">
+                                <%=user.customChallenge[j].Content%>
+                            </div>
+                            <div class="checkbox-wrapper">
+                                <div class="round">
+                                    <input type="checkbox" id="checkbox3" />
+                                    <label for="checkbox3"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
                 <div class="activity-container">
                     <div class="activity activity-fourh">
                         <div class="front">Add your Custom challenge</div>
                         <div class="back">
-
-                            <div class="daily-plus-container">
-                                <button class="plus" onclick="dailyValidate()">
-                                    <i class="bi bi-plus-lg clickable" id="daily-plus-btn"></i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <input type="text" placeholder="Type a title here ..." class="custom-input" id="input-title">
-                            <textarea placeholder="type the challenge here ..." class="custom-input" id="input-content"></textarea>
+                            <form method="post" action="/home/<%= user._id %>/custom" style="width: 100%;">
+                                <div class="daily-plus-container">
+                                    <button class="plus" type="submit" onclick="dailyValidate(); addDailyCustomChallenge()">
+                                        <i class="bi bi-plus-lg clickable" id="daily-plus-btn"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            
+                                <input type="text" name="Title" placeholder="Type a title here ..." class="custom-input" id="input-title">
+                                <textarea placeholder="type the challenge here ..." name="Content" class="custom-input" id="input-content"></textarea>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -181,7 +228,7 @@
                             Add Weekly challenge
                             <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>        
                         </div>
-                        <button class="plus" onclick="weeklyMonthlyValidate()">
+                        <button class="plus" onclick="weeklyMonthlyValidate(); addWeeklyCustomChallenge()">
                             <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
@@ -221,9 +268,9 @@
                     <div class="mactivity activity3">
                         <div class="mchallenge-content">
                             Add Monthly challenge
-                            <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>
+                            <textarea placeholder="type here.." class="custom-input" id="custom-activitym"></textarea>
                         </div>
-                    <button class="plus" onclick="weeklyMonthlyValidate()">
+                    <button class="plus" onclick="addMonthlyCustomChallenge()">
                         <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
@@ -234,6 +281,10 @@
         </div>
         <div class="footer"></div>
     </div>
+    <script>
+        console.log(user.Firstname); 
+    </script>
+
     <script src="/js/home.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

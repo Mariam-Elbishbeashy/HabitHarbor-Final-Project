@@ -1,5 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const customSchema = new Schema({
+  Title: {
+    type: String,
+    required: false,
+  },
+  Content: {
+    type: String,
+    required: false,
+  },
+}, { timestamps: true });
 
 const userSchema = new Schema({
   DataType:{
@@ -52,7 +62,9 @@ const userSchema = new Schema({
   Image: {
     type: String,
     required: false,
-  }
+  },
+  customChallenge: [customSchema],
+  
 }, { timestamps: true });
 
 const Userdb = mongoose.model('userdb', userSchema);
