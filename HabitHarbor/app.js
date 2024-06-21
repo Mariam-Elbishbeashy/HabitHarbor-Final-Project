@@ -38,8 +38,6 @@ mongoose.connect(dbURI)
     const result3 = await Posts.insertMany(Postdata);
     console.log(`${result3.length} documents inserted successfully`);
 
-  
-
     // Start express server after inserting data
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
@@ -106,6 +104,8 @@ app.get('/signup', (req, res) => {
 app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
+
+
 
 //404 page
 //  app.use((req, res) => {
