@@ -1,15 +1,28 @@
 <div class="sidebar">
     <div class="profile">
-        <div class="profile-title"><h2 id="profile-title-h2">Profile</h2></div>
-        <div class="profile-picture centered">
-            <img src="user.Image" alt="profile picture" id="profile-pic"/>
-        </div>
+        <% if (user) { %>
+            <div class="profile-title"><h2 id="profile-title-h2">Welcome! <%- user.Firstname %></h2></div>
+            <div class="profile-picture centered">
+                <img src="<%- user.Image %>" alt="profile picture" id="profile-pic"/>
+            </div>
+        <% } else { %>
+            <div class="profile-title"><h2 id="profile-title-h2">Welcome, Guest!</h2></div>
+            <div class="profile-picture centered">
+                <img src="/images/profile-pic.png" alt="profile picture" id="profile-pic"/>
+            </div>
+        <% } %>
         <div class="age-title centered">Age</div>
         <div class="height-title centered">Height</div>
         <div class="weight-title centered">Weight</div>
-        <div class="age-value centered"><%= user.age %></div>
-        <div class="height-value centered"><%= user.Height %></div>
-        <div class="weight-value centered"><%= user.Weight %></div>
+        <% if (user && user.age) { %>
+            <div class="age-value centered"><%- user.age %></div>
+            <div class="height-value centered"><%- user.Height %></div>
+            <div class="weight-value centered"><%- user.Weight %></div>
+        <% } else { %>
+            <div class="age-value centered">Unknown</div>
+            <div class="height-value centered">Unknown</div>
+            <div class="weight-value centered">Unknown</div>
+        <% } %>
     </div>
     <div class="calendar"> 
         <div class="datepicker-top">
@@ -73,24 +86,13 @@
     </div>
     <div class="badges-title">
         <h2 id="badge-title">Badges</h2>
-        <i class="bi bi-plus-lg clickable" id="plus-badge"></i>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-          </svg>
-        <button class="seeAll">SeeAll-></button>
     </div>
     <div class="badges">
-        <button class="first-badge" onClick="return modalForm(this);">
-            <h5 class="badge-title">100 days Physical Activity Badge</h5>
-            <img src="./images/gold-badge.png" alt="physical badge" id="img-badge1"/>
-        </button>
-        <button class="second-badge" onClick="return modalForm(this);">
-            <h5 class="badge-title">50 days Nutrition Activity Badge</h5>
-            <img src="./images/silver-badge.png" alt="nutrition badge" id="img-badge2"/>
-        </button>
-        <button class="third-badge" onClick="return modalForm(this);">
-            <h5 class="badge-title">10 days Reading Activity Badge</h5>
-            <img src="./images/bronze-badge.png" alt="reading badge" id="img-badge3"/>
-        </button>
+        <% badges.forEach(function(badge) { %>
+            <button class="badge" onClick="return modalForm(this);">
+                <h5 class="badge-title"><%- badge.badgeTitle %></h5>
+                <img src="<%- badge.badgeImage %>" alt="<%- badge.badgeCategory %> badge" class="img-badge"/>
+            </button>
+        <% }); %>
     </div>
 </div>
