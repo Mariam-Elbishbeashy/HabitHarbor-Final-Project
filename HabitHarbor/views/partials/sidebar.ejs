@@ -1,15 +1,28 @@
 <div class="sidebar">
     <div class="profile">
-        <div class="profile-title"><h2 id="profile-title-h2">Profile</h2></div>
-        <div class="profile-picture centered">
-            <img src="./images/profile-pic.png" alt="profile picture" id="profile-pic"/>
-        </div>
+        <% if (user) { %>
+            <div class="profile-title"><h2 id="profile-title-h2">Welcome! <%- user.Firstname %></h2></div>
+            <div class="profile-picture centered">
+                <img src="<%- user.Image %>" alt="profile picture" id="profile-pic"/>
+            </div>
+        <% } else { %>
+            <div class="profile-title"><h2 id="profile-title-h2">Welcome, Guest!</h2></div>
+            <div class="profile-picture centered">
+                <img src="/images/profile-pic.png" alt="profile picture" id="profile-pic"/>
+            </div>
+        <% } %>
         <div class="age-title centered">Age</div>
         <div class="height-title centered">Height</div>
         <div class="weight-title centered">Weight</div>
-        <div class="age-value centered">--</div>
-        <div class="height-value centered">--</div>
-        <div class="weight-value centered">--</div>
+        <% if (user && user.age) { %>
+            <div class="age-value centered"><%- user.age %></div>
+            <div class="height-value centered"><%- user.Height %></div>
+            <div class="weight-value centered"><%- user.Weight %></div>
+        <% } else { %>
+            <div class="age-value centered">Unknown</div>
+            <div class="height-value centered">Unknown</div>
+            <div class="weight-value centered">Unknown</div>
+        <% } %>
     </div>
     <div class="calendar"> 
         <div class="datepicker-top">

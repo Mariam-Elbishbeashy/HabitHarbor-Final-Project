@@ -6,15 +6,21 @@ const path = require('path');
 const fs = require('fs');
 
 const savePost = (req, res) => {
+
+    if (!req.session.user) {
+        return res.status(401).send('User not logged in');
+    }
+
     if (!req.files || !req.files.image) {
         return res.status(400).send('No file uploaded');
     }
 
+    const user = req.session.user; 
     const image = req.files.image;
-    const imageName = uuidv4() + '_' + image.name; 
+    const imageName = uuidv4() + '_' + image.name;
 
     const imagesDir = path.join(__dirname, '..', 'public', 'images');
-    
+
     // Ensure the images directory exists
     if (!fs.existsSync(imagesDir)) {
         fs.mkdirSync(imagesDir, { recursive: true });
@@ -29,8 +35,10 @@ const savePost = (req, res) => {
         }
 
         const postdb = new Postdb({
+            userName: user.Firstname,
+            userProfile: user.Image,
             text: req.body.text,
-            imageUploaded: path.join('images', imageName), 
+            imageUploaded: path.join('images', imageName),
         });
 
         postdb.save()
@@ -45,12 +53,17 @@ const savePost = (req, res) => {
 };
 
 const commentPost = (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).send('User not logged in');
+    }
+
     const { id } = req.params;
-    const { userName, userProfile, commentText  } = req.body;
+    const user = req.session.user;  
+    const { commentText } = req.body;
 
     Postdb.findByIdAndUpdate(
         id,
-        { $push: { comments: { userName, userProfile, commentText  } } },
+        { $push: { comments: { userName: user.Firstname, userProfile: user.Image, commentText } } },
         { new: true }
     )
     .then(() => {
@@ -66,7 +79,7 @@ const getPosts = (req, res) => {
     Postdb.find()
         .sort({ createdAt: -1 }) 
         .then((posts) => {
-            res.render("posts", { posts });
+            res.render("posts", { posts, user: req.session.user });
         })
         .catch((err) => {
             console.log(err);
@@ -88,7 +101,7 @@ const getResources = async (req, res) => {
         searchTerms.push(searchKey);
       }
   
-      res.render('resources', { data: resources, message, searchTerms }); 
+      res.render('resources', { data: resources, message, searchTerms, user: req.session.user }); 
     } catch (err) {
       res.status(500).send(err);
     }
