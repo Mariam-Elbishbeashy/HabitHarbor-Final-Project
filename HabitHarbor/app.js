@@ -92,6 +92,9 @@ app.get('/', (req, res) => {
   res.render('front');
 });
 
+app.get('/analysis', (req, res) => {
+  res.render('analysis');
+});
 
 app.get('/login', (req, res) => {
   res.render('login');
