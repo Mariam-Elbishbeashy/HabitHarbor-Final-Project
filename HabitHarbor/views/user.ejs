@@ -53,7 +53,7 @@
  <!-- General -->
  <div id="generalContent" class="content">
     <div class="user-profile">
-      <img src="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" value="<%= arr.length > 0 ? arr[arr.length - 1].Image : '' %>" alt="Profile Picture" id="profilePic">
+      <img src="<%= user.Image %>" value="<%= user.Image %>" alt="Profile Picture" id="profilePic">
     </div>
     <div class="user-profile">
       <div class="general">
@@ -82,85 +82,82 @@
     </div>
   </div>
 
-            <div id="infoContent" class="content">
-                <div class="ageNumber">
-                <label for="age"><b>Age:</b></label>
-                <input type="text" id="age" value="25" readonly>
-                            
-                <label for="phoneNumber"><b>Phone Number:</b></label>
-                <input type="text" id="phoneNumber" value="<%= user.phone %>" readonly>
-                <div class="Space"></div>
-                        
-               <div class="space"></div> 
-            </div>  
-                <label for="gender"><b>Gender:</b></label>
-                <div id="gender">
-                    <input type="radio" id="male" name="gender" value="male" checked> 
-                    <label for="male" class="gender-label"><i class="fa-solid fa-person"></i> Male</label>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female" class="gender-label"><i class="fa-solid fa-person-dress"></i> Female</label>
-                </div>
-                <div class="space"></div>         
-                <label for="country"><b>Country:</b></label>
-                <select id="country">
-                    <option value="Argentina">Argentina</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Austria">Austria</option>
-                    <option value="Belgium">Belgium</option>
-                    <option value="Brazil">Brazil</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Chile">Chile</option>
-                    <option value="China">China</option>
-                    <option value="Colombia">Colombia</option>
-                    <option value="Czech Republic">Czech Republic</option>
-                    <option value="Denmark">Denmark</option>
-                    <option value="Egypt" selected>Egypt</option>
-                    <option value="Finland">Finland</option>
-                    <option value="France">France</option>
-                    <option value="Germany">Germany</option>
-                    <option value="Greece">Greece</option>
-                    <option value="Hong Kong">Hong Kong</option>
-                    <option value="Hungary">Hungary</option>
-                    <option value="India">India</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="Iran">Iran</option>
-                    <option value="Iraq">Iraq</option>
-                    <option value="Ireland">Ireland</option>
-                    <option value="Italy">Italy</option>
-                    <option value="Japan">Japan</option>
-                    <option value="Malaysia">Malaysia</option>
-                    <option value="Mexico">Mexico</option>
-                    <option value="Netherlands">Netherlands</option>
-                    <option value="New Zealand">New Zealand</option>
-                    <option value="Norway">Norway</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="Philippines">Philippines</option>
-                    <option value="Poland">Poland</option>
-                    <option value="Portugal">Portugal</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
-                    <option value="Singapore">Singapore</option>
-                    <option value="South Africa">South Africa</option>
-                    <option value="South Korea">South Korea</option>
-                    <option value="Spain">Spain</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="Switzerland">Switzerland</option>
-                    <option value="Taiwan">Taiwan</option>
-                    <option value="Thailand">Thailand</option>
-                    <option value="Turkey">Turkey</option>
-                    <option value="Ukraine">Ukraine</option>
-                    <option value="United Arab Emirates">United Arab Emirates</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="United States">United States</option>
-                    <option value="Vietnam">Vietnam</option>
-                </select>
-                 
-                <div class="user-profile custom-info">
-                    <p>Please choose your gender and country and click "Save Changes" to ensure they are saved.</p>
-                    <h6>Please choose your gender and country and <br> click "Save Changes" to ensure they are saved. </h6>
-                </div>
-                </div>
-            
+  <div id="infoContent" class="content">
+    <div class="ageNumber">
+        <label for="age"><b>Age:</b></label>
+        <input type="text" id="age" value="<%= user.age %>" readonly>
+                    
+        <label for="phoneNumber"><b>Phone Number:</b></label>
+        <input type="text" id="phoneNumber" value="<%= user.phone %>" readonly>
+        <div class="Space"></div>
+                
+        <div class="space"></div> 
+    </div>  
+    <label for="gender"><b>Gender:</b></label>
+    <div id="gender">
+        <input type="radio" id="male" name="Gender" value="male" 
+        <%= user.Gender.trim().toLowerCase() === 'male' ? 'checked' : '' %> >
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="Gender" value="female" 
+        <%= user.Gender.trim().toLowerCase() === 'female' ? 'checked' : '' %> >
+    <label for="female">Female</label><br>
+</div>
+    <div class="space"></div>         
+    <label for="country"><b>Country:</b></label>
+    <select id="country" disabled>
+        <option value="Argentina" <%= user.country === 'Argentina' ? 'selected' : '' %>>Argentina</option>
+        <option value="Australia" <%= user.country === 'Australia' ? 'selected' : '' %>>Australia</option>
+        <option value="Austria" <%= user.country === 'Austria' ? 'selected' : '' %>>Austria</option>
+        <option value="Belgium" <%= user.country === 'Belgium' ? 'selected' : '' %>>Belgium</option>
+        <option value="Brazil" <%= user.country === 'Brazil' ? 'selected' : '' %>>Brazil</option>
+        <option value="Canada" <%= user.country === 'Canada' ? 'selected' : '' %>>Canada</option>
+        <option value="Chile" <%= user.country === 'Chile' ? 'selected' : '' %>>Chile</option>
+        <option value="China" <%= user.country === 'China' ? 'selected' : '' %>>China</option>
+        <option value="Colombia" <%= user.country === 'Colombia' ? 'selected' : '' %>>Colombia</option>
+        <option value="Czech Republic" <%= user.country === 'Czech Republic' ? 'selected' : '' %>>Czech Republic</option>
+        <option value="Denmark" <%= user.country === 'Denmark' ? 'selected' : '' %>>Denmark</option>
+        <option value="Egypt" <%= user.country === 'Egypt' ? 'selected' : '' %>>Egypt</option>
+        <option value="Finland" <%= user.country === 'Finland' ? 'selected' : '' %>>Finland</option>
+        <option value="France" <%= user.country === 'France' ? 'selected' : '' %>>France</option>
+        <option value="Germany" <%= user.country === 'Germany' ? 'selected' : '' %>>Germany</option>
+        <option value="Greece" <%= user.country === 'Greece' ? 'selected' : '' %>>Greece</option>
+        <option value="Hong Kong" <%= user.country === 'Hong Kong' ? 'selected' : '' %>>Hong Kong</option>
+        <option value="Hungary" <%= user.country === 'Hungary' ? 'selected' : '' %>>Hungary</option>
+        <option value="India" <%= user.country === 'India' ? 'selected' : '' %>>India</option>
+        <option value="Indonesia" <%= user.country === 'Indonesia' ? 'selected' : '' %>>Indonesia</option>
+        <option value="Iran" <%= user.country === 'Iran' ? 'selected' : '' %>>Iran</option>
+        <option value="Iraq" <%= user.country === 'Iraq' ? 'selected' : '' %>>Iraq</option>
+        <option value="Ireland" <%= user.country === 'Ireland' ? 'selected' : '' %>>Ireland</option>
+        <option value="Italy" <%= user.country === 'Italy' ? 'selected' : '' %>>Italy</option>
+        <option value="Japan" <%= user.country === 'Japan' ? 'selected' : '' %>>Japan</option>
+        <option value="Malaysia" <%= user.country === 'Malaysia' ? 'selected' : '' %>>Malaysia</option>
+        <option value="Mexico" <%= user.country === 'Mexico' ? 'selected' : '' %>>Mexico</option>
+        <option value="Netherlands" <%= user.country === 'Netherlands' ? 'selected' : '' %>>Netherlands</option>
+        <option value="New Zealand" <%= user.country === 'New Zealand' ? 'selected' : '' %>>New Zealand</option>
+        <option value="Norway" <%= user.country === 'Norway' ? 'selected' : '' %>>Norway</option>
+        <option value="Pakistan" <%= user.country === 'Pakistan' ? 'selected' : '' %>>Pakistan</option>
+        <option value="Philippines" <%= user.country === 'Philippines' ? 'selected' : '' %>>Philippines</option>
+        <option value="Poland" <%= user.country === 'Poland' ? 'selected' : '' %>>Poland</option>
+        <option value="Portugal" <%= user.country === 'Portugal' ? 'selected' : '' %>>Portugal</option>
+        <option value="Russia" <%= user.country === 'Russia' ? 'selected' : '' %>>Russia</option>
+        <option value="Saudi Arabia" <%= user.country === 'Saudi Arabia' ? 'selected' : '' %>>Saudi Arabia</option>
+        <option value="Singapore" <%= user.country === 'Singapore' ? 'selected' : '' %>>Singapore</option>
+        <option value="South Africa" <%= user.country === 'South Africa' ? 'selected' : '' %>>South Africa</option>
+        <option value="South Korea" <%= user.country === 'South Korea' ? 'selected' : '' %>>South Korea</option>
+        <option value="Spain" <%= user.country === 'Spain' ? 'selected' : '' %>>Spain</option>
+        <option value="Sweden" <%= user.country === 'Sweden' ? 'selected' : '' %>>Sweden</option>
+        <option value="Switzerland" <%= user.country === 'Switzerland' ? 'selected' : '' %>>Switzerland</option>
+        <option value="Taiwan" <%= user.country === 'Taiwan' ? 'selected' : '' %>>Taiwan</option>
+        <option value="Thailand" <%= user.country === 'Thailand' ? 'selected' : '' %>>Thailand</option>
+        <option value="Turkey" <%= user.country === 'Turkey' ? 'selected' : '' %>>Turkey</option>
+        <option value="Ukraine" <%= user.country === 'Ukraine' ? 'selected' : '' %>>Ukraine</option>
+        <option value="United Arab Emirates" <%= user.country === 'United Arab Emirates' ? 'selected' : '' %>>United Arab Emirates</option>
+        <option value="United Kingdom" <%= user.country === 'United Kingdom' ? 'selected' : '' %>>United Kingdom</option>
+        <option value="United States" <%= user.country === 'United States' ? 'selected' : '' %>>United States</option>
+        <option value="Vietnam" <%= user.country === 'Vietnam' ? 'selected' : '' %>>Vietnam</option>
+    </select>
+</div>
+
             
             <!-- BMI Content -->
             <div id="bmiContent" class="content" style="display: none;">
@@ -224,75 +221,74 @@
              </div>
             
 
-    <!--health info-->
-    <div id="healthInfoContent" class="content" style="display: none;">
-        <div class="user-profile">
-            <label for="healthIssues">Health Issues:</label>
-            <textarea id="health-issues" name="health-issues" rows="3" cols="50" placeholder="Enter your health issues here..."></textarea>
+             
+        <div id="healthInfoContent" class="content" style="display: none;">
+            <div class="user-profile">
+                <label for="healthIssues">Health Issues:</label>
+                <textarea id="health-issues" name="health-issues" rows="3" cols="50" placeholder="None" readonly><%= user.health_issues %></textarea>
+            </div>
+            <div class="info2-section">
+                <label for="habits-goals">Health/Habit Goals:</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox"  id="sleep" class="checkbox-custom" name="goals" value="sleep" <%= user.goals.includes('sleep') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="sleep">Healthy sleep patterns</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="weight_loss" class="checkbox-custom" name="goals" value="weight_loss" <%= user.goals.includes('weight_loss') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="weight_loss">Weight loss</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="hydration" class="checkbox-custom" name="goals" value="hydration" <%= user.goals.includes('hydration') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="hydration">Hydration goals</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="eating" class="checkbox-custom" name="goals" value="eating" <%= user.goals.includes('eating') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="eating">Healthy Eating</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="flexibility" class="checkbox-custom" name="goals" value="flexibility" <%= user.goals.includes('flexibility') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="flexibility">Flexibility training</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="strength" class="checkbox-custom" name="goals" value="strength" <%= user.goals.includes('strength') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="strength">Strength training</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="cardio" class="checkbox-custom" name="goals" value="cardio" <%= user.goals.includes('cardio') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="cardio">Cardiovascular health</label>
+            </div>
         </div>
-        <div class="info2-section">
-            <label for="habits-goals">Health/Habit Goals:</label>
-        </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal1" name="goal1" class="checkbox-custom">
-                <label class="checkbox-label" for="goal1">Weight Loss</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal2" name="goal2" class="checkbox-custom">
-                <label class="checkbox-label" for="goal2">Healthy Eating</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal3" name="goal3" class="checkbox-custom">
-                <label class="checkbox-label" for="goal3">Hydration Goals</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal4" name="goal4" class="checkbox-custom">
-                <label class="checkbox-label" for="goal4">Healthy Sleep Patterns</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal5" name="goal5" class="checkbox-custom" onchange="toggleOtherTextArea()">
-                <label class="checkbox-label" for="goal5">Other</label>
-            </div>
-            
-            <div class="user-profile" id="otherGoalTextArea" style="display: none;">
-                <label for="otherGoal">Other Goal:</label>
-                <textarea id="otherGoal" name="otherGoal" rows="2" cols="50" placeholder="Write here"></textarea>
-            </div>
-           
-            <div class="user-profile custom-info">
-                <p>Please check the boxes for the health goals needed and click "Save Changes" to ensure they are saved.</p>
-              </div> 
-    </div>
     
     <!--social links-->
- <div id="socialLinksContent" class="content">
-    <div class="user-profile">
-        <div class="social-links">
-            <i class="fa-brands fa-facebook"></i>
-            <input type="text" id="facebookLink" placeholder="Enter your facebook link">
-            <a href="#" onclick="openLink('facebookLink')">Open</a>
-            <div class="error" id="facebookLinkError"></div>
-        </div>
-        <div class="social-links">
-            <i class="fa-brands fa-twitter "></i>
-            <input type="text" id="twitterLink" placeholder="Enter your twitter link">
-            <a href="#" onclick="openLink('twitterLink')">Open</a>
-            <div class="error" id="twitterLinkError"></div>
-        </div>
-        <div class="social-links">
-            <i class="fa-brands fa-instagram"></i>
-            <input type="text" id="instagramLink" placeholder="Enter your instagram link">
-            <a href="#" onclick="openLink('instagramLink')">Open</a>
-            <div class="error" id="instagramLinkError"></div>
-        </div>
-        <div class="social-links">
-            <i class="fa-brands fa-linkedin"></i>
-            <input type="text" id="linkedinLink" placeholder="Enter your linkedin link">
-            <a href="#" onclick="openLink('linkedinLink')">Open</a>
-            <div class="error" id="linkedinLinkError"></div>
+    <div id="socialLinksContent" class="content">
+        <div class="user-profile">
+            <div class="social-links">
+                <i class="fa-brands fa-facebook"></i>
+                <input type="text" id="facebookLink" value="<%= user.facebook %>" readonly>
+                <a href="<%= user.facebook %>" target="_blank">Open</a>
+                <div class="error" id="facebookLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-twitter "></i>
+                <input type="text" id="twitterLink" value="<%= user.twitter %>" readonly>
+                <a href="<%= user.twitter %>" target="_blank">Open</a>
+                <div class="error" id="twitterLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <input type="text" id="instagramLink" value="<%= user.instagram %>" readonly>
+                <a href="<%= user.instagram %>" target="_blank">Open</a>
+                <div class="error" id="instagramLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-linkedin"></i>
+                <input type="text" id="linkedinLink" value="<%= user.linkedin %>" readonly>
+                <a href="<%= user.linkedin %>" target="_blank">Open</a>
+                <div class="error" id="linkedinLinkError"></div>
+            </div>
         </div>
     </div>
-</div>
 
   <!--password-->
   <div id="passwordContent" class="content">

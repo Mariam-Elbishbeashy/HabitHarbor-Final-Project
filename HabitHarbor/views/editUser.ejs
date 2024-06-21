@@ -20,93 +20,139 @@
                 <legend>Personal Information</legend>
                 <label for="profile_image">Profile Image:</label><br>
                 <input type="file" id="profile_image" name="profile_image" class="profile-image-input" onchange="previewImage(event)"><br>
-                <img name="Image" id="profile-image-preview" src="<%= user.Image %>" alt="Profile Image Preview" class="profile-image-preview"><br><br>
+                <img name="Image" id="profile-image-preview" src="<%= user.Image %>" value="<%= user.Image %>" alt="Profile Image Preview" class="profile-image-preview"><br><br>
 
                 <label for="firstname">First Name:</label>
-<input value="<%= user ? user.Firstname : '' %>" type="text" id="firstname" name="Firstname"><br><br>
+                <input value="<%= user.Firstname %>" type="text" id="firstname" name="Firstname"><br><br>
                 <div class="error" id="firstnameError"></div>
 
                 <label for="lastname">Last Name:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Lastname : '' %>" type="text" id="lastname" name="Lastname"><br><br>
+                <input value="<%= user.Lastname %>" type="text" id="lastname" name="Lastname"><br><br>
                 <div class="error" id="lastnameError"></div>
 
                 <label for="username">Username:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Username : '' %>" type="text" id="username" name="Username"><br><br>
+                <input value="<%= user.Username %>" type="text" id="username" name="Username"><br><br>
                 <div class="error" id="usernameError"></div>
 
                 <label for="email">Email:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Email : '' %>" type="text" id="email" name="Email"><br><br>
+                <input value="<%= user.Email %>" type="text" id="email" name="Email"><br><br>
                 <div class="error" id="emailError"></div>
 
                 <label for="age">Age:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].age : '' %>" type="text" id="age" name="age"><br><br>
+                <input value="<%= user.age %>" type="text" id="age" name="age"><br><br>
                 <div class="error" id="ageError"></div>
 
                 <label for="phone">Phone Number:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].phone : '' %>" type="text" id="phone" name="phone"><br><br>
+                <input value="<%= user.phone %>" type="text" id="phone" name="phone"><br><br>
                 <div class="error" id="phoneError"></div>
 
                 <label>Gender:</label><br>
                 <input type="radio" id="male" name="Gender" value="male" 
-                    <%= arr.length > 0 && arr[arr.length - 1].Gender.trim().toLowerCase() === 'male' ? 'checked' : '' %> >
+                    <%= user.Gender.trim().toLowerCase() === 'male' ? 'checked' : '' %> >
                 <label for="male">Male</label><br>
                 <input type="radio" id="female" name="Gender" value="female" 
-                    <%= arr.length > 0 && arr[arr.length - 1].Gender.trim().toLowerCase() === 'female' ? 'checked' : '' %> >
+                    <%= user.Gender.trim().toLowerCase() === 'female' ? 'checked' : '' %> >
                 <label for="female">Female</label><br>
 
                 <label for="country">Country:</label>
                 <select id="country" name="country">
-                    <option value="us" <%= arr.length > 0 && arr[arr.length - 1].country === 'us' ? 'selected' : '' %> >United States</option>
-                    <option value="ca" <%= arr.length > 0 && arr[arr.length - 1].country === 'ca' ? 'selected' : '' %> >Canada</option>
-                    <option value="uk" <%= arr.length > 0 && arr[arr.length - 1].country === 'uk' ? 'selected' : '' %> >United Kingdom</option>
-                    <!-- Add more countries as needed -->
+                    <option value="Argentina" <%= user.country === 'Argentina' ? 'selected' : '' %>>Argentina</option>
+        <option value="Australia" <%= user.country === 'Australia' ? 'selected' : '' %>>Australia</option>
+        <option value="Austria" <%= user.country === 'Austria' ? 'selected' : '' %>>Austria</option>
+        <option value="Belgium" <%= user.country === 'Belgium' ? 'selected' : '' %>>Belgium</option>
+        <option value="Brazil" <%= user.country === 'Brazil' ? 'selected' : '' %>>Brazil</option>
+        <option value="Canada" <%= user.country === 'Canada' ? 'selected' : '' %>>Canada</option>
+        <option value="Chile" <%= user.country === 'Chile' ? 'selected' : '' %>>Chile</option>
+        <option value="China" <%= user.country === 'China' ? 'selected' : '' %>>China</option>
+        <option value="Colombia" <%= user.country === 'Colombia' ? 'selected' : '' %>>Colombia</option>
+        <option value="Czech Republic" <%= user.country === 'Czech Republic' ? 'selected' : '' %>>Czech Republic</option>
+        <option value="Denmark" <%= user.country === 'Denmark' ? 'selected' : '' %>>Denmark</option>
+        <option value="Egypt" <%= user.country === 'Egypt' ? 'selected' : '' %>>Egypt</option>
+        <option value="Finland" <%= user.country === 'Finland' ? 'selected' : '' %>>Finland</option>
+        <option value="France" <%= user.country === 'France' ? 'selected' : '' %>>France</option>
+        <option value="Germany" <%= user.country === 'Germany' ? 'selected' : '' %>>Germany</option>
+        <option value="Greece" <%= user.country === 'Greece' ? 'selected' : '' %>>Greece</option>
+        <option value="Hong Kong" <%= user.country === 'Hong Kong' ? 'selected' : '' %>>Hong Kong</option>
+        <option value="Hungary" <%= user.country === 'Hungary' ? 'selected' : '' %>>Hungary</option>
+        <option value="India" <%= user.country === 'India' ? 'selected' : '' %>>India</option>
+        <option value="Indonesia" <%= user.country === 'Indonesia' ? 'selected' : '' %>>Indonesia</option>
+        <option value="Iran" <%= user.country === 'Iran' ? 'selected' : '' %>>Iran</option>
+        <option value="Iraq" <%= user.country === 'Iraq' ? 'selected' : '' %>>Iraq</option>
+        <option value="Ireland" <%= user.country === 'Ireland' ? 'selected' : '' %>>Ireland</option>
+        <option value="Italy" <%= user.country === 'Italy' ? 'selected' : '' %>>Italy</option>
+        <option value="Japan" <%= user.country === 'Japan' ? 'selected' : '' %>>Japan</option>
+        <option value="Malaysia" <%= user.country === 'Malaysia' ? 'selected' : '' %>>Malaysia</option>
+        <option value="Mexico" <%= user.country === 'Mexico' ? 'selected' : '' %>>Mexico</option>
+        <option value="Netherlands" <%= user.country === 'Netherlands' ? 'selected' : '' %>>Netherlands</option>
+        <option value="New Zealand" <%= user.country === 'New Zealand' ? 'selected' : '' %>>New Zealand</option>
+        <option value="Norway" <%= user.country === 'Norway' ? 'selected' : '' %>>Norway</option>
+        <option value="Pakistan" <%= user.country === 'Pakistan' ? 'selected' : '' %>>Pakistan</option>
+        <option value="Philippines" <%= user.country === 'Philippines' ? 'selected' : '' %>>Philippines</option>
+        <option value="Poland" <%= user.country === 'Poland' ? 'selected' : '' %>>Poland</option>
+        <option value="Portugal" <%= user.country === 'Portugal' ? 'selected' : '' %>>Portugal</option>
+        <option value="Russia" <%= user.country === 'Russia' ? 'selected' : '' %>>Russia</option>
+        <option value="Saudi Arabia" <%= user.country === 'Saudi Arabia' ? 'selected' : '' %>>Saudi Arabia</option>
+        <option value="Singapore" <%= user.country === 'Singapore' ? 'selected' : '' %>>Singapore</option>
+        <option value="South Africa" <%= user.country === 'South Africa' ? 'selected' : '' %>>South Africa</option>
+        <option value="South Korea" <%= user.country === 'South Korea' ? 'selected' : '' %>>South Korea</option>
+        <option value="Spain" <%= user.country === 'Spain' ? 'selected' : '' %>>Spain</option>
+        <option value="Sweden" <%= user.country === 'Sweden' ? 'selected' : '' %>>Sweden</option>
+        <option value="Switzerland" <%= user.country === 'Switzerland' ? 'selected' : '' %>>Switzerland</option>
+        <option value="Taiwan" <%= user.country === 'Taiwan' ? 'selected' : '' %>>Taiwan</option>
+        <option value="Thailand" <%= user.country === 'Thailand' ? 'selected' : '' %>>Thailand</option>
+        <option value="Turkey" <%= user.country === 'Turkey' ? 'selected' : '' %>>Turkey</option>
+        <option value="Ukraine" <%= user.country === 'Ukraine' ? 'selected' : '' %>>Ukraine</option>
+        <option value="United Arab Emirates" <%= user.country === 'United Arab Emirates' ? 'selected' : '' %>>United Arab Emirates</option>
+        <option value="United Kingdom" <%= user.country === 'United Kingdom' ? 'selected' : '' %>>United Kingdom</option>
+        <option value="United States" <%= user.country === 'United States' ? 'selected' : '' %>>United States</option>
+        <option value="Vietnam" <%= user.country === 'Vietnam' ? 'selected' : '' %>>Vietnam</option>
                 </select><br><br>
                 <div class="error" id="countryError"></div>
 
                 <label for="height">Height (cm):</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Height : '' %>" type="number" id="height" name="Height"><br><br>
+                <input value="<%= user.Height %>" type="number" id="height" name="Height"><br><br>
                 <div class="error" id="heightError"></div>
 
                 <label for="weight">Weight (kg):</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].Weight : '' %>" type="number" id="weight" name="Weight"><br><br>
+                <input value="<%= user.Weight %>" type="number" id="weight" name="Weight"><br><br>
                 <div class="error" id="weightError"></div>
 
                 <label for="health_issues">Health Issues:</label><br>
-                <textarea id="health_issues" name="health_issues" rows="4" cols="50"><%= arr.length > 0 ? arr[arr.length - 1].health_issues : '' %></textarea><br><br>
+                <textarea id="health_issues" name="health_issues" rows="4" cols="50"><%= user.health_issues %></textarea><br><br>
 
                 <label>Health/Habit Goals:</label><br>
-                <input type="checkbox" id="sleep" name="goals" value="sleep" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('sleep') ? 'checked' : '' %> >
+                <input type="checkbox" id="sleep" name="goals" value="sleep" <%= user.goals.includes('sleep') ? 'checked' : '' %> >
                 <label for="sleep">Healthy sleep patterns</label><br>
-                <input type="checkbox" id="weight_loss" name="goals" value="weight_loss" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('weight_loss') ? 'checked' : '' %> >
+                <input type="checkbox" id="weight_loss" name="goals" value="weight_loss" <%= user.goals.includes('weight_loss') ? 'checked' : '' %> >
                 <label for="weight_loss">Weight loss</label><br>
-                <input type="checkbox" id="hydration" name="goals" value="hydration" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('hydration') ? 'checked' : '' %> >
+                <input type="checkbox" id="hydration" name="goals" value="hydration" <%= user.goals.includes('hydration') ? 'checked' : '' %> >
                 <label for="hydration">Hydration goals</label><br>
-                <input type="checkbox" id="eating" name="goals" value="eating" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('eating') ? 'checked' : '' %> >
+                <input type="checkbox" id="eating" name="goals" value="eating" <%= user.goals.includes('eating') ? 'checked' : '' %> >
                 <label for="eating">Healthy Eating</label><br>
-                <input type="checkbox" id="flexibility" name="goals" value="flexibility" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('flexibility') ? 'checked' : '' %> >
+                <input type="checkbox" id="flexibility" name="goals" value="flexibility" <%= user.goals.includes('flexibility') ? 'checked' : '' %> >
                 <label for="flexibility">Flexibility training</label><br>
-                <input type="checkbox" id="strength" name="goals" value="strength" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('strength') ? 'checked' : '' %> >
+                <input type="checkbox" id="strength" name="goals" value="strength" <%= user.goals.includes('strength') ? 'checked' : '' %> >
                 <label for="strength">Strength training</label><br>
-                <input type="checkbox" id="cardio" name="goals" value="cardio" <%= arr.length > 0 && arr[arr.length - 1].goals.includes('cardio') ? 'checked' : '' %> >
+                <input type="checkbox" id="cardio" name="goals" value="cardio" <%= user.goals.includes('cardio') ? 'checked' : '' %> >
                 <label for="cardio">Cardiovascular health</label><br><br>
             </fieldset>
 
             <fieldset>
                 <legend>Social Links</legend>
                 <label for="facebook">Facebook:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].facebook : '' %>" type="text" id="facebook" name="facebook"><br><br>
+                <input value="<%= user.facebook %>" type="text" id="facebook" name="facebook"><br><br>
                 <div class="error" id="facebookError"></div>
 
                 <label for="instagram">Instagram:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].instagram : '' %>" type="text" id="instagram" name="instagram"><br><br>
+                <input value="<%= user.instagram %>" type="text" id="instagram" name="instagram"><br><br>
                 <div class="error" id="instagramError"></div>
 
                 <label for="twitter">Twitter:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].twitter : '' %>" type="text" id="twitter" name="twitter"><br><br>
+                <input value="<%= user.twitter %>" type="text" id="twitter" name="twitter"><br><br>
                 <div class="error" id="twitterError"></div>
 
                 <label for="linkedin">LinkedIn:</label>
-                <input value="<%= arr.length > 0 ? arr[arr.length - 1].linkedin : '' %>" type="text" id="linkedin" name="linkedin"><br><br>
+                <input value="<%= user.linkedin %>" type="text" id="linkedin" name="linkedin"><br><br>
                 <div class="error" id="linkedinError"></div>
             </fieldset>
 

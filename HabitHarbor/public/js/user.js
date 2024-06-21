@@ -105,103 +105,103 @@ window.onload = function() {
     });
   }
   
-  //general section: profile picture
-    function changeProfile() {
-      var fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.accept = "image/*";
+  // //general section: profile picture
+  //   function changeProfile() {
+  //     var fileInput = document.createElement("input");
+  //     fileInput.type = "file";
+  //     fileInput.accept = "image/*";
     
-      fileInput.onchange = function(event) {
-        var file = event.target.files[0];
-        var reader = new FileReader();
-        reader.onload = function() {
-          var profilePic = document.getElementById("profilePic");
-          profilePic.src = reader.result;
-        };
-        reader.readAsDataURL(file);
-      };
+  //     fileInput.onchange = function(event) {
+  //       var file = event.target.files[0];
+  //       var reader = new FileReader();
+  //       reader.onload = function() {
+  //         var profilePic = document.getElementById("profilePic");
+  //         profilePic.src = reader.result;
+  //       };
+  //       reader.readAsDataURL(file);
+  //     };
     
-      fileInput.click();
-    }
+  //     fileInput.click();
+  //   }
    
     //info 
-  function saveGenderCountryChanges() {
-    document.querySelectorAll('input[name="gender"]').forEach(radio => {
-        radio.disabled = true;
-    });
+  // function saveGenderCountryChanges() {
+  //   document.querySelectorAll('input[name="gender"]').forEach(radio => {
+  //       radio.disabled = true;
+  //   });
   
-    document.getElementById('country').disabled = true;
+  //   document.getElementById('country').disabled = true;
   
-    document.getElementById('saveChangesButton').style.display = 'none';
+  //   document.getElementById('saveChangesButton').style.display = 'none';
   
-    document.getElementById('editGenderButton').style.display = 'inline-block';
+  //   document.getElementById('editGenderButton').style.display = 'inline-block';
   
-    document.querySelector('.custom-info p').style.display = 'none';
-  }
-  function editGenderCountry() {
-    document.querySelectorAll('input[name="gender"]').forEach(radio => {
-        radio.disabled = false;
-    });
+  //   document.querySelector('.custom-info p').style.display = 'none';
+  // }
+  // function editGenderCountry() {
+  //   document.querySelectorAll('input[name="gender"]').forEach(radio => {
+  //       radio.disabled = false;
+  //   });
   
-    document.getElementById('country').disabled = false;
+  //   document.getElementById('country').disabled = false;
   
-    document.getElementById('saveChangesButton').style.display = 'inline-block';
+  //   document.getElementById('saveChangesButton').style.display = 'inline-block';
   
-    document.getElementById('editGenderButton').style.display = 'none';
+  //   document.getElementById('editGenderButton').style.display = 'none';
   
-    document.querySelector('.custom-info p').style.display = 'block';
-  }
+  //   document.querySelector('.custom-info p').style.display = 'block';
+  // }
   
-  function editInfo() {
-    document.getElementById('editInfoModal').style.display = 'block';
-    document.getElementById('editAge').value = '';
-    document.getElementById('editPhoneNumber').value = '';
-    document.getElementById('countryCode').selectedIndex = 0; 
-    document.getElementById('ageError').innerText = '';
-    document.getElementById('numberError').innerText = '';
-  }
+  // function editInfo() {
+  //   document.getElementById('editInfoModal').style.display = 'block';
+  //   document.getElementById('editAge').value = '';
+  //   document.getElementById('editPhoneNumber').value = '';
+  //   document.getElementById('countryCode').selectedIndex = 0; 
+  //   document.getElementById('ageError').innerText = '';
+  //   document.getElementById('numberError').innerText = '';
+  // }
   
-  function closeEditInfoModal() {
-    document.getElementById('editInfoModal').style.display = 'none';
-  }
+  // function closeEditInfoModal() {
+  //   document.getElementById('editInfoModal').style.display = 'none';
+  // }
   
-  function saveEditedInfo() {
+  // function saveEditedInfo() {
    
-    var age = document.getElementById('editAge').value;
-    var ageError = '';
-    if (isNaN(age) || age === '' || age <= 0 ||age>120) {
-        ageError = 'Please enter a valid age.';
-    }
+  //   var age = document.getElementById('editAge').value;
+  //   var ageError = '';
+  //   if (isNaN(age) || age === '' || age <= 0 ||age>120) {
+  //       ageError = 'Please enter a valid age.';
+  //   }
   
-    var phoneNumber = document.getElementById('editPhoneNumber').value;
-    var numberError = '';
-    if (!(/^\+?\d{1,3}[- ]?\d{9}$/.test(phoneNumber))) {
-        numberError = 'Please enter a valid phone number.';
-    }
+  //   var phoneNumber = document.getElementById('editPhoneNumber').value;
+  //   var numberError = '';
+  //   if (!(/^\+?\d{1,3}[- ]?\d{9}$/.test(phoneNumber))) {
+  //       numberError = 'Please enter a valid phone number.';
+  //   }
   
-    document.getElementById('ageError').innerText = ageError;
-    document.getElementById('numberError').innerText = numberError;
+  //   document.getElementById('ageError').innerText = ageError;
+  //   document.getElementById('numberError').innerText = numberError;
   
-    if (ageError !== '' || numberError !== '') {
-        return;
-    }
+  //   if (ageError !== '' || numberError !== '') {
+  //       return;
+  //   }
   
-    document.getElementById('age').value = age;
-    document.getElementById('phoneNumber').value = document.getElementById('countryCode').value + " " + phoneNumber;
+  //   document.getElementById('age').value = age;
+  //   document.getElementById('phoneNumber').value = document.getElementById('countryCode').value + " " + phoneNumber;
   
-    closeEditInfoModal();
-  }
+  //   closeEditInfoModal();
+  // }
   
-    //health info
-    function toggleOtherTextArea() {
-      var otherCheckbox = document.getElementById("goal5");
-      var otherTextArea = document.getElementById("otherGoalTextArea");
-      if (otherCheckbox.checked) {
-          otherTextArea.style.display = "block";
-      } else {
-          otherTextArea.style.display = "none";
-      }
-  }
+  //   //health info
+  //   function toggleOtherTextArea() {
+  //     var otherCheckbox = document.getElementById("goal5");
+  //     var otherTextArea = document.getElementById("otherGoalTextArea");
+  //     if (otherCheckbox.checked) {
+  //         otherTextArea.style.display = "block";
+  //     } else {
+  //         otherTextArea.style.display = "none";
+  //     }
+  // }
   
   //BMI
   function calculateBMI() {
@@ -246,129 +246,129 @@ window.onload = function() {
     });
   }
   
-  function weightHeightModal() {
-    var modal = document.getElementById("weightHeightModal");
-    modal.style.display = "block";
-  }
+  // function weightHeightModal() {
+  //   var modal = document.getElementById("weightHeightModal");
+  //   modal.style.display = "block";
+  // }
   
-  function closeWeightHeightModal() {
-    var modal = document.getElementById("weightHeightModal");
-    modal.style.display = "none";
-  }
+  // function closeWeightHeightModal() {
+  //   var modal = document.getElementById("weightHeightModal");
+  //   modal.style.display = "none";
+  // }
   
-  function saveWeightHeight() {
-    var weightInput = document.getElementById("weightInput").value.trim(); 
-    var heightInput = document.getElementById("heightInput").value.trim(); 
-    var weightError = document.getElementById("weightError");
-    var heightError = document.getElementById("heightError");
+  // function saveWeightHeight() {
+  //   var weightInput = document.getElementById("weightInput").value.trim(); 
+  //   var heightInput = document.getElementById("heightInput").value.trim(); 
+  //   var weightError = document.getElementById("weightError");
+  //   var heightError = document.getElementById("heightError");
   
-    if (weightInput === "" || isNaN(parseFloat(weightInput)) || parseFloat(weightInput) <= 0) {
-      weightError.textContent = "Please enter a valid weight.";
-    } else {
-      weightError.textContent = ""; 
-    }
+  //   if (weightInput === "" || isNaN(parseFloat(weightInput)) || parseFloat(weightInput) <= 0) {
+  //     weightError.textContent = "Please enter a valid weight.";
+  //   } else {
+  //     weightError.textContent = ""; 
+  //   }
   
-    if (heightInput === "" || isNaN(parseFloat(heightInput)) || parseFloat(heightInput) <= 0) {
-      heightError.textContent = "Please enter a valid height.";
-    } else {
-      heightError.textContent = ""; 
-    }
+  //   if (heightInput === "" || isNaN(parseFloat(heightInput)) || parseFloat(heightInput) <= 0) {
+  //     heightError.textContent = "Please enter a valid height.";
+  //   } else {
+  //     heightError.textContent = ""; 
+  //   }
   
-    if (weightError.textContent === "" && heightError.textContent === "") {
-      var weight = parseFloat(weightInput);
-      var weightUnit = document.getElementById("weightUnit").value;
-      var height = parseFloat(heightInput);
-      var heightUnit = document.getElementById("heightUnit").value;
+  //   if (weightError.textContent === "" && heightError.textContent === "") {
+  //     var weight = parseFloat(weightInput);
+  //     var weightUnit = document.getElementById("weightUnit").value;
+  //     var height = parseFloat(heightInput);
+  //     var heightUnit = document.getElementById("heightUnit").value;
   
-      if (weightUnit === "lbs") {
-         var weightKg = (weight * 0.453592).toFixed(2); 
-         document.getElementById("weightKg").value = weightKg + " kg";
-         document.getElementById("weightLbs").value = weight + " lbs";
-      } else {
-        var weightLbs = (weight * 2.2046).toFixed(2);
-        document.getElementById("weightKg").value = weight + " kg";
-        document.getElementById("weightLbs").value = weightLbs + " lbs";
-      }
+  //     if (weightUnit === "lbs") {
+  //        var weightKg = (weight * 0.453592).toFixed(2); 
+  //        document.getElementById("weightKg").value = weightKg + " kg";
+  //        document.getElementById("weightLbs").value = weight + " lbs";
+  //     } else {
+  //       var weightLbs = (weight * 2.2046).toFixed(2);
+  //       document.getElementById("weightKg").value = weight + " kg";
+  //       document.getElementById("weightLbs").value = weightLbs + " lbs";
+  //     }
   
-      if (heightUnit === "feet") {
-         var heightCm = (height * 30.48).toFixed(2); 
-         document.getElementById("heightCm").value = heightCm + " cm";
-         document.getElementById("heightFt").value = height + " ft";
-      } else {
-        var heightFt= (height / 30.48).toFixed(2);
-        document.getElementById("heightCm").value = height + " cm";
-        document.getElementById("heightFt").value = heightFt + " ft";
-      }
+  //     if (heightUnit === "feet") {
+  //        var heightCm = (height * 30.48).toFixed(2); 
+  //        document.getElementById("heightCm").value = heightCm + " cm";
+  //        document.getElementById("heightFt").value = height + " ft";
+  //     } else {
+  //       var heightFt= (height / 30.48).toFixed(2);
+  //       document.getElementById("heightCm").value = height + " cm";
+  //       document.getElementById("heightFt").value = heightFt + " ft";
+  //     }
   
-      calculateBMI();
+  //     calculateBMI();
   
-      closeWeightHeightModal();
-    }
-  }
+  //     closeWeightHeightModal();
+  //   }
+  // }
   
-  function saveHealthInfoChanges() {
-    var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
-    var otherTextArea = document.getElementById("otherGoal");
-    var saveChangesButton = document.querySelector('#healthInfoContent button');
+  // function saveHealthInfoChanges() {
+  //   var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
+  //   var otherTextArea = document.getElementById("otherGoal");
+  //   var saveChangesButton = document.querySelector('#healthInfoContent button');
   
-    checkboxes.forEach(function(checkbox) {
-        checkbox.disabled = true;
-    });
+  //   checkboxes.forEach(function(checkbox) {
+  //       checkbox.disabled = true;
+  //   });
   
-    otherTextArea.disabled = true;
+  //   otherTextArea.disabled = true;
   
-    saveChangesButton.style.display = "none";
-    saveChangesButton.style.border = "none";
+  //   saveChangesButton.style.display = "none";
+  //   saveChangesButton.style.border = "none";
   
-    var instructionLine = document.querySelector('.custom-info');
-    instructionLine.style.display = "none";
+  //   var instructionLine = document.querySelector('.custom-info');
+  //   instructionLine.style.display = "none";
   
-    checkboxes.forEach(function(checkbox) {
-        checkbox.classList.add('disabled-checkbox');
-    });
+  //   checkboxes.forEach(function(checkbox) {
+  //       checkbox.classList.add('disabled-checkbox');
+  //   });
   
-    var healthIssuesTextArea = document.getElementById("health-issues");
-    healthIssuesTextArea.disabled = true;
+  //   var healthIssuesTextArea = document.getElementById("health-issues");
+  //   healthIssuesTextArea.disabled = true;
   
-    var modal = document.getElementById("saveChanges-modal");
-    modal.style.display = "block";
+  //   var modal = document.getElementById("saveChanges-modal");
+  //   modal.style.display = "block";
   
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
+  //   var span = document.getElementsByClassName("close")[0];
+  //   span.onclick = function() {
+  //       modal.style.display = "none";
+  //   }
   
-    var closeModalBtn = document.getElementById("closeModalBtn");
-    closeModalBtn.onclick = function() {
-        modal.style.display = "none";
-    }
+  //   var closeModalBtn = document.getElementById("closeModalBtn");
+  //   closeModalBtn.onclick = function() {
+  //       modal.style.display = "none";
+  //   }
   
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    var editButton = document.getElementById("editHealthInfoButton");
-    editButton.style.display = "block";
+  //   window.onclick = function(event) {
+  //       if (event.target == modal) {
+  //           modal.style.display = "none";
+  //       }
+  //   }
+  //   var editButton = document.getElementById("editHealthInfoButton");
+  //   editButton.style.display = "block";
   
-    disableTextAreaAndCheckboxes(true);
+  //   disableTextAreaAndCheckboxes(true);
     
-  }
+  // }
   
-  function editHealthInfo() {
-    disableTextAreaAndCheckboxes(false);
+  // function editHealthInfo() {
+  //   disableTextAreaAndCheckboxes(false);
   
-    var saveChangesButton = document.querySelector('#healthInfoContent button');
-    saveChangesButton.style.display = "block";
+  //   var saveChangesButton = document.querySelector('#healthInfoContent button');
+  //   saveChangesButton.style.display = "block";
   
-    var editButton = document.getElementById("editHealthInfoButton");
-    editButton.style.display = "none";
+  //   var editButton = document.getElementById("editHealthInfoButton");
+  //   editButton.style.display = "none";
   
-    var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.classList.remove('disabled-checkbox');
-    });
-  }
+  //   var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
+  //   checkboxes.forEach(function(checkbox) {
+  //       checkbox.classList.remove('disabled-checkbox');
+  //   });
+  // }
   
   //Password
   function validatePasswords() {
@@ -465,18 +465,18 @@ window.onload = function() {
     });
   }
   
-  function disableTextAreaAndCheckboxes(disabled) {
-    var healthIssuesTextArea = document.getElementById("health-issues");
-    healthIssuesTextArea.disabled = disabled;
+  // function disableTextAreaAndCheckboxes(disabled) {
+  //   var healthIssuesTextArea = document.getElementById("health-issues");
+  //   healthIssuesTextArea.disabled = disabled;
   
-    var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.disabled = disabled;
-    });
+  //   var checkboxes = document.querySelectorAll('#healthInfoContent input[type="checkbox"]');
+  //   checkboxes.forEach(function(checkbox) {
+  //       checkbox.disabled = disabled;
+  //   });
   
-    var otherTextArea = document.getElementById("otherGoal");
-    otherTextArea.disabled = disabled;
-  }
+  //   var otherTextArea = document.getElementById("otherGoal");
+  //   otherTextArea.disabled = disabled;
+  // }
   
   //feedback
   function starRating() {
@@ -497,34 +497,34 @@ window.onload = function() {
     }
   }
   
-  function displayFeedbackModal() {
-      document.getElementById("feedbackModal").style.display = "block";
+  // function displayFeedbackModal() {
+  //     document.getElementById("feedbackModal").style.display = "block";
   
-      document.getElementById("submitBtn").style.display = "none";
+  //     document.getElementById("submitBtn").style.display = "none";
   
-      document.getElementById("feedbackSubmitButton").style.display = "block";
+  //     document.getElementById("feedbackSubmitButton").style.display = "block";
   
-      var stars = document.getElementsByClassName("fas");
-      for (var i = 0; i < stars.length; i++) {
-          stars[i].style.pointerEvents = "none";
-      }
+  //     var stars = document.getElementsByClassName("fas");
+  //     for (var i = 0; i < stars.length; i++) {
+  //         stars[i].style.pointerEvents = "none";
+  //     }
   
-      document.getElementById("feedback").disabled = true;
-  }
+  //     document.getElementById("feedback").disabled = true;
+  // }
   
-  function closeFeedbackModal() {
-    document.getElementById("feedbackModal").style.display = "none";
-  }
+  // function closeFeedbackModal() {
+  //   document.getElementById("feedbackModal").style.display = "none";
+  // }
   
-  document.getElementById("submitBtn").addEventListener("click", displayFeedbackModal);
-  document.getElementById("closeFeedbackModalBtn").addEventListener("click", closeFeedbackModal);
+  // document.getElementById("submitBtn").addEventListener("click", displayFeedbackModal);
+  // document.getElementById("closeFeedbackModalBtn").addEventListener("click", closeFeedbackModal);
   
-  window.addEventListener("click", function(event) {
-    var feedbackModal = document.getElementById("feedbackModal");
-    if (event.target == feedbackModal) {
-        closeFeedbackModal();
-    }
-  });
+  // window.addEventListener("click", function(event) {
+  //   var feedbackModal = document.getElementById("feedbackModal");
+  //   if (event.target == feedbackModal) {
+  //       closeFeedbackModal();
+  //   }
+  // });
   
   function changeRatingButton() {
     document.getElementById("feedbackModal").style.display = "none";
@@ -545,195 +545,195 @@ window.onload = function() {
   }
   
   //edit general info
-  function editGeneralInfo() {
-    var modal = document.getElementById("editModal");
-    modal.style.display = "block";
+  // function editGeneralInfo() {
+  //   var modal = document.getElementById("editModal");
+  //   modal.style.display = "block";
   
-    document.getElementById("editFirstName").value = "";
-    document.getElementById("editLastName").value = "";
-    document.getElementById("editUsername").value = "";
-    document.getElementById("editEmail").value = "";
-  }
+  //   document.getElementById("editFirstName").value = "";
+  //   document.getElementById("editLastName").value = "";
+  //   document.getElementById("editUsername").value = "";
+  //   document.getElementById("editEmail").value = "";
+  // }
   
-  function closeEditModal() {
-    var modal = document.getElementById("editModal");
-    modal.style.display = "none";
+  // function closeEditModal() {
+  //   var modal = document.getElementById("editModal");
+  //   modal.style.display = "none";
     
-    document.getElementById("firstNameError").innerHTML = "";
-    document.getElementById("lastNameError").innerHTML = "";
-    document.getElementById("usernameError").innerHTML = "";
-    document.getElementById("emailError").innerHTML = "";
-  }
+  //   document.getElementById("firstNameError").innerHTML = "";
+  //   document.getElementById("lastNameError").innerHTML = "";
+  //   document.getElementById("usernameError").innerHTML = "";
+  //   document.getElementById("emailError").innerHTML = "";
+  // }
   
-  document.getElementById("editButton").addEventListener("click", editGeneralInfo);
+  // document.getElementById("editButton").addEventListener("click", editGeneralInfo);
   
-  document.getElementsByClassName("close")[1].addEventListener("click", closeEditModal);
+  // document.getElementsByClassName("close")[1].addEventListener("click", closeEditModal);
   
-  function printError(elemId, hintMsg) {
-    document.getElementById(elemId).innerHTML = hintMsg;
-  }
+  // function printError(elemId, hintMsg) {
+  //   document.getElementById(elemId).innerHTML = hintMsg;
+  // }
   
-  function validateForm(form) {
-    var firstName = form.elements["editFirstName"].value.trim();
-    var lastName = form.elements["editLastName"].value.trim();
-    var username = form.elements["editUsername"].value.trim();
-    var email = form.elements["editEmail"].value.trim();
+  // function validateForm(form) {
+  //   var firstName = form.elements["editFirstName"].value.trim();
+  //   var lastName = form.elements["editLastName"].value.trim();
+  //   var username = form.elements["editUsername"].value.trim();
+  //   var email = form.elements["editEmail"].value.trim();
   
-    var nameRegex = /^[a-zA-Z]+$/;
-    var usernameRegex = /^[a-zA-Z0-9_]+$/;
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   var nameRegex = /^[a-zA-Z]+$/;
+  //   var usernameRegex = /^[a-zA-Z0-9_]+$/;
+  //   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-    var isValid = true;
-    var errorMessage = "";
+  //   var isValid = true;
+  //   var errorMessage = "";
   
-    if (firstName === "") {
-      printError("firstNameError", "Please enter your first name");
-      isValid = false;
-    } else if (!firstName.match(nameRegex)) {
-      printError("firstNameError", "Please enter a valid first name");
-      isValid = false;
-    } else {
-      printError("firstNameError", "");
-    }
+  //   if (firstName === "") {
+  //     printError("firstNameError", "Please enter your first name");
+  //     isValid = false;
+  //   } else if (!firstName.match(nameRegex)) {
+  //     printError("firstNameError", "Please enter a valid first name");
+  //     isValid = false;
+  //   } else {
+  //     printError("firstNameError", "");
+  //   }
   
-    if (lastName === "") {
-      printError("lastNameError", "Please enter your last name");
-      isValid = false;
-    } else if (!lastName.match(nameRegex)) {
-      printError("lastNameError", "Please enter a valid last name");
-      isValid = false;
-    } else {
-      printError("lastNameError", "");
-    }
+  //   if (lastName === "") {
+  //     printError("lastNameError", "Please enter your last name");
+  //     isValid = false;
+  //   } else if (!lastName.match(nameRegex)) {
+  //     printError("lastNameError", "Please enter a valid last name");
+  //     isValid = false;
+  //   } else {
+  //     printError("lastNameError", "");
+  //   }
   
-    if (username === "") {
-      printError("usernameError", "Please enter a username");
-      isValid = false;
-    } else if (!username.match(usernameRegex)) {
-      printError("usernameError", "Please enter a valid username");
-      isValid = false;
-    } else {
-      printError("usernameError", "");
-    }
+  //   if (username === "") {
+  //     printError("usernameError", "Please enter a username");
+  //     isValid = false;
+  //   } else if (!username.match(usernameRegex)) {
+  //     printError("usernameError", "Please enter a valid username");
+  //     isValid = false;
+  //   } else {
+  //     printError("usernameError", "");
+  //   }
   
-    if (email === "") {
-      printError("emailError", "Please enter an email address");
-      isValid = false;
-    } else if (!email.match(emailRegex)) {
-      printError("emailError", "Please enter a valid email address");
-      isValid = false;
-    } else {
-      printError("emailError", "");
-    }
+  //   if (email === "") {
+  //     printError("emailError", "Please enter an email address");
+  //     isValid = false;
+  //   } else if (!email.match(emailRegex)) {
+  //     printError("emailError", "Please enter a valid email address");
+  //     isValid = false;
+  //   } else {
+  //     printError("emailError", "");
+  //   }
   
-    if (isValid) {
-      saveUserInfo(form);
-    }
-  }
+  //   if (isValid) {
+  //     saveUserInfo(form);
+  //   }
+  // }
   
-  function saveUserInfo(form) {
-    var firstName = form.elements["editFirstName"].value.trim();
-    var lastName = form.elements["editLastName"].value.trim();
-    var username = form.elements["editUsername"].value.trim();
-    var email = form.elements["editEmail"].value.trim();
+  // function saveUserInfo(form) {
+  //   var firstName = form.elements["editFirstName"].value.trim();
+  //   var lastName = form.elements["editLastName"].value.trim();
+  //   var username = form.elements["editUsername"].value.trim();
+  //   var email = form.elements["editEmail"].value.trim();
   
-    document.getElementById("firstName").value = firstName;
-    document.getElementById("lastName").value = lastName;
-    document.getElementById("username").value = username;
-    document.getElementById("email").value = email;
+  //   document.getElementById("firstName").value = firstName;
+  //   document.getElementById("lastName").value = lastName;
+  //   document.getElementById("username").value = username;
+  //   document.getElementById("email").value = email;
   
-    closeEditModal();
-  }
+  //   closeEditModal();
+  // }
   
   //social links
-  function saveSocialLinksChanges() {
-    var facebookLink = document.getElementById("facebookLink").value;
-    var twitterLink = document.getElementById("twitterLink").value;
-    var instagramLink = document.getElementById("instagramLink").value;
-    var linkedinLink = document.getElementById("linkedinLink").value;
+  // function saveSocialLinksChanges() {
+  //   var facebookLink = document.getElementById("facebookLink").value;
+  //   var twitterLink = document.getElementById("twitterLink").value;
+  //   var instagramLink = document.getElementById("instagramLink").value;
+  //   var linkedinLink = document.getElementById("linkedinLink").value;
   
-    // Regular expression for validating URLs
-    var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  //   // Regular expression for validating URLs
+  //   var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
   
-    var errorMessages = {
-        facebookLinkError: "Please enter a valid Facebook link",
-        twitterLinkError: "Please enter a valid Twitter link",
-        instagramLinkError: "Please enter a valid Instagram link",
-        linkedinLinkError: "Please enter a valid LinkedIn link"
-    };
+  //   var errorMessages = {
+  //       facebookLinkError: "Please enter a valid Facebook link",
+  //       twitterLinkError: "Please enter a valid Twitter link",
+  //       instagramLinkError: "Please enter a valid Instagram link",
+  //       linkedinLinkError: "Please enter a valid LinkedIn link"
+  //   };
   
-    var validationResults = {
-        facebookLinkError: !urlRegex.test(facebookLink) && facebookLink.trim() !== '',
-        twitterLinkError: !urlRegex.test(twitterLink) && twitterLink.trim() !== '',
-        instagramLinkError: !urlRegex.test(instagramLink) && instagramLink.trim() !== '',
-        linkedinLinkError: !urlRegex.test(linkedinLink) && linkedinLink.trim() !== ''
-    };
+  //   var validationResults = {
+  //       facebookLinkError: !urlRegex.test(facebookLink) && facebookLink.trim() !== '',
+  //       twitterLinkError: !urlRegex.test(twitterLink) && twitterLink.trim() !== '',
+  //       instagramLinkError: !urlRegex.test(instagramLink) && instagramLink.trim() !== '',
+  //       linkedinLinkError: !urlRegex.test(linkedinLink) && linkedinLink.trim() !== ''
+  //   };
   
-    Object.keys(validationResults).forEach(function(key) {
-        if (validationResults[key]) {
-            printError(key, errorMessages[key]);
-        } else {
-            printError(key, ""); 
-        }
-    });
+  //   Object.keys(validationResults).forEach(function(key) {
+  //       if (validationResults[key]) {
+  //           printError(key, errorMessages[key]);
+  //       } else {
+  //           printError(key, ""); 
+  //       }
+  //   });
   
-    var hasErrors = Object.values(validationResults).some(function(result) {
-        return result;
-    });
+  //   var hasErrors = Object.values(validationResults).some(function(result) {
+  //       return result;
+  //   });
   
-    if (!hasErrors) {
+  //   if (!hasErrors) {
     
-      var socialLinksInputs = document.querySelectorAll('#socialLinksContent input[type="text"]');
-      var saveChangesButton = document.querySelector('#socialLinksContent button');
+  //     var socialLinksInputs = document.querySelectorAll('#socialLinksContent input[type="text"]');
+  //     var saveChangesButton = document.querySelector('#socialLinksContent button');
   
-      socialLinksInputs.forEach(function(input) {
-          input.disabled = true;
-      });
+  //     socialLinksInputs.forEach(function(input) {
+  //         input.disabled = true;
+  //     });
   
-      saveChangesButton.style.display = "none";
-      editButton2.style.display = "block";
+  //     saveChangesButton.style.display = "none";
+  //     editButton2.style.display = "block";
   
-      var modal = document.getElementById("saveChanges-modal");
-      modal.style.display = "block";
+  //     var modal = document.getElementById("saveChanges-modal");
+  //     modal.style.display = "block";
   
-      var span = document.getElementsByClassName("close")[0];
-      span.onclick = function() {
-          modal.style.display = "none";
-      }
+  //     var span = document.getElementsByClassName("close")[0];
+  //     span.onclick = function() {
+  //         modal.style.display = "none";
+  //     }
   
-      var closeModalBtn = document.getElementById("closeModalBtn");
-      closeModalBtn.onclick = function() {
-          modal.style.display = "none";
-      }
+  //     var closeModalBtn = document.getElementById("closeModalBtn");
+  //     closeModalBtn.onclick = function() {
+  //         modal.style.display = "none";
+  //     }
   
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
-      }
+  //     window.onclick = function(event) {
+  //         if (event.target == modal) {
+  //             modal.style.display = "none";
+  //         }
+  //     }
       
-    }
-  }
+  //   }
+  // }
   
-  function editSocialLinks() {
-    var facebookInput = document.getElementById("facebookLink");
-    var twitterInput = document.getElementById("twitterLink");
-    var instagramInput = document.getElementById("instagramLink");
-    var linkedinInput = document.getElementById("linkedinLink");
+  // function editSocialLinks() {
+  //   var facebookInput = document.getElementById("facebookLink");
+  //   var twitterInput = document.getElementById("twitterLink");
+  //   var instagramInput = document.getElementById("instagramLink");
+  //   var linkedinInput = document.getElementById("linkedinLink");
   
-    facebookInput.disabled = false;
-    twitterInput.disabled = false;
-    instagramInput.disabled = false;
-    linkedinInput.disabled = false;
+  //   facebookInput.disabled = false;
+  //   twitterInput.disabled = false;
+  //   instagramInput.disabled = false;
+  //   linkedinInput.disabled = false;
   
-    facebookInput.value = "";
-    twitterInput.value = "";
-    instagramInput.value = "";
-    linkedinInput.value = "";
+  //   facebookInput.value = "";
+  //   twitterInput.value = "";
+  //   instagramInput.value = "";
+  //   linkedinInput.value = "";
   
-    document.querySelector('#socialLinksContent button').style.display = "inline";
-    document.getElementById("editButton2").style.display = "none";
-  }
+  //   document.querySelector('#socialLinksContent button').style.display = "inline";
+  //   document.getElementById("editButton2").style.display = "none";
+  // }
   
   function openLink(linkId) {
     var link = document.getElementById(linkId).value;
