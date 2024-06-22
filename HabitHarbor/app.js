@@ -28,27 +28,21 @@ const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongod
 // Connect to MongoDB
 mongoose.connect(dbURI)
   .then(async () => {
-    await Resource.deleteMany({});
-    await Resource.insertMany(data);
-    // await Activities.deleteMany({}); 
-    // const result2 = await Activities.insertMany(Activitydata);
-    // console.log(`${result2.length} documents inserted successfully`);
+    await Users.deleteMany({}); 
+    const result4 = await Users.insertMany(Userdata);
+    console.log(`${result4.length} documents inserted successfully`);
 
-    //await Posts.deleteMany({}); 
-    //const result3 = await Posts.insertMany(Postdata);
-    //console.log(`${result3.length} documents inserted successfully`); 
-
-     await Badgesdb.deleteMany({}); 
-     const result2 = await Badgesdb.insertMany(badgesData);
-     console.log(`${result2.length} documents inserted successfully`);
-
+    await Activities.deleteMany({}); 
+    const result5 = await Activities.insertMany(Activitydata);
+    console.log(`${result5.length} documents inserted successfully`);
+  
+    // Start express server after inserting data
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
   })
   .catch(err => console.error('MongoDB connection error:', err));
 
-  
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,6 +56,7 @@ app.use(session({
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
+  res.setHeader('Cache-Control', 'no-store');
   next();
 });
 
@@ -81,9 +76,6 @@ app.get('/home', async (req, res) => {
   }
 });
 
-app.get('/home', (req, res) => {
-  res.render('home',{user:req.session.user});
-});
 
 
 app.get('/admin', (req, res) => {
