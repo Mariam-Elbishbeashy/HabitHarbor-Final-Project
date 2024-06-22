@@ -30,16 +30,17 @@ mongoose.connect(dbURI)
   .then(async () => {
     await Resource.deleteMany({});
     await Resource.insertMany(data);
+    // await Activities.deleteMany({}); 
+    // const result2 = await Activities.insertMany(Activitydata);
+    // console.log(`${result2.length} documents inserted successfully`);
 
+    //await Posts.deleteMany({}); 
+    //const result3 = await Posts.insertMany(Postdata);
+    //console.log(`${result3.length} documents inserted successfully`); 
 
      await Badgesdb.deleteMany({}); 
      const result2 = await Badgesdb.insertMany(badgesData);
      console.log(`${result2.length} documents inserted successfully`);
-
-    // await Posts.deleteMany({}); 
-    // const result3 = await Posts.insertMany(Postdata);
-    // console.log(`${result3.length} documents inserted successfully`);
-
 
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
@@ -53,7 +54,6 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 app.use(session({
-
   secret: 'Your_Secret_Key',
   resave: true,
   saveUninitialized:false,
@@ -84,6 +84,7 @@ app.get('/home', async (req, res) => {
 app.get('/home', (req, res) => {
   res.render('home',{user:req.session.user});
 });
+
 
 app.get('/admin', (req, res) => {
   res.render('admin');

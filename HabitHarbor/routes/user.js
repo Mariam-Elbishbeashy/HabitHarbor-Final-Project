@@ -29,8 +29,7 @@ const upload = multer({
     cb(null, true);
   }
 });
-
-
+//login
 userRoutes.post('/login', async (req, res) => {
   try {
     console.log(req.body);
@@ -42,6 +41,7 @@ userRoutes.post('/login', async (req, res) => {
     res.status(500).send("Failed to save user");
   }
 })
+
 userRoutes.post('/home', async (req, res) => {
   try {
     const { Email, Password } = req.body; 
@@ -74,6 +74,7 @@ userRoutes.post('/home', async (req, res) => {
     res.status(500).json("Internal Server Error");
   }
 });
+//logout
 userRoutes.post('/logout', (req, res) => {
   req.session.destroy(err => {
     console.log("destroyed");
@@ -84,6 +85,34 @@ userRoutes.post('/logout', (req, res) => {
     res.redirect('/');
   });
 });
+
+
+// POST route for reset password
+userRoutes.post('/forgetpass', async (req, res) => {
+  try {
+    const { Email, Password } = req.body;
+
+    // Find the user in the database
+    const user = await Users.findOne({ Email: Email });
+    console.log(user);
+    if (!user) {
+       return res.status(404).json({ success: false, message: 'Email not found.' });
+    }else{
+       // Update the user's password
+    user.Password = Password;
+    await user.save();
+res.redirect('/login');
+   
+    }
+  } catch (err) {
+    console.error("Error resetting password:", err);
+    res.status(500).json("Failed to reset password.");
+  }
+});
+
+
+
+module.exports = userRoutes;
 
 userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res) => {
   const userId = req.params.id;
@@ -116,7 +145,7 @@ userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res)
     res.status(500).send('Internal Server Error');
   }
 });
-
+//sign up
 userRoutes.get('/user', async (req, res) => {
   try {
     const users = await Users.find();
@@ -185,3 +214,4 @@ userRoutes.post('/password', async (req, res) => {
 
 
 module.exports = userRoutes;
+
