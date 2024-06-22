@@ -81,6 +81,14 @@ const userSchema = new Schema({
     type: String,
     required: false,
   },
+  feedback: {
+    type: String,
+    required: false,
+  },
+  rating: {
+    type: Number,
+    required: false,
+  },
 }, { timestamps: true });
 
 const Userdb = mongoose.model('userdb', userSchema);

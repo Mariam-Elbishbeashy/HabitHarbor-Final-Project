@@ -99,6 +99,9 @@ app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
 
+app.get('/feedback', (req, res) => {
+  res.render('feedback');
+});
 
 app.get('/user', async (req, res) => {
   try {
@@ -149,4 +152,3 @@ app.put("/editUser/:id", async (req, res) => {
       res.status(500).send("Error updating user information");
   }
 });
-

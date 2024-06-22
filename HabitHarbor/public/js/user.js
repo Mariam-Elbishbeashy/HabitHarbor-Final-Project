@@ -8,7 +8,6 @@ window.onload = function() {
     generalLink.style.fontWeight = 'bold';
     generalLink.style.color = '#CAF746'; 
     toggleFontWeight('generalLink');
-    starRating(); 
     calculateBMI();
   };
   
@@ -20,7 +19,7 @@ window.onload = function() {
     var healthInfoContent = document.getElementById("healthInfoContent");
     var socialLinksContent = document.getElementById("socialLinksContent");
     var passwordContent = document.getElementById("passwordContent");
-    var feedbackContent = document.getElementById("feedbackContent");
+    var moreContent = document.getElementById("moreContent"); // Add this line
   
     var generalLink = document.getElementById("generalLink");
     var infoLink = document.getElementById("infoLink");
@@ -28,15 +27,15 @@ window.onload = function() {
     var healthInfoLink = document.getElementById("healthInfoLink");
     var socialLinks = document.getElementById("socialLinksLink");
     var passwordLink = document.getElementById("passwordLink");
-    var feedbackLink = document.getElementById("feedbackLink");
+    var moreLink = document.getElementById("moreLink"); // Add this line
   
     generalContent.style.display = "none";
     infoContent.style.display = "none";
     bmiContent.style.display = "none";
     healthInfoContent.style.display = "none";
-    socialLinksContent.style.display="none";
+    socialLinksContent.style.display = "none";
     passwordContent.style.display = "none";
-    feedbackContent.style.display = "none";
+    moreContent.style.display = "none"; // Add this line
   
     generalLink.classList.remove("active");
     infoLink.classList.remove("active");
@@ -44,40 +43,32 @@ window.onload = function() {
     healthInfoLink.classList.remove("active");
     socialLinks.classList.remove("active");
     passwordLink.classList.remove("active");
-    feedbackLink.classList.remove("active");
+    moreLink.classList.remove("active"); // Add this line
   
     if (optionName === "general") {
-        generalContent.style.display = "block";
-        generalLink.classList.add("active");
-  
+      generalContent.style.display = "block";
+      generalLink.classList.add("active");
     } else if (optionName === "info") {
-        infoContent.style.display = "block";
-        infoLink.classList.add("active");
-  
-      }
-  
-      else if (optionName === "bmi") { 
-        bmiContent.style.display = "block";
-        bmiLink.classList.add("active");
-    }
-      
-      else if (optionName === "healthInfo") {
-        healthInfoContent.style.display = "block";
-        healthInfoLink.classList.add("active");
-    } 
-  else if (optionName === "socialLinks") {
-    socialLinksContent.style.display = "block";
-    socialLinks.classList.add("active");
-  } 
-  else if (optionName === "password") {
-        passwordContent.style.display = "block";
-        passwordLink.classList.add("active");
-       
-    } else if (optionName === "feedback") {
-        feedbackContent.style.display = "block";
-        feedbackLink.classList.add("active");
+      infoContent.style.display = "block";
+      infoLink.classList.add("active");
+    } else if (optionName === "bmi") {
+      bmiContent.style.display = "block";
+      bmiLink.classList.add("active");
+    } else if (optionName === "healthInfo") {
+      healthInfoContent.style.display = "block";
+      healthInfoLink.classList.add("active");
+    } else if (optionName === "socialLinks") {
+      socialLinksContent.style.display = "block";
+      socialLinks.classList.add("active");
+    } else if (optionName === "password") {
+      passwordContent.style.display = "block";
+      passwordLink.classList.add("active");
+    }  else if (optionName === "more") {
+      moreContent.style.display = "block";
+      moreLink.classList.add("active");
     }
   }
+  
   function openGeneralOnly()
   {
     var generalContent = document.getElementById("generalContent");
@@ -87,7 +78,6 @@ window.onload = function() {
     healthInfoContent.style.display = "none";
     socialLinksContent.style.display="none";
     passwordContent.style.display = "none";
-    feedbackContent.style.display = "none";
   }
   
   function toggleFontWeight(linkId) {

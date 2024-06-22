@@ -21,35 +21,35 @@
         <!--User Profile-->
         <div class="card">
             <div class="top-panel">
-              <ul>
-                <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
-                <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
-                <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
-                <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
-                <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
-                <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
-                <li><a href="#" id="feedbackLink" onclick="toggleFontWeight('feedbackLink'); toggleOption('feedback');">Feedback</a></li>
-              </ul>
+                <ul>
+                    <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
+                    <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
+                    <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
+                    <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
+                    <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                    <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
+                    
+                    <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
+                  </ul>
             </div>
 
             <div class="top-panel-mobile">
                 <ul>
-                  <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
-                  <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
-                  <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
-                  <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
-                 </ul>
+                    <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                    <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
+                    
+                    <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
+                  </ul>
               </div>
 
               <div class="bottom-panel-mobile">
                 <ul>
                   <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
                   <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
-                  <li><a href="#" id="feedbackLink" onclick="toggleFontWeight('feedbackLink'); toggleOption('feedback');">Feedback</a></li>
+                  
                 </ul>
               </div>
 
-             <!-- general -->
  <!-- General -->
  <div id="generalContent" class="content">
     <div class="user-profile">
@@ -105,6 +105,7 @@
     <div class="space"></div>         
     <label for="country"><b>Country:</b></label>
     <select id="country" disabled>
+        <option value="Egypt" <%= user.country === 'Egypt' ? 'selected' : '' %>>Egypt</option>
         <option value="Argentina" <%= user.country === 'Argentina' ? 'selected' : '' %>>Argentina</option>
         <option value="Australia" <%= user.country === 'Australia' ? 'selected' : '' %>>Australia</option>
         <option value="Austria" <%= user.country === 'Austria' ? 'selected' : '' %>>Austria</option>
@@ -116,7 +117,6 @@
         <option value="Colombia" <%= user.country === 'Colombia' ? 'selected' : '' %>>Colombia</option>
         <option value="Czech Republic" <%= user.country === 'Czech Republic' ? 'selected' : '' %>>Czech Republic</option>
         <option value="Denmark" <%= user.country === 'Denmark' ? 'selected' : '' %>>Denmark</option>
-        <option value="Egypt" <%= user.country === 'Egypt' ? 'selected' : '' %>>Egypt</option>
         <option value="Finland" <%= user.country === 'Finland' ? 'selected' : '' %>>Finland</option>
         <option value="France" <%= user.country === 'France' ? 'selected' : '' %>>France</option>
         <option value="Germany" <%= user.country === 'Germany' ? 'selected' : '' %>>Germany</option>
@@ -164,17 +164,17 @@
                 <div class="user-profile">
                     <div class="heightWeight">
                         <label for="height">Height (cm):</label>
-                        <input type="text" id="heightCm" value="<%= arr.length > 0 ? arr[arr.length - 1].Height : '' %>" readonly>
+                        <input type="text" id="heightCm" value="<%= user.Height%>" readonly>
                     </div>
                     <div class="heightWeight">
                         <label for="weight">Weight (kg):</label>
-                        <input type="text" id="weightKg" value="<%= arr.length > 0 ? arr[arr.length - 1].Weight : '' %>" readonly>
+                        <input type="text" id="weightKg" value="<%= user.Weight%>" readonly>
                     </div>
                     <div class="user-profile">
                         <div class="heightWeight">
                             <label for="height">Height (ft):</label>
                             <% if (arr.length > 0) { %>
-                                <% const heightCm = arr[arr.length - 1].Height; %>
+                                <% const heightCm = user.Height; %>
                                 <% const heightFt = (heightCm * 0.0328084).toFixed(1); %>
                                 <input type="text" id="heightFt" value="<%= heightFt %>" readonly>
                             <% } else { %>
@@ -184,7 +184,7 @@
                         <div class="heightWeight">
                             <label for="weight">Weight (lbs):</label>
                             <% if (arr.length > 0) { %>
-                                <% const weightKg = arr[arr.length - 1].Weight; %>
+                                <% const weightKg = user.Weight; %>
                                 <% const weightLbs = (weightKg * 2.20462).toFixed(2); %>
                                 <input type="text" id="weightLbs" value="<%= weightLbs %> lbs" readonly>
                             <% } else { %>
@@ -330,35 +330,42 @@
 </div>
 
     
-    <!--feedback-->
-    <div id="feedbackContent" class="content" style="display: none;">
-        <div class ="feedback-section">
-            <h2 class="rate-title">Rate Us!</h2>
-            <div class="emoji">
-                <div id="emojis">
-                <img src="/images/poor.png">
-                <img src="/images/bad.png">
-                <img src="/images/okay.png">
-                <img src="/images/good.png">
-                <img src="/images/excellent.png">
-            </div>
-            </div>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="feedback-textarea">
-                <label for="feedback"><b>Feedback:</b></label>
-                <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Enter feedback here..."></textarea>
-            </div>
-           
-    </div>
     
+    <div id="moreContent" class="content" style="display: none;">
+        <!-- Widget 1 -->
+        <div class="widget" id="widget-width">
+          <a href="page1.html" class="widget-link">
+            <div class="widget-content">
+              <div class="widget-image">
+                <img src="images/Feedback Reactions.gif" alt="Widget Image 1">
+              </div>
+              <div class="widget-text">
+                <h3>Widget 1</h3>
+                <p>Description for Widget 1</p>
+              </div>
+            </div>
+          </a>
     </div>
-  </div>
+        <div class="space"></div>
+        <div class="space"></div>
+        <!-- Widget 2 -->
+        <div class="widget" id="widget-width">
+          <a href="/feedback" class="widget-link">
+            <div class="widget-content">
+              <div class="widget-image" >
+                <img src="images/rate.gif" alt="Widget Image 2">
+              </div>
+              <div class="widget-text">
+                <h3>Rate Us!</h3>
+                <p>Your opinion matters!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      
+        <!-- Add more widgets as needed -->
+      </div>
+      
   <div class="edit-btn">
     <a href="/editUser">
         <button>Edit User Profile</button>
