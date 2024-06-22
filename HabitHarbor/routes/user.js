@@ -175,7 +175,7 @@ userRoutes.post('/password', async (req, res) => {
       user.Password = newPassword;
       await user.save();
 
-      res.status(200).json({ success: true, message: 'Password updated successfully' });
+      res.redirect("/user");
 
   } catch (error) {
       console.error('Error updating password:', error);

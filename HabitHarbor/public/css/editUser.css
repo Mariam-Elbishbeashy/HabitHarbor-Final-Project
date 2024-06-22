@@ -135,7 +135,12 @@ body {
   }
 
   /*Edit User*/
-
+  
+  .edit
+  {
+    overflow-y: auto;
+  }
+  
   /*button styling*/
   button {
     background-color: #CAF746;

@@ -15,6 +15,7 @@
         <%- include("partials/header.ejs") %>
         <%- include("partials/navbar.ejs") %>
         
+        <div class="edit">
         <form method="POST" action="/editUser/<%= user._id %>?_method=PUT" id="editForm" enctype="multipart/form-data" onsubmit="return validateForm()">
             <fieldset>
                 <legend>Personal Information</legend>
@@ -160,6 +161,7 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+</div>
 
     <script src="/js/editUser.js"></script>
     <script src="/js/home.js"></script>
