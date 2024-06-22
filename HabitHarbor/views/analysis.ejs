@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Harbor</title>
+    <link href="/css/home.css" rel="stylesheet"/>
+    <link href="/css/analysis.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <%- include("partials/header.ejs") %>
+        <%- include("partials/sidebar.ejs") %>
+        <%- include("partials/navbar.ejs") %>
+        <div class="main">
+            <div class = "switches">
+                <div class = "switch-container" onclick = "toggle('analysis',this)">
+                    <a>
+                        <i class="bi bi-clipboard-data clickable" id="home-btn"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z"/>
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                        </svg>
+    
+                    </a>
+                </div>
+                <div class = "switch-container" onclick = "toggle('history',this)">
+                    <a>
+
+                        <i class="bi bi-hourglass-split"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+                            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+                        </svg>
+    
+                    </a>
+                </div>
+            </div>
+            <br>
+            <div class = "content">
+                <div class = "analysis">
+                    <div class = "square-row">
+                        <div class = 'square'>
+            
+                            <p style = "color: white;" class = "square-text">Total Habits</p>
+                            <p class = "square-text" id = "num" style = "color: white; text-shadow: 5px 5px 0px #cdfb47;">0</p>
+                
+                        </div>
+            
+                        <div class = 'square1'>
+            
+                            <p style = "font-style: black;" class = "square-text">Chart</p>
+                            <img src = "/images/Image_01-05-2024_at_1.08_PM-removebg-preview.png" id = "image">
+                    
+                        </div>
+                    
+                    </div>
+                    <div class = 'square2'>
+            
+                        <p style = "font-style: black;" class = "square-text">Habits/Month</p>
+                        <img src = "https://www.cvsc.org.uk/images/Red_Modern_Line_Chart_Diagram_Produt_Data_Graph.png" id = "image1">
+                
+                    </div>
+                </div>
+                <div class = "history" style = "display: none;">
+                    <div class="title">
+                        <h2>Daily Challenges</h2>
+                        <button class="seeAll">SeeAll-></button>
+                    </div>
+                    <div class="daily-challenges">
+                        <div class="activity-container">
+                            <div class="activity activity-one">
+                                <div class="front">
+                                    Nutrition challenge
+                                    <div class="gif-container"><img src="./images/food.gif" id="food"></div>
+                                </div>
+                                
+                                <div class="back">
+                                    <div>
+                                        <button class="trash-btn" onClick="return deleteForm(this);">
+                                            <i class="bi bi-trash"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="description">
+                                        No sugar for today
+                                    </div>
+                                    <div class="checkbox-wrapper">
+                                        <div class="round">
+                                            <input type="checkbox" id="checkbox1" />
+                                            <label for="checkbox1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="activity activity-two">
+                                <div class="front">
+                                    Physical Challenge
+                                    <div class="gif-container"><img src="./images/runner.gif" id="runner"></div>
+                                </div>
+        
+                                <div class="back">
+                                    <div>
+                                        <button class="trash-btn" onClick="return deleteForm(this);">
+                                            <i class="bi bi-trash"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                              </svg>
+                                        </button>
+                                    </div>
+                                    <div class="description">
+                                        Run for an hour
+                                    </div>
+                                    <div class="checkbox-wrapper">
+                                        <div class="round">
+                                            <input type="checkbox" id="checkbox2" />
+                                            <label for="checkbox2"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="activity activity-three">
+                                <div class="front">Well-being challenge
+                                    <div class="gif-container"><img src="./images/meditation.gif" id="meditation"></div>
+                                </div>
+        
+                                <div class="back">
+                                    <div>
+                                        <button class="trash-btn" onClick="return deleteForm(this);">
+                                            <i class="bi bi-trash"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="description">
+                                        Meditate for 20 minutes
+                                    </div>
+                                    <div class="checkbox-wrapper">
+                                        <div class="round">
+                                            <input type="checkbox" id="checkbox3" />
+                                            <label for="checkbox3"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-container">
+                            <div class="activity activity-fourh">
+                                <div class="front">Add your Custom challenge</div>
+                                <div class="back">
+        
+                                    <div class="daily-plus-container">
+                                        <button class="plus" onclick="dailyValidate()">
+                                            <i class="bi bi-plus-lg clickable" id="daily-plus-btn"></i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <input type="text" placeholder="Type a title here ..." class="custom-input" id="input-title">
+                                    <textarea placeholder="type the challenge here ..." class="custom-input" id="input-content"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ttitle">
+                        <h2>Weekly Challenges</h2>
+                        <button class="seeAll">SeeAll-></button>
+                    </div>
+                    <div class="weekly-challenges">
+        
+                        <div class="activity-container">
+                            <div class="wactivity wactivity-one" style="--progress-value: 85%;">
+                                <div class="wchallenge-content">Drink 8 cups of water</div>
+                                <button class="activity-btn" id="completion-btn">Day 5</button>
+                                <div class="loader"></div>
+                                <div class="progress">85%</div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="wactivity wactivity-two" style="--progress-value: 50%;">
+                                <div class="wchallenge-content">Read 30 pages of a book</div>
+                                <button class="activity-btn" id="completion-btn">Day 4</button>
+                                <div class="loader"></div>
+                                <div class="progress">50%</div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="wactivity wactivity-three" style="--progress-value: 20%;">
+                                <div class="wchallenge-content"> Try a new activity</div>
+                                <button class="activity-btn" id="start-btn">Let's go!!</button>
+                                <button class="activity-btn" id="completion-btn">Day 1</button>
+                                <div class="loader"></div>
+                                <div class="progress">20%</div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="wactivity wactivity-four">
+                                <div class="wchallenge-content">
+                                    Add Weekly challenge
+                                    <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>        
+                                </div>
+                                <button class="plus" onclick="weeklyMonthlyValidate()">
+                                    <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                    </svg>
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Title">
+                        <h2>Monthly Challenges</h2>
+                        <button class="seeAll">SeeAll-></button>
+                    </div>
+                    <div class="monthly-challenges">
+        
+                        <div class="activity-container">
+                            <div class="mactivity activity1" style="--progress-value: 90%;">
+                                <div class="mchallenge-content"> Start your day with a healthy breakfast</div>
+                                <button class="activity-btn" id="completion-btn">Day 27</button>
+                                <div class="loader"></div>
+                                <div class="progress">90%</div>
+                            </div>
+                        </div>
+        
+                        <div class="activity-container">
+                            <div class="mactivity activity2">
+                                <div class="mactivity activity2" style="--progress-value: 10%;">
+                                    <div class="mchallenge-content"> Write down 5 things you're thankful for </div>
+                                    <button class="activity-btn" id="start-btn">Let's go!!</button>
+                                    <button class="activity-btn" id="completion-btn">Day 1</button>
+                                    <div class="loader"></div>
+                                    <div class="progress">10%</div>
+                                </div>
+                            </div>
+                        </div>
+      
+                        <div class="activity-container">
+                            <div class="mactivity activity3">
+                                <div class="mchallenge-content">
+                                    Add Monthly challenge
+                                    <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>
+                                </div>
+                            <button class="plus">
+                                <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="footer"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer"></div>
+    </div>
+    <script src="/js/analysis.js"  charset="UTF-8"></script>
+    <script src="/routes/analysisRoute.js" charset="UTF-8"></script>
+    <script src="/scripts/home.js" charset="UTF-8"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
+

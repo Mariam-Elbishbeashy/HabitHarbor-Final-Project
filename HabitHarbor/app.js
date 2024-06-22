@@ -4,6 +4,8 @@ const path = require('path');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const Resource = require('./models/resourcedb');
+const Badgesdb = require('./models/badgesdb');
+const badgesData = require('./config/badgesdata');
 const data = require('./config/resourcedata');
 const userRoutes = require('./routes/user');
 const Users = require('./models/userdb');
@@ -29,13 +31,15 @@ mongoose.connect(dbURI)
     await Resource.deleteMany({});
     await Resource.insertMany(data);
 
-    await Activities.deleteMany({});
-    await Activities.insertMany(Activitydata);
 
-    await Posts.deleteMany({});
-    await Posts.insertMany(Postdata);
+     await Badgesdb.deleteMany({}); 
+     const result2 = await Badgesdb.insertMany(badgesData);
+     console.log(`${result2.length} documents inserted successfully`);
 
-    console.log('MongoDB connected');
+    // await Posts.deleteMany({}); 
+    // const result3 = await Posts.insertMany(Postdata);
+    // console.log(`${result3.length} documents inserted successfully`);
+
 
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
@@ -49,12 +53,12 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 app.use(session({
+
   secret: 'Your_Secret_Key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000 }
-}));
-app.set('view engine', 'ejs');
+  resave: true,
+  saveUninitialized:false,
+  cookie:{maxAge:72000000} }));
+  app.set('view engine', 'ejs');     
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
@@ -65,14 +69,20 @@ app.use("/", userRoutes);
 app.use("/", indexRoutes);
 app.use("/", adminRoutes);
 
-// Get requests
+//get requests
 app.get('/home', async (req, res) => {
   try {
     const activities = await Activities.find();
-    res.render('home', { activities });
+    const badges = await Badgesdb.find();
+    res.render('home', { activities, badges, user: req.session.user });
   } catch (err) {
     console.log(err);
+    res.status(500).send('Server Error');
   }
+});
+
+app.get('/home', (req, res) => {
+  res.render('home',{user:req.session.user});
 });
 
 app.get('/admin', (req, res) => {
@@ -81,6 +91,11 @@ app.get('/admin', (req, res) => {
 
 app.get('/', (req, res) => {
   res.render('front');
+});
+
+app.get('/analysis', async (req, res) => {
+  const badges = await Badgesdb.find();
+  res.render('analysis', {badges, user: req.session.user});
 });
 
 app.get('/login', (req, res) => {
@@ -103,4 +118,7 @@ app.get('/password', (req, res) => {
   res.render('password');
 });
 
-
+//404 page
+ app.use((req, res) => {
+   res.status(404).render('404', {user: req.session.user});
+ });
