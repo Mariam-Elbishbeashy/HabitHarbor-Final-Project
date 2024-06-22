@@ -2,9 +2,34 @@ const express = require('express');
 const userRoutes = express.Router();
 const UserController = require('../controllers/User');
 const Users=require('../models/userdb');
+const multer = require('multer');
 
 var methodOverride = require('method-override')
 userRoutes.use(methodOverride('_method'))
+userRoutes.use('/uploads', express.static('uploads'));
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads'); // Ensure 'images' folder exists and is writable
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10 // 10 MB file size limit
+  },
+  fileFilter: function (req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Only JPG, JPEG, or PNG files are allowed!'), false);
+    }
+    cb(null, true);
+  }
+});
+
 
 userRoutes.post('/login', async (req, res) => {
   try {
@@ -61,58 +86,38 @@ userRoutes.post('/logout', (req, res) => {
   });
 });
 
-userRoutes.put('/editUser/:id', async (req, res) => {
+userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res) => {
   const userId = req.params.id;
-  try {
-   // Example: Updating session user data after edit
-const updatedUser = await Users.findOneAndUpdate(
-  { _id: userId },
-  { $set: req.body },
-  { new: true }
-);
-// Update session data
-req.session.user = updatedUser;
+  const updateData = req.body;
 
-    res.redirect("/user"); // Redirect to appropriate page after update
+  try {
+    if (req.file) {
+      updateData.Image = req.file.filename; // Save the new image filename
+    }
+
+    const updatedUser = await Users.findOneAndUpdate(
+      { _id: userId },
+      { $set: updateData },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send('User not found.');
+    }
+
+    req.session.user = updatedUser; // Update session with new user data
+    res.redirect("/user"); // Redirect to user profile page after update
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Failed to update user" + err.message);
+    console.error('Error updating user:', err);
+
+    if (err instanceof multer.MulterError) {
+      return res.status(400).send('File upload error: ' + err.message);
+    }
+
+    res.status(500).send('Internal Server Error');
   }
 });
 
-userRoutes.post('/password', async (req, res) => {
-  try {
-      const { currentPassword, newPassword, confirmPassword } = req.body;
-      const userId = req.session.user._id; // Assuming you store user's ID in session
-
-      // Find the user by ID
-      const user = await Users.findById(userId);
-
-      if (!user) {
-          return res.status(404).json({ success: false, message: 'User not found' });
-      }
-
-      // Validate current password
-      if (currentPassword !== user.Password) {
-          return res.status(400).json({ success: false, message: 'Current password is incorrect' });
-      }
-
-      // Validate new password and confirm password match
-      if (newPassword !== confirmPassword) {
-          return res.status(400).json({ success: false, message: 'New password and confirm password do not match' });
-      }
-
-      // Update user's password and save to MongoDB
-      user.Password = newPassword;
-      await user.save();
-
-      res.status(200).json({ success: true, message: 'Password updated successfully' });
-      
-  } catch (error) {
-      console.error('Error updating password:', error);
-      res.status(500).json({ success: false, message: 'Failed to update password' });
-  }
-});
 
 
 module.exports = userRoutes;

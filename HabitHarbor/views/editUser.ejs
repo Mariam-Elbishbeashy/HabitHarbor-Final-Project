@@ -15,7 +15,7 @@
         <%- include("partials/header.ejs") %>
         <%- include("partials/navbar.ejs") %>
         
-        <form method="post" action="/editUser/<%= user._id %>?_method=PUT" id="editForm" onsubmit="return validateForm()">
+        <form method="POST" action="/editUser/<%= user._id %>?_method=PUT" id="editForm" enctype="multipart/form-data" onsubmit="return validateForm()">
             <fieldset>
                 <legend>Personal Information</legend>
                 <label for="profile_image">Profile Image:</label><br>

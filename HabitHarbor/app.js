@@ -1,5 +1,4 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -48,10 +47,11 @@ mongoose.connect(dbURI)
   })
   .catch(err => console.error('MongoDB connection error:', err));
 
+  
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 app.use(session({
   secret: 'Your_Secret_Key',
   resave: false,
@@ -143,17 +143,18 @@ app.get('/editUser', async (req, res) => {
 });
 
 // Uncomment and modify this route in app.js
-app.put("/editUser/:id", async (req, res) => {
-  const userId = req.params.id;
-  try {
-      const updatedUser = await Users.findOneAndUpdate(
-          { _id: userId },
-          { $set: req.body },
-          { new: true }
-      );
-      res.redirect("/user"); // Redirect to appropriate page after update
-  } catch (err) {
-      console.log(err);
-      res.status(500).send("Error updating user information");
-  }
-});
+// app.put("/editUser/:id", async (req, res) => {
+//   const userId = req.params.id;
+//   try {
+//     console.log(req.file);
+//       const updatedUser = await Users.findOneAndUpdate(
+//           { _id: userId },
+//           { $set: req.body },
+//           { new: true }
+//       );
+//       res.redirect("/user"); // Redirect to appropriate page after update
+//   } catch (err) {
+//       console.log(err);
+//       res.status(500).send("Error updating user information");
+//   }
+// });
