@@ -103,6 +103,11 @@ app.get('/feedback', (req, res) => {
   res.render('feedback');
 });
 
+app.get('/password', (req, res) => {
+  res.render('password');
+});
+
+
 app.get('/user', async (req, res) => {
   try {
     const users = await Users.find();

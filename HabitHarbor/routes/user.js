@@ -79,4 +79,40 @@ req.session.user = updatedUser;
     res.status(500).send("Failed to update user" + err.message);
   }
 });
+
+userRoutes.post('/password', async (req, res) => {
+  try {
+      const { currentPassword, newPassword, confirmPassword } = req.body;
+      const userId = req.session.user._id; // Assuming you store user's ID in session
+
+      // Find the user by ID
+      const user = await Users.findById(userId);
+
+      if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+      }
+
+      // Validate current password
+      if (currentPassword !== user.Password) {
+          return res.status(400).json({ success: false, message: 'Current password is incorrect' });
+      }
+
+      // Validate new password and confirm password match
+      if (newPassword !== confirmPassword) {
+          return res.status(400).json({ success: false, message: 'New password and confirm password do not match' });
+      }
+
+      // Update user's password and save to MongoDB
+      user.Password = newPassword;
+      await user.save();
+
+      res.status(200).json({ success: true, message: 'Password updated successfully' });
+      
+  } catch (error) {
+      console.error('Error updating password:', error);
+      res.status(500).json({ success: false, message: 'Failed to update password' });
+  }
+});
+
+
 module.exports = userRoutes;

@@ -27,7 +27,6 @@
                     <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
                     <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
                     <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
-                    <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
                     
                     <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
                   </ul>
@@ -36,7 +35,6 @@
             <div class="top-panel-mobile">
                 <ul>
                     <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
-                    <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
                     
                     <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
                   </ul>
@@ -45,7 +43,6 @@
               <div class="bottom-panel-mobile">
                 <ul>
                   <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
-                  <li><a href="#" id="passwordLink" onclick="toggleFontWeight('passwordLink'); toggleOption('password');">Change Password</a></li>
                   
                 </ul>
               </div>
@@ -264,91 +261,49 @@
     <div id="socialLinksContent" class="content">
         <div class="user-profile">
             <div class="social-links">
-                <i class="fa-brands fa-facebook"></i>
-                <input type="text" id="facebookLink" value="<%= user.facebook %>" readonly>
-                <a href="<%= user.facebook %>" target="_blank">Open</a>
-                <div class="error" id="facebookLinkError"></div>
-            </div>
-            <div class="social-links">
-                <i class="fa-brands fa-twitter "></i>
-                <input type="text" id="twitterLink" value="<%= user.twitter %>" readonly>
-                <a href="<%= user.twitter %>" target="_blank">Open</a>
-                <div class="error" id="twitterLinkError"></div>
-            </div>
-            <div class="social-links">
                 <i class="fa-brands fa-instagram"></i>
-                <input type="text" id="instagramLink" value="<%= user.instagram %>" readonly>
+                <input type="text" id="instagramLink" value="<%= user.instagram %>" placeholder="Instagram Link">
                 <a href="<%= user.instagram %>" target="_blank">Open</a>
                 <div class="error" id="instagramLinkError"></div>
             </div>
             <div class="social-links">
+                <i class="fa-brands fa-twitter "></i>
+                <input type="text" id="twitterLink" value="<%= user.twitter %>" placeholder="Twitter Link" readonly>
+                <a href="<%= user.twitter %>" target="_blank">Open</a>
+                <div class="error" id="twitterLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook"></i>
+                <input type="text" id="facebookLink" value="<%= user.facebook %>"placeholder="Facebook Link" readonly>
+                <a href="<%= user.facebook %>" target="_blank">Open</a>
+                <div class="error" id="facebookLinkError"></div>
+            </div>
+            <div class="social-links">
                 <i class="fa-brands fa-linkedin"></i>
-                <input type="text" id="linkedinLink" value="<%= user.linkedin %>" readonly>
+                <input type="text" id="linkedinLink" value="<%= user.linkedin %>" placeholder="Linkedin Link" readonly>
                 <a href="<%= user.linkedin %>" target="_blank">Open</a>
                 <div class="error" id="linkedinLinkError"></div>
             </div>
         </div>
     </div>
 
-  <!--password-->
-  <div id="passwordContent" class="content">
-    <div class="user-profile">
-        <div class="password-section">
-            <label for="currentPassword">Current Password:</label>
-            <div class="password-container">
-                <input type="password" id="currentPassword" name="currentPassword">
-                <div class="password-checkbox-container">
-                    <input type="checkbox" id="showCurrentPassword" class="checkbox-custom">
-                    <label for="showCurrentPassword" class="checkbox-label">Show Password</label>
-                </div>
-                <div class="error" id="currentPasswordError"></div>
-            </div>
-        </div>
-        <div class="password-section">
-            <label for="newPassword">New Password:</label>
-            <div class="password-container">
-                <input type="password" id="newPassword" name="newPassword">
-                <div class="password-checkbox-container">
-                    <input type="checkbox" id="showNewPassword" class="checkbox-custom">
-                    <label for="showNewPassword" class="checkbox-label">Show Password</label>
-                </div>
-                <div class="error" id="newPasswordError"></div> 
-            </div>
-        </div>
-        <div class="password-section">
-            <label for="confirmPassword">Confirm Password:</label>
-            <div class="password-container">
-                <input type="password" id="confirmPassword" name="confirmPassword">
-                <div class="password-checkbox-container">
-                    <input type="checkbox" id="showConfirmPassword" class="checkbox-custom">
-                    <label for="showConfirmPassword" class="checkbox-label">Show Password</label>
-                </div>
-                <div class="error" id="confirmPasswordError"></div> 
-            </div>
-        </div>
-       </div>
-</div>
-
-    
-    
+  
     <div id="moreContent" class="content" style="display: none;">
-        <!-- Widget 1 -->
         <div class="widget" id="widget-width">
-          <a href="page1.html" class="widget-link">
+          <a href="/password" class="widget-link">
             <div class="widget-content">
               <div class="widget-image">
-                <img src="images/Feedback Reactions.gif" alt="Widget Image 1">
+                <img src="images/lock.gif" alt="Widget Image 1">
               </div>
               <div class="widget-text">
-                <h3>Widget 1</h3>
-                <p>Description for Widget 1</p>
+                <h3>CHANGE PASSWORD</h3>
+                <p>Update your password here.</p>
               </div>
             </div>
           </a>
     </div>
         <div class="space"></div>
         <div class="space"></div>
-        <!-- Widget 2 -->
         <div class="widget" id="widget-width">
           <a href="/feedback" class="widget-link">
             <div class="widget-content">
@@ -356,14 +311,12 @@
                 <img src="images/rate.gif" alt="Widget Image 2">
               </div>
               <div class="widget-text">
-                <h3>Rate Us!</h3>
+                <h3>RATE US!</h3>
                 <p>Your opinion matters!</p>
               </div>
             </div>
           </a>
         </div>
-      
-        <!-- Add more widgets as needed -->
       </div>
       
   <div class="edit-btn">
@@ -372,167 +325,6 @@
     </a>
 </div>
 
-
-    <!--modal-->
-    <div id="saveChanges-modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>Changes saved successfully!</p>
-          <button id="closeModalBtn">Close</button>
-        </div>
-      </div>
-
-      <!--feedback modal-->
-      <div id="feedbackModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Thank you for your feedback!</p>
-            <button id="closeFeedbackModalBtn">Close</button>
-        </div>
-    </div>
-
-    <!--editModal-->
-    <div id="editModal" class="editModal">
-        <div class="edit-modal-content">
-          <span class="close" onclick="closeEditModal()">&times;</span>
-          <h2>Edit General Info</h2>
-          <form id="editForm">
-            <div class="input-group">
-              <label for="editFirstName">First Name:</label>
-              <input type="text" id="editFirstName" name="editFirstName">
-              <div class="error" id="firstNameError"></div>
-            </div>
-            <div class="input-group">
-              <label for="editLastName">Last Name:</label>
-              <input type="text" id="editLastName" name="editLastName">
-              <div class="error" id="lastNameError"></div>
-            </div>
-            <div class="input-group">
-              <label for="editUsername">Username:</label>
-              <input type="text" id="editUsername" name="editUsername">
-              <div class="error" id="usernameError"></div>
-            </div>
-            <div class="input-group">
-              <label for="editEmail">Email:</label>
-              <input type="text" id="editEmail" name="editEmail">
-              <div class="error" id="emailError"></div>
-            </div>
-            <div class="button-group">
-                <button type="button" id="save" onclick="validateForm(editForm)">Save Changes</button>
-              <button type="button" onclick="closeEditModal()" class="cancel-button">Cancel</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <div id="weightHeightModal" class="modal">
-        <div class="weight-height-content">
-            <span class="close" onclick="closeWeightHeightModal()">&times;</span>
-            <h2>Edit Weight and Height</h2>
-            <div>
-                <label for="weight">Weight:</label>
-                <input type="number" id="weightInput" step="0.1">
-                <div class="error" id="weightError"></div>
-                <select id="weightUnit">
-                    <option value="kg">kg</option>
-                    <option value="lbs">lbs</option>
-                </select>
-            </div>
-            <div>
-                <label for="height">Height:</label>
-                <input type="number" id="heightInput" step="0.1">
-                <div class="error" id="heightError"></div>
-                <select id="heightUnit">
-                    <option value="cm">cm</option>
-                    <option value="feet">feet</option>
-                </select>
-            </div>
-            <button onclick="saveWeightHeight()">Save Changes</button>
-        </div>
-    </div>
-
-    <!-- The Modal -->
-    <!-- Edit info modal -->
-    <div id="editInfoModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditInfoModal()">&times;</span>
-            <h2>Edit Info</h2>
-            <label for="editAge"><b>Age:</b></label>
-            <input type="text" id="editAge" value="">
-            <div class="error" id="ageError"></div>
-            <div class="space"></div>
-            <label for="editPhoneNumber"><b>Phone Number:</b></label>
-            <div class="Space"></div>
-            <div class="phone-input">
-                <select id="countryCode">
-                    <option value="+1">+1 (United States)</option>
-                    <option value="+7">+7 (Russia)</option>
-                    <option value="+20">+20 (Egypt)</option>
-                    <option value="+27">+27 (South Africa)</option>
-                    <option value="+30">+30 (Greece)</option>
-                    <option value="+31">+31 (Netherlands)</option>
-                    <option value="+32">+32 (Belgium)</option>
-                    <option value="+33">+33 (France)</option>
-                    <option value="+34">+34 (Spain)</option>
-                    <option value="+36">+36 (Hungary)</option>
-                    <option value="+39">+39 (Italy)</option>
-                    <option value="+40">+40 (Romania)</option>
-                    <option value="+41">+41 (Switzerland)</option>
-                    <option value="+43">+43 (Austria)</option>
-                    <option value="+44">+44 (United Kingdom)</option>
-                    <option value="+45">+45 (Denmark)</option>
-                    <option value="+46">+46 (Sweden)</option>
-                    <option value="+47">+47 (Norway)</option>
-                    <option value="+48">+48 (Poland)</option>
-                    <option value="+49">+49 (Germany)</option>
-                    <option value="+51">+51 (Peru)</option>
-                    <option value="+52">+52 (Mexico)</option>
-                    <option value="+53">+53 (Cuba)</option>
-                    <option value="+54">+54 (Argentina)</option>
-                    <option value="+55">+55 (Brazil)</option>
-                    <option value="+56">+56 (Chile)</option>
-                    <option value="+57">+57 (Colombia)</option>
-                    <option value="+58">+58 (Venezuela)</option>
-                    <option value="+60">+60 (Malaysia)</option>
-                    <option value="+61">+61 (Australia)</option>
-                    <option value="+62">+62 (Indonesia)</option>
-                    <option value="+63">+63 (Philippines)</option>
-                    <option value="+64">+64 (New Zealand)</option>
-                    <option value="+65">+65 (Singapore)</option>
-                    <option value="+66">+66 (Thailand)</option>
-                    <option value="+81">+81 (Japan)</option>
-                    <option value="+82">+82 (South Korea)</option>
-                    <option value="+84">+84 (Vietnam)</option>
-                    <option value="+86">+86 (China)</option>
-                    <option value="+90">+90 (Turkey)</option>
-                    <option value="+91">+91 (India)</option>
-                    <option value="+92">+92 (Pakistan)</option>
-                    <option value="+93">+93 (Afghanistan)</option>
-                    <option value="+94">+94 (Sri Lanka)</option>
-                    <option value="+95">+95 (Myanmar)</option>
-                    <option value="+98">+98 (Iran)</option>
-                    <option value="+234">+234 (Nigeria)</option>
-                    <option value="+251">+251 (Ethiopia)</option>
-                    <option value="+254">+254 (Kenya)</option>
-                    <option value="+255">+255 (Tanzania)</option>
-                    <option value="+256">+256 (Uganda)</option>
-                    <option value="+260">+260 (Zambia)</option>
-                    <option value="+263">+263 (Zimbabwe)</option>
-                </select>
-                <div class="Space"></div>
-                <input type="text" id="editPhoneNumber" value="">
-                <div class="error" id="numberError"></div>
-            </div>
-            <div class="space"></div>
-            <button onclick="saveEditedInfo()">Save</button>
-        </div>
-    </div>
-    
-<!--     
-        <script src="../public/js/user.js"></script>
-        <script src="../public/js/home.js"></script>  -->
-
-        
         <script src="\js\user.js"></script>
         <script src="\js/home.js"></script> 
         
