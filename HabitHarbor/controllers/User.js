@@ -58,22 +58,27 @@ const savePost = (req, res) => {
 };
 
 const commentPost = (req, res) => {
-  const { id } = req.params;
-  const { userName, userProfile, commentText } = req.body;
-
-  Postdb.findByIdAndUpdate(
-    id,
-    { $push: { comments: { userName, userProfile, commentText } } },
-    { new: true }
-  )
-    .then(() => {
-      res.redirect("/posts");
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error saving comment");
-    });
-};
+    const { id } = req.params;
+    const { commentText } = req.body;
+  
+    const user = req.session.user;
+    const userName = user.Firstname;
+    const userProfile = path.join('uploads', user.Image);
+  
+    Postdb.findByIdAndUpdate(
+      id,
+      { $push: { comments: { userName, userProfile, commentText } } },
+      { new: true }
+    )
+      .then(() => {
+        res.redirect("/posts");
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error saving comment");
+      });
+  };
+  
 
 const getPosts = (req, res) => {
   Postdb.find()
