@@ -1,0 +1,337 @@
+<!--Sondos-->
+<!--user.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <%- include("partials/header.ejs") %>
+        <%- include("partials/navbar.ejs") %>
+        
+        <!--User Profile-->
+        <div class="card">
+            <div class="top-panel">
+                <ul>
+                    <li><a href="#" id="generalLink" class="active" onclick="toggleFontWeight('generalLink'); toggleOption('general')">General</a></li>
+                    <li><a href="#" id="infoLink" onclick="toggleFontWeight('infoLink'); toggleOption('info');">Info</a></li>
+                    <li><a href="#" id="bmiLink" onclick="toggleFontWeight('bmiLink'); toggleOption('bmi');">BMI</a></li>
+                    <li><a href="#" id="healthInfoLink" onclick="toggleFontWeight('healthInfoLink'); toggleOption('healthInfo');">Health Info</a></li>
+                    <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                    
+                    <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
+                  </ul>
+            </div>
+
+            <div class="top-panel-mobile">
+                <ul>
+                    <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                    
+                    <li><a href="#" id="moreLink" onclick="toggleFontWeight('moreLink'); toggleOption('more');">More</a></li>
+                  </ul>
+              </div>
+
+              <div class="bottom-panel-mobile">
+                <ul>
+                  <li><a href="#" id="socialLinksLink" onclick="toggleFontWeight('socialLinksLink'); toggleOption('socialLinks');">Social Links</a></li>
+                  
+                </ul>
+              </div>
+
+ <!-- General -->
+ <div id="generalContent" class="content">
+    <div class="user-profile">
+      <img src="/uploads/<%= user.Image %>" alt="Profile Picture" id="profilePic">
+    </div>
+    <div class="user-profile">
+      <div class="general">
+        <div class="general-section">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" value="<%= user.Firstname %>" readonly>
+        </div>
+        <div class="general-section">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" value="<%= user.Lastname %>" readonly>
+        </div>
+      </div>
+      <div class="general">
+        <div class="general-section">
+          <label for="username">Username:</label>
+          <input type="text" id="username" value="<%= user.Username %>" readonly>
+        </div>
+      </div>
+      <div class="general">
+        <div class="general-section">
+          <label for="email">Email:</label>
+          <input type="email" id="email" value="<%= user.Email%>" readonly>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+
+  <div id="infoContent" class="content">
+    <div class="ageNumber">
+        <label for="age"><b>Age:</b></label>
+        <input type="text" id="age" value="<%= user.age %>" readonly>
+                    
+        <label for="phoneNumber"><b>Phone Number:</b></label>
+        <input type="text" id="phoneNumber" value="<%= user.phone %>" readonly>
+        <div class="Space"></div>
+                
+        <div class="space"></div> 
+    </div>  
+    <label for="gender"><b>Gender:</b></label>
+    <div id="gender">
+        <input type="radio" id="male" name="Gender" value="male" 
+        <%= user.Gender.trim().toLowerCase() === 'male' ? 'checked' : '' %> >
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="Gender" value="female" 
+        <%= user.Gender.trim().toLowerCase() === 'female' ? 'checked' : '' %> >
+    <label for="female">Female</label><br>
+</div>
+    <div class="space"></div>         
+    <label for="country"><b>Country:</b></label>
+    <select id="country" disabled>
+        <option value="Egypt" <%= user.country === 'Egypt' ? 'selected' : '' %>>Egypt</option>
+        <option value="Argentina" <%= user.country === 'Argentina' ? 'selected' : '' %>>Argentina</option>
+        <option value="Australia" <%= user.country === 'Australia' ? 'selected' : '' %>>Australia</option>
+        <option value="Austria" <%= user.country === 'Austria' ? 'selected' : '' %>>Austria</option>
+        <option value="Belgium" <%= user.country === 'Belgium' ? 'selected' : '' %>>Belgium</option>
+        <option value="Brazil" <%= user.country === 'Brazil' ? 'selected' : '' %>>Brazil</option>
+        <option value="Canada" <%= user.country === 'Canada' ? 'selected' : '' %>>Canada</option>
+        <option value="Chile" <%= user.country === 'Chile' ? 'selected' : '' %>>Chile</option>
+        <option value="China" <%= user.country === 'China' ? 'selected' : '' %>>China</option>
+        <option value="Colombia" <%= user.country === 'Colombia' ? 'selected' : '' %>>Colombia</option>
+        <option value="Czech Republic" <%= user.country === 'Czech Republic' ? 'selected' : '' %>>Czech Republic</option>
+        <option value="Denmark" <%= user.country === 'Denmark' ? 'selected' : '' %>>Denmark</option>
+        <option value="Finland" <%= user.country === 'Finland' ? 'selected' : '' %>>Finland</option>
+        <option value="France" <%= user.country === 'France' ? 'selected' : '' %>>France</option>
+        <option value="Germany" <%= user.country === 'Germany' ? 'selected' : '' %>>Germany</option>
+        <option value="Greece" <%= user.country === 'Greece' ? 'selected' : '' %>>Greece</option>
+        <option value="Hong Kong" <%= user.country === 'Hong Kong' ? 'selected' : '' %>>Hong Kong</option>
+        <option value="Hungary" <%= user.country === 'Hungary' ? 'selected' : '' %>>Hungary</option>
+        <option value="India" <%= user.country === 'India' ? 'selected' : '' %>>India</option>
+        <option value="Indonesia" <%= user.country === 'Indonesia' ? 'selected' : '' %>>Indonesia</option>
+        <option value="Iran" <%= user.country === 'Iran' ? 'selected' : '' %>>Iran</option>
+        <option value="Iraq" <%= user.country === 'Iraq' ? 'selected' : '' %>>Iraq</option>
+        <option value="Ireland" <%= user.country === 'Ireland' ? 'selected' : '' %>>Ireland</option>
+        <option value="Italy" <%= user.country === 'Italy' ? 'selected' : '' %>>Italy</option>
+        <option value="Japan" <%= user.country === 'Japan' ? 'selected' : '' %>>Japan</option>
+        <option value="Malaysia" <%= user.country === 'Malaysia' ? 'selected' : '' %>>Malaysia</option>
+        <option value="Mexico" <%= user.country === 'Mexico' ? 'selected' : '' %>>Mexico</option>
+        <option value="Netherlands" <%= user.country === 'Netherlands' ? 'selected' : '' %>>Netherlands</option>
+        <option value="New Zealand" <%= user.country === 'New Zealand' ? 'selected' : '' %>>New Zealand</option>
+        <option value="Norway" <%= user.country === 'Norway' ? 'selected' : '' %>>Norway</option>
+        <option value="Pakistan" <%= user.country === 'Pakistan' ? 'selected' : '' %>>Pakistan</option>
+        <option value="Philippines" <%= user.country === 'Philippines' ? 'selected' : '' %>>Philippines</option>
+        <option value="Poland" <%= user.country === 'Poland' ? 'selected' : '' %>>Poland</option>
+        <option value="Portugal" <%= user.country === 'Portugal' ? 'selected' : '' %>>Portugal</option>
+        <option value="Russia" <%= user.country === 'Russia' ? 'selected' : '' %>>Russia</option>
+        <option value="Saudi Arabia" <%= user.country === 'Saudi Arabia' ? 'selected' : '' %>>Saudi Arabia</option>
+        <option value="Singapore" <%= user.country === 'Singapore' ? 'selected' : '' %>>Singapore</option>
+        <option value="South Africa" <%= user.country === 'South Africa' ? 'selected' : '' %>>South Africa</option>
+        <option value="South Korea" <%= user.country === 'South Korea' ? 'selected' : '' %>>South Korea</option>
+        <option value="Spain" <%= user.country === 'Spain' ? 'selected' : '' %>>Spain</option>
+        <option value="Sweden" <%= user.country === 'Sweden' ? 'selected' : '' %>>Sweden</option>
+        <option value="Switzerland" <%= user.country === 'Switzerland' ? 'selected' : '' %>>Switzerland</option>
+        <option value="Taiwan" <%= user.country === 'Taiwan' ? 'selected' : '' %>>Taiwan</option>
+        <option value="Thailand" <%= user.country === 'Thailand' ? 'selected' : '' %>>Thailand</option>
+        <option value="Turkey" <%= user.country === 'Turkey' ? 'selected' : '' %>>Turkey</option>
+        <option value="Ukraine" <%= user.country === 'Ukraine' ? 'selected' : '' %>>Ukraine</option>
+        <option value="United Arab Emirates" <%= user.country === 'United Arab Emirates' ? 'selected' : '' %>>United Arab Emirates</option>
+        <option value="United Kingdom" <%= user.country === 'United Kingdom' ? 'selected' : '' %>>United Kingdom</option>
+        <option value="United States" <%= user.country === 'United States' ? 'selected' : '' %>>United States</option>
+        <option value="Vietnam" <%= user.country === 'Vietnam' ? 'selected' : '' %>>Vietnam</option>
+    </select>
+</div>
+
+            
+            <!-- BMI Content -->
+            <div id="bmiContent" class="content" style="display: none;">
+                <div class="user-profile">
+                    <div class="heightWeight">
+                        <label for="height">Height (cm):</label>
+                        <input type="text" id="heightCm" value="<%= user.Height%>" readonly>
+                    </div>
+                    <div class="heightWeight">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="text" id="weightKg" value="<%= user.Weight%>" readonly>
+                    </div>
+                    <div class="user-profile">
+                        <div class="heightWeight">
+                            <label for="height">Height (ft):</label>
+                            <% if (arr.length > 0) { %>
+                                <% const heightCm = user.Height; %>
+                                <% const heightFt = (heightCm * 0.0328084).toFixed(1); %>
+                                <input type="text" id="heightFt" value="<%= heightFt %>" readonly>
+                            <% } else { %>
+                                <input type="text" id="heightFt" value="" readonly>
+                            <% } %>
+                        </div>
+                        <div class="heightWeight">
+                            <label for="weight">Weight (lbs):</label>
+                            <% if (arr.length > 0) { %>
+                                <% const weightKg = user.Weight; %>
+                                <% const weightLbs = (weightKg * 2.20462).toFixed(2); %>
+                                <input type="text" id="weightLbs" value="<%= weightLbs %> lbs" readonly>
+                            <% } else { %>
+                                <input type="text" id="weightLbs" value="" readonly>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <section class="output">
+                    <h3>Your BMI is</h3>
+                    <p id="bmi">0</p>
+                    <p id="desc">N/A</p>
+                </section>
+                <section class="bmi-scale">
+                    <div style="--color:var(--underweight)">
+                        <h4>UnderWeight</h4>
+                        <p>&lt; 18.5</p>
+                    </div>
+                    <div style="--color:var(--normal)">
+                        <h4>Normal</h4>
+                        <p>18.5-25</p>
+                    </div>
+                    <div style="--color:var(--overweight)">
+                        <h4>OverWeight</h4>
+                        <p>25-30</p>
+                    </div>
+
+                    <div style="--color:var(--obese)">
+                        <h4>Obese</h4>
+                        <p>≥ 30</p>
+                    </div>
+
+                </section>
+             </div>
+            
+
+             
+        <div id="healthInfoContent" class="content" style="display: none;">
+            <div class="user-profile">
+                <label for="healthIssues">Health Issues:</label>
+                <textarea id="health-issues" name="health-issues" rows="3" cols="50" placeholder="None" readonly><%= user.health_issues %></textarea>
+            </div>
+            <div class="info2-section">
+                <label for="habits-goals">Health/Habit Goals:</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox"  id="sleep" class="checkbox-custom" name="goals" value="sleep" <%= user.goals.includes('sleep') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="sleep">Healthy sleep patterns</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="weight_loss" class="checkbox-custom" name="goals" value="weight_loss" <%= user.goals.includes('weight_loss') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="weight_loss">Weight loss</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="hydration" class="checkbox-custom" name="goals" value="hydration" <%= user.goals.includes('hydration') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="hydration">Hydration goals</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="eating" class="checkbox-custom" name="goals" value="eating" <%= user.goals.includes('eating') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="eating">Healthy Eating</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="flexibility" class="checkbox-custom" name="goals" value="flexibility" <%= user.goals.includes('flexibility') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="flexibility">Flexibility training</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="strength" class="checkbox-custom" name="goals" value="strength" <%= user.goals.includes('strength') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="strength">Strength training</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="cardio" class="checkbox-custom" name="goals" value="cardio" <%= user.goals.includes('cardio') ? 'checked' : '' %> disabled>
+                <label class="checkbox-label" for="cardio">Cardiovascular health</label>
+            </div>
+        </div>
+    
+    <!--social links-->
+    <div id="socialLinksContent" class="content">
+        <div class="user-profile">
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <input type="text" id="instagramLink" value="<%= user.instagram %>" placeholder="Instagram Link">
+                <a href="<%= user.instagram %>" target="_blank">Open</a>
+                <div class="error" id="instagramLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-twitter "></i>
+                <input type="text" id="twitterLink" value="<%= user.twitter %>" placeholder="Twitter Link" readonly>
+                <a href="<%= user.twitter %>" target="_blank">Open</a>
+                <div class="error" id="twitterLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook"></i>
+                <input type="text" id="facebookLink" value="<%= user.facebook %>"placeholder="Facebook Link" readonly>
+                <a href="<%= user.facebook %>" target="_blank">Open</a>
+                <div class="error" id="facebookLinkError"></div>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-linkedin"></i>
+                <input type="text" id="linkedinLink" value="<%= user.linkedin %>" placeholder="Linkedin Link" readonly>
+                <a href="<%= user.linkedin %>" target="_blank">Open</a>
+                <div class="error" id="linkedinLinkError"></div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div id="moreContent" class="content" style="display: none;">
+        <div class="widget" id="widget-width">
+          <a href="/password" class="widget-link">
+            <div class="widget-content">
+              <div class="widget-image">
+                <img src="images/lock.gif" alt="Widget Image 1">
+              </div>
+              <div class="widget-text">
+                <h3>CHANGE PASSWORD</h3>
+                <p>Update your password here.</p>
+              </div>
+            </div>
+          </a>
+    </div>
+        <div class="space"></div>
+        <div class="space"></div>
+        <div class="widget" id="widget-width">
+          <a href="/feedback" class="widget-link">
+            <div class="widget-content">
+              <div class="widget-image" >
+                <img src="images/rate.gif" alt="Widget Image 2">
+              </div>
+              <div class="widget-text">
+                <h3>RATE US!</h3>
+                <p>Your opinion matters!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+  <div class="edit-btn">
+    <a href="/editUser">
+        <button>Edit User Profile</button>
+    </a>
+</div>
+
+        <script src="\js\user.js"></script>
+        <script src="\js\home.js"></script> 
+        
+        <script>
+        showPassword('currentPassword', 'showCurrentPassword');
+        showPassword('newPassword', 'showNewPassword');
+        showPassword('confirmPassword', 'showConfirmPassword');
+        </script>
+</body>
+</html>

@@ -1,26 +1,26 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
+const session = require('express-session');
 const Resource = require('./models/resourcedb');
 const Badgesdb = require('./models/badgesdb');
 const badgesData = require('./config/badgesdata');
 const data = require('./config/resourcedata');
-const session=require('express-session');
-const userRoutes=require('./routes/user');
+const userRoutes = require('./routes/user');
 const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
 const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
+const multer = require('multer');
 
-//importing routes
-const adminRoutes = require('./routes/admin')
+// Importing routes
+const adminRoutes = require('./routes/admin');
 const indexRoutes = require('./routes/index');
 
-// express app
+// Express app
 const app = express();
 const port = 3000;
 const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
@@ -28,9 +28,9 @@ const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongod
 // Connect to MongoDB
 mongoose.connect(dbURI)
   .then(async () => {
-    await Resource.deleteMany({}); 
-    const result = await Resource.insertMany(data);
-    console.log(`${result.length} documents inserted successfully`);
+    await Resource.deleteMany({});
+    await Resource.insertMany(data);
+
 
      await Badgesdb.deleteMany({}); 
      const result2 = await Badgesdb.insertMany(badgesData);
@@ -40,32 +40,34 @@ mongoose.connect(dbURI)
     // const result3 = await Posts.insertMany(Postdata);
     // console.log(`${result3.length} documents inserted successfully`);
 
-    // Start express server after inserting data
+
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
   })
-  .catch(err => console.log(err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
-
+  
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 app.use(session({
-   secret: 'Your_Secret_Key',
+
+  secret: 'Your_Secret_Key',
   resave: true,
-saveUninitialized:false,
-cookie:{maxAge:72000000} }));
-app.set('view engine', 'ejs');     
+  saveUninitialized:false,
+  cookie:{maxAge:72000000} }));
+  app.set('view engine', 'ejs');     
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
- app.use("/", userRoutes);
- app.use("/", indexRoutes);
- app.use("/", adminRoutes);
+
+app.use("/", userRoutes);
+app.use("/", indexRoutes);
+app.use("/", adminRoutes);
 
 //get requests
 app.get('/home', async (req, res) => {
@@ -104,12 +106,17 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-
 app.get('/forgetpass', (req, res) => {
   res.render('forgetpass');
 });
 
+app.get('/feedback', (req, res) => {
+  res.render('feedback');
+});
 
+app.get('/password', (req, res) => {
+  res.render('password');
+});
 
 //404 page
  app.use((req, res) => {
