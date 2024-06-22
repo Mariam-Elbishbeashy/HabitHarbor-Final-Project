@@ -3,7 +3,7 @@
         <% if (user) { %>
             <div class="profile-title"><h2 id="profile-title-h2">Welcome! <%- user.Firstname %></h2></div>
             <div class="profile-picture centered">
-                <img src="<%- user.Image %>" alt="profile picture" id="profile-pic"/>
+                <img src="/uploads/<%= user.Image %>"  alt="profile picture" id="profile-pic"/>
             </div>
         <% } else { %>
             <div class="profile-title"><h2 id="profile-title-h2">Welcome, Guest!</h2></div>
