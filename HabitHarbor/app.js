@@ -35,12 +35,8 @@ mongoose.connect(dbURI)
     await Posts.deleteMany({});
     await Posts.insertMany(Postdata);
 
-    await Users.deleteMany({});
-    await Users.insertMany(Userdata);
-
     console.log('MongoDB connected');
 
-    // Start express server after inserting data
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);
     });
@@ -108,53 +104,3 @@ app.get('/password', (req, res) => {
 });
 
 
-app.get('/user', async (req, res) => {
-  try {
-    const users = await Users.find();
-    res.render('user', { arr: users });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Error retrieving data');
-  }
-});
-
-app.get('/search', async (req, res) => {
-  const searchKey = req.query.key;
-  try {
-    const data = await Resource.find({
-      "$or": [
-        { Category: { $regex: searchKey, $options: 'i' } }
-      ]
-    });
-    res.render('resources', { data });
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
-app.get('/editUser', async (req, res) => {
-  try {
-    const users = await Users.find();
-    res.render('editUser', { arr: users });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Error retrieving data');
-  }
-});
-
-// Uncomment and modify this route in app.js
-// app.put("/editUser/:id", async (req, res) => {
-//   const userId = req.params.id;
-//   try {
-//     console.log(req.file);
-//       const updatedUser = await Users.findOneAndUpdate(
-//           { _id: userId },
-//           { $set: req.body },
-//           { new: true }
-//       );
-//       res.redirect("/user"); // Redirect to appropriate page after update
-//   } catch (err) {
-//       console.log(err);
-//       res.status(500).send("Error updating user information");
-//   }
-// });

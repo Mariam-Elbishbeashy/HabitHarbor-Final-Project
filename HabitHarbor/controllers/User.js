@@ -3,11 +3,11 @@ const Users = require('../models/userdb');
 const Resource = require('../models/resourcedb');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const multer = require('multer'); // Import multer
+const multer = require('multer'); 
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads'); // Ensure 'uploads' folder exists and is writable
+    cb(null, 'uploads'); 
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 10 // 10 MB file size limit
+    fileSize: 1024 * 1024 * 10 
   },
   fileFilter: function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -34,12 +34,16 @@ const savePost = (req, res) => {
       return res.status(500).send('Error uploading file');
     }
 
+    const user = req.session.user;
     const imageName = req.file.filename;
-    const imagePath = path.join('uploads', imageName); // Relative path to save in database
+    const imagePath = path.join('uploads', imageName);
+    const userProfilePath = path.join('uploads', user.Image);
 
     const postdb = new Postdb({
       text: req.body.text,
       imageUploaded: imagePath,
+      userName: user.Firstname, 
+      userProfile: userProfilePath 
     });
 
     postdb.save()

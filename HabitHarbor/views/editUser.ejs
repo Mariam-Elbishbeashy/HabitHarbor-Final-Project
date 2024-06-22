@@ -20,7 +20,7 @@
                 <legend>Personal Information</legend>
                 <label for="profile_image">Profile Image:</label><br>
                 <input type="file" id="profile_image" name="profile_image" class="profile-image-input" onchange="previewImage(event)"><br>
-                <img name="Image" id="profile-image-preview" src="<%= user.Image %>" value="<%= user.Image %>" alt="Profile Image Preview" class="profile-image-preview"><br><br>
+                <img name="Image" id="profile-image-preview" src="/uploads/<%= user.Image %>" value="<%= user.Image %>" alt="Profile Image Preview" class="profile-image-preview"><br><br>
 
                 <label for="firstname">First Name:</label>
                 <input value="<%= user.Firstname %>" type="text" id="firstname" name="Firstname"><br><br>

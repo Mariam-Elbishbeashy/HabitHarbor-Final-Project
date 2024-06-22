@@ -734,70 +734,6 @@ body {
     }
   }
   
-  /*password*/
-
-  
-  /* Feedback
-  #feedbackLink {
-  color: white;
-  text-decoration: none;
-  display: block;
-  }
-  
-  .feedback-section
-  {
-  padding:50px 100px;
-  border-radius:10px;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  }
-  
-  .rate-title {
-  font-size: 35px; 
-  color: transparent;
-  background-image: linear-gradient(to right, #000, #000); 
-  -webkit-background-clip: text; 
-  background-clip: text;
-  animation: neon-glow 1s ease-in-out infinite alternate; 
-  }
-  
-  @keyframes neon-glow {
-  0% {
-      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; 
-  }
-  100% {
-      text-shadow: 0 0 5px #00ff00, 0 0 15px #00ff00, 0 0 25px #00ff00; 
-  }
-  }
-  
-  .emoji
-  {
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  margin-bottom: 30px;
-  overflow:hidden;
-  }
-  .emoji img{
-  width:80px;
-  margin: 0 10px;
-  }
-  #emojis
-  {
-  display: flex;
-  align-items: center;
-  transform: translateX(-400px);
-  transition: 0.3s;
-  }
-  
-  .rating .fas
-  {
-   font-size: 60px;
-   color: #e4e4e4;
-   cursor: pointer;
-  } */
-  
   .button-group {
     display: flex;
     gap: 10px; 
@@ -887,6 +823,87 @@ body {
     transform: scale(1.1); 
   }
   
+  
+  .edit-btn {
+    position: absolute;
+    bottom: 150px; 
+    right: 150px; 
+  }
+ 
+
+#moreContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 30px; 
+}
+
+.widget {
+  width: 100%; 
+  max-width: 400px; 
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: black; 
+}
+
+.widget-content {
+  display: flex;
+  align-items: center;
+}
+
+.widget-image {
+  flex: 0 0 100%; 
+  height: 300px; 
+  overflow: hidden;
+  position: relative;
+}
+
+.widget-image img {
+  width: 300px;
+  height: 260px;
+  object-fit: cover; 
+  transition: transform 0.3s ease;
+}
+
+
+.widget-text h3 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #CAF746;
+}
+
+.widget-text p {
+  margin-bottom: 0;
+  font-size: 20px;
+  color: #CAF746; 
+}
+
+.widget:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.widget:hover .widget-image img {
+  transform: scale(1.1);
+}
+
+.widget-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#widget-width {
+  background-color: rgb(41, 41, 41);
+  padding-right: 200px; 
+  height: 210px;
+  padding-bottom: 50px;
+  border: 1px solid #ccc;
+}
+
   /*mobile phones*/
   @media only screen and (max-width: 390px) {
     .container {
@@ -944,15 +961,7 @@ body {
     .user-profile img {
       width: 125px;
     }
-    .feedback-section
-   {
-     padding:0px;
-   }
   
-  .rating .fas
-  {
-   font-size: 20px;
-  }
   
   .content select
   {
@@ -1001,13 +1010,7 @@ body {
     font-size: 20px;
     background-color: #f8f8f8;
   }
-  .modal-content {
-    width: 70%;
-    height:300px; 
-    }
-    .edit-modal-content { 
-      width: 70%; 
-     }
+  
      .ageNumber
      {
       width:70%;
@@ -1051,88 +1054,3 @@ body {
   }
   
   
-  .edit-btn {
-    position: absolute;
-    bottom: 150px; /* Adjust this value as needed */
-    right: 50px; /* Adjust this value as needed */
-  }
- 
- /* Container for widgets */
-#moreContent {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Adjust as per your layout preference */
-  gap: 30px; /* Gap between widgets */
-}
-
-/* Individual widget style */
-.widget {
-  width: 100%; /* Full width of container */
-  max-width: 400px; /* Max width of each widget */
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: black; /* Set background color to black */
-}
-
-/* Widget content container */
-.widget-content {
-  display: flex;
-  align-items: center;
-}
-
-/* Widget image style */
-.widget-image {
-  flex: 0 0 100%; /* Fixed width for the image */
-  height: 300px; /* Fixed height for the image */
-  overflow: hidden;
-  position: relative;
-}
-
-.widget-image img {
-  width: 300px;
-  height: 260px;
-  object-fit: cover; /* Maintain aspect ratio and cover */
-  transition: transform 0.3s ease;
-}
-
-
-.widget-text h3 {
-  margin-top: 0;
-  font-size: 24px;
-  font-weight: bold;
-  color: #CAF746; /* Text color */
-}
-
-.widget-text p {
-  margin-bottom: 0;
-  font-size: 20px;
-  color: #CAF746; /* Text color */
-}
-
-/* Hover effect */
-.widget:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.widget:hover .widget-image img {
-  transform: scale(1.1);
-}
-
-/* Link styles */
-.widget-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-#widget-width {
-  /* Custom styles specific to the rate us widget */
-  background-color: rgb(41, 41, 41);
-  padding-right: 200px; /* Adjust the right padding as needed */
-  height: 210px;
-  padding-bottom: 50px;
-  border: 1px solid #ccc;
-}

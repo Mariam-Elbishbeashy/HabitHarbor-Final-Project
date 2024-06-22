@@ -18,28 +18,28 @@ window.onload = function() {
     var bmiContent = document.getElementById("bmiContent");
     var healthInfoContent = document.getElementById("healthInfoContent");
     var socialLinksContent = document.getElementById("socialLinksContent");
-    var moreContent = document.getElementById("moreContent"); // Add this line
+    var moreContent = document.getElementById("moreContent"); 
   
     var generalLink = document.getElementById("generalLink");
     var infoLink = document.getElementById("infoLink");
     var bmiLink = document.getElementById("bmiLink");
     var healthInfoLink = document.getElementById("healthInfoLink");
     var socialLinks = document.getElementById("socialLinksLink");
-    var moreLink = document.getElementById("moreLink"); // Add this line
+    var moreLink = document.getElementById("moreLink"); 
   
     generalContent.style.display = "none";
     infoContent.style.display = "none";
     bmiContent.style.display = "none";
     healthInfoContent.style.display = "none";
     socialLinksContent.style.display = "none";
-    moreContent.style.display = "none"; // Add this line
+    moreContent.style.display = "none"; 
   
     generalLink.classList.remove("active");
     infoLink.classList.remove("active");
     bmiLink.classList.remove("active");
     healthInfoLink.classList.remove("active");
     socialLinks.classList.remove("active");
-    moreLink.classList.remove("active"); // Add this line
+    moreLink.classList.remove("active"); 
   
     if (optionName === "general") {
       generalContent.style.display = "block";

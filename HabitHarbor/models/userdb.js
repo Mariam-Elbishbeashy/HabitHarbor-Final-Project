@@ -54,7 +54,7 @@ const userSchema = new Schema({
     required: false,
   },
   country: {
-    type: String, // Adjust the type based on your needs (e.g., enum for limited options)
+    type: String,
     required: false,
   },
   health_issues: {
@@ -62,7 +62,7 @@ const userSchema = new Schema({
     required: false,
   },
   goals: {
-    type: [String], // Assuming multiple values are stored as an array of strings
+    type: [String], 
     required: false,
   },
   facebook: {
@@ -85,10 +85,7 @@ const userSchema = new Schema({
     type: String,
     required: false,
   },
-  rating: {
-    type: Number,
-    required: false,
-  },
+ 
 }, { timestamps: true });
 
 const Userdb = mongoose.model('userdb', userSchema);

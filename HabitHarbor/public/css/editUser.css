@@ -216,20 +216,19 @@ body {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333; /* Adjust color as needed */
-    border-bottom: 2px solid #CAF746; /* Highlight with a bottom border */
+    color: #333; 
+    border-bottom: 2px solid #CAF746; 
     padding-bottom: 5px;
   }
   
-/* Checkboxes */
 input[type="checkbox"] {
-    appearance: none; /* Remove default appearance */
+    appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #ccc; /* Border color */
-    border-radius: 5px; /* Rounded corners */
+    border: 2px solid #ccc; 
+    border-radius: 5px; 
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s, border-color 0.3s;
@@ -237,57 +236,55 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-    background-color: #CAF746; /* Background color when checked */
-    border-color: #CAF746; /* Border color when checked */
+    background-color: #CAF746; 
+    border-color: #CAF746; 
 }
 
-/* Custom checkmark SVG */
 input[type="checkbox"]::before {
     content: "";
     display: inline-block;
     position: absolute;
-    width: 8px; /* Width of the checkmark */
-    height: 16px; /* Height of the checkmark */
+    width: 8px; 
+    height: 16px; 
     border-style: solid;
     border-color: transparent;
-    border-width: 0 2px 2px 0; /* Styling the checkmark as an angled line */
-    transform: rotate(45deg); /* Rotating the line to form a checkmark */
-    top: 50%; /* Adjust position vertically */
-    left: 50%; /* Adjust position horizontally */
-    transform-origin: center; /* Ensure rotation is centered */
-    transform: translate(-50%, -50%) rotate(45deg); /* Correct the position and rotate */
+    border-width: 0 2px 2px 0; 
+    transform: rotate(45deg); 
+    top: 50%; 
+    left: 50%; 
+    transform-origin: center; 
+    transform: translate(-50%, -50%) rotate(45deg); 
 }
 
-/* Adjust the appearance when checked */
 input[type="checkbox"]:checked::before {
-    border-color: black; /* Color of the checkmark */
+    border-color: black; 
 }
 
 
   /* Radio buttons */
   input[type="radio"] {
-    appearance: none; /* Remove default appearance */
+    appearance: none; 
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #ccc; /* Border color */
-    border-radius: 50%; /* Circle shape */
+    border: 2px solid #ccc; 
+    border-radius: 50%; 
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s, border-color 0.3s;
   }
   
   input[type="radio"]:checked {
-    background-color: #CAF746; /* Background color when checked */
-    border-color: #CAF746; /* Border color when checked */
+    background-color: #CAF746; 
+    border-color: #CAF746; 
   }
   
   input[type="number"] {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    width: calc(100% - 20px); /* Adjust width as needed */
+    width: calc(100% - 20px); 
     font-size: 20px;
     box-sizing: border-box;
     outline: none;
@@ -302,7 +299,7 @@ input[type="tel"] {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    width: calc(100% - 20px); /* Adjust width as needed */
+    width: calc(100% - 20px); 
     font-size: 20px;
     box-sizing: border-box;
     outline: none;
@@ -319,7 +316,7 @@ select#country {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    width: calc(100% - 20px); /* Adjust width as needed */
+    width: calc(100% - 20px); 
     font-size: 20px;
     box-sizing: border-box;
     outline: none;
@@ -359,7 +356,7 @@ select#country {
     margin-bottom: 10px;
 }
 .profile-image-preview {
-    width: 100px; /* Adjust as needed */
+    width: 100px; 
     height: auto;
     margin-bottom: 10px;
 }

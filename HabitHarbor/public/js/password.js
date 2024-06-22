@@ -14,7 +14,6 @@ function showPassword(inputId, checkboxId) {
   function validateCurrentPassword() {
     const currentPasswordInput = document.getElementById('currentPassword').value;
 
-    // AJAX request to validate current password
     fetch('/validateCurrentPassword', {
         method: 'POST',
         headers: {
@@ -25,17 +24,14 @@ function showPassword(inputId, checkboxId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Password is valid, clear error message if any
             document.getElementById('currentPasswordError').textContent = '';
         } else {
-            // Password is not valid, show error message
             document.getElementById('currentPasswordError').textContent = 'Incorrect current password';
         }
     })
     .catch(error => console.error('Error:', error));
 }
 
-// Event listener for current password input
 document.getElementById('currentPassword').addEventListener('blur', validateCurrentPassword);
 
 function validateNewPassword() {
@@ -49,7 +45,6 @@ function validateNewPassword() {
     }
 }
 
-// Event listener for new password input
 document.getElementById('newPassword').addEventListener('blur', validateNewPassword);
 
 function validateConfirmPassword() {
@@ -63,5 +58,4 @@ function validateConfirmPassword() {
     }
 }
 
-// Event listener for confirm password input
 document.getElementById('confirmPassword').addEventListener('blur', validateConfirmPassword);

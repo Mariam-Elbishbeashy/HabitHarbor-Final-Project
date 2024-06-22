@@ -12,7 +12,7 @@ function starRating() {
                     stars[j].style.color = "#e4e4e4";
                 }
             }
-            ratingInput.value = i + 1; // Update hidden input value
+            ratingInput.value = i + 1; 
             emoji.style.transform = `translateX(-${i * 100}px)`;
         };
     }

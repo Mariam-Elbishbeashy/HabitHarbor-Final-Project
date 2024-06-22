@@ -19,7 +19,7 @@
         <div class="main">
             <form id="post-form"  method="post" enctype="multipart/form-data" action="/posts/saveposts">
                 <div class="creating-posts">
-                    <img src="./images/profile-pic.png" alt="your profile pic" class="your-profile-pic"/>
+                    <img src="/uploads/<%= user.Image %>" alt="your profile pic" class="your-profile-pic"/>
                     <textarea placeholder="What's on your mind?" class="input-field" name="text"></textarea>
                     <input type="file" id="image-input" name="image" accept="image/*" style="display:none"/>
                     <label for="image-input" id="images-btn">

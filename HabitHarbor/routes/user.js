@@ -10,7 +10,7 @@ userRoutes.use('/uploads', express.static('uploads'));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads'); // Ensure 'images' folder exists and is writable
+    cb(null, 'uploads'); 
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 10 // 10 MB file size limit
+    fileSize: 1024 * 1024 * 10 
   },
   fileFilter: function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -44,31 +44,30 @@ userRoutes.post('/login', async (req, res) => {
 })
 userRoutes.post('/home', async (req, res) => {
   try {
-    const { Email, Password } = req.body; // Destructure Email and Password from req.body
+    const { Email, Password } = req.body; 
 
-    // Find the user in the database
     const user = await Users.findOne({ Email: Email });
 
     if (user) {
       if (user.Password === Password) {
         
-        req.session.user = user; // Store user data in session
+        req.session.user = user; 
         console.log("created",user.id);
         if (user.DataType === "admin") {
-          // Admin user logic
-          res.redirect("/admin"); // Redirect to admin home page
+         
+          res.redirect("/admin"); 
         } else if (user.DataType === "user") {
-          // Regular user logic
-          res.redirect("/home"); // Redirect to regular user home page
+          
+          res.redirect("/home"); 
         } else {
-          // Handle unexpected DataType (optional)
+          
           res.redirect("/home");
         }
       } else {
         res.json("The username or password is incorrect");
       }
     } else {
-      res.status(404).json("User not found"); // Return 404 if user is not found
+      res.status(404).json("User not found"); 
     }
   } catch (err) {
     console.error("Error finding user:", err);
@@ -92,7 +91,7 @@ userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res)
 
   try {
     if (req.file) {
-      updateData.Image = req.file.filename; // Save the new image filename
+      updateData.Image = req.file.filename; 
     }
 
     const updatedUser = await Users.findOneAndUpdate(
@@ -105,8 +104,8 @@ userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res)
       return res.status(404).send('User not found.');
     }
 
-    req.session.user = updatedUser; // Update session with new user data
-    res.redirect("/user"); // Redirect to user profile page after update
+    req.session.user = updatedUser; 
+    res.redirect("/user"); 
   } catch (err) {
     console.error('Error updating user:', err);
 
@@ -118,6 +117,71 @@ userRoutes.put('/editUser/:id', upload.single('profile_image'), async (req, res)
   }
 });
 
+userRoutes.get('/user', async (req, res) => {
+  try {
+    const users = await Users.find();
+    res.render('user', { arr: users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving data');
+  }
+});
+
+userRoutes.get('/search', async (req, res) => {
+  const searchKey = req.query.key;
+  try {
+    const data = await Resource.find({
+      "$or": [
+        { Category: { $regex: searchKey, $options: 'i' } }
+      ]
+    });
+    res.render('resources', { data });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+userRoutes.get('/editUser', async (req, res) => {
+  try {
+    const users = await Users.find();
+    res.render('editUser', { arr: users });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving data');
+  }
+});
+
+
+
+userRoutes.post('/password', async (req, res) => {
+  try {
+      const { currentPassword, newPassword, confirmPassword } = req.body;
+      const userId = req.session.user._id; 
+  
+      const user = await Users.findById(userId);
+
+      if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+      }
+
+      if (currentPassword !== user.Password) {
+          return res.status(400).json({ success: false, message: 'Current password is incorrect' });
+      }
+
+      if (newPassword !== confirmPassword) {
+          return res.status(400).json({ success: false, message: 'New password and confirm password do not match' });
+      }
+
+      user.Password = newPassword;
+      await user.save();
+
+      res.status(200).json({ success: true, message: 'Password updated successfully' });
+
+  } catch (error) {
+      console.error('Error updating password:', error);
+      res.status(500).json({ success: false, message: 'Failed to update password' });
+  }
+});
 
 
 module.exports = userRoutes;

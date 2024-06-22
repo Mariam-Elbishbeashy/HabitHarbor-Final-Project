@@ -9,10 +9,8 @@ function previewImage(event) {
 }
 
 function validateForm() {
-    // Reset all error messages
     clearErrors();
 
-    // Fetch form inputs
     var firstname = document.getElementById('firstname').value.trim();
     var lastname = document.getElementById('lastname').value.trim();
     var username = document.getElementById('username').value.trim();
@@ -28,10 +26,8 @@ function validateForm() {
     var twitter = document.getElementById('twitter').value.trim();
     var linkedin = document.getElementById('linkedin').value.trim();
 
-    // Validation flags
     var isValid = true;
 
-    // Check required fields
     if (firstname === '') {
         setError('firstnameError', 'First Name cannot be empty.');
         isValid = false;
@@ -85,7 +81,6 @@ function validateForm() {
         isValid = false;
     }
 
-    // Optional fields (social links) validation as URLs
     if (facebook !== '' && !isValidFacebookUrl(facebook)) {
         setError('facebookError', 'Enter a valid URL for Facebook.');
         isValid = false;
@@ -106,7 +101,6 @@ function validateForm() {
         isValid = false;
     }
 
-    // Display a pop-up if validation fails
     if (!isValid) {
         alert('Please correct the errors in the form.');
     }
@@ -117,12 +111,11 @@ function validateForm() {
 function clearErrors() {
     var errors = document.getElementsByClassName('error');
     for (var i = 0; i < errors.length; i++) {
-        errors[i].innerHTML = ''; // Clear the error message
+        errors[i].innerHTML = ''; 
     }
 }
 
 
-// Function to set error message
 function setError(id, errorMessage) {
     var element = document.getElementById(id);
     if (element) {
@@ -130,37 +123,30 @@ function setError(id, errorMessage) {
     }
 }
 
-// Function to validate email using regex
 function isValidEmail(email) {
-    // Regular expression for basic email validation
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
-// Function to validate URL for Facebook
+
 function isValidFacebookUrl(url) {
-    // Regular expression for Facebook URL validation
     var facebookRegex = /^(https?:\/\/)?(www\.)?(facebook|fb)\.com\/[a-zA-Z0-9(\.\?)?]/;
     return facebookRegex.test(url);
 }
 
-// Function to validate URL (generic)
 function isValidUrl(url) {
-    // Regular expression for URL validation
     var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(url);
 }
 
 function isValidPhoneNumber(phone) {
-    // Regular expression to match digits and optional '+' sign at the start
     var phoneRegex = /^\+?\d+$/;
     return phoneRegex.test(phone);
 }
 
 
-// Event listener for form submission
 var form = document.getElementById('editForm');
 form.addEventListener('submit', function(event) {
     if (!validateForm()) {
-        event.preventDefault(); // Prevent form submission if validation fails
+        event.preventDefault(); 
     }
 });
