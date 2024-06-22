@@ -24,6 +24,6 @@ const activityRecordsSchema = new mongoose.Schema({
     }
 });
 
-const ActivityRecordsdb = mongoose.model('activitiesRecordsdb', activityRecordsSchema);
+const ActivityRecordsdb = mongoose.model('activityRecordsdb', activityRecordsSchema);
 
 module.exports = ActivityRecordsdb;

@@ -1,4 +1,5 @@
 <div class="sidebar">
+   
     <div class="profile">
         <div class="profile-title"><h2 id="profile-title-h2">Profile</h2></div>
         <div class="profile-picture centered">
@@ -11,66 +12,63 @@
         <div class="height-value centered">--</div>
         <div class="weight-value centered">--</div>
     </div>
-    <div class="calendar"> 
-        <div class="datepicker-top">
-            <div class="month-selector">
-                <button class="arrow"><i class="bi bi-caret-left-fill"></i> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-                    </svg>
-                </button>
-
-                <span class="month-name">December 2020</span>
-                <button class="arrow"><i class="bi bi-caret-right-fill"></i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                    </svg>
-                </button>
-            </div>
+    
+    <div class="wrapper">
+        <header>
+          <p class="current-date">December</p>
+          <div class="icon">
+            <span id="prev" class="material-symbols-rounded">chevron_left</span>
+            <span id="next" class="material-symbols-rounded">chevron_right</span>
+          </div>
+        </header>
+        <div class=" calendar">
+          <ul class="weeks">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul class="days">
+            <li>30</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>30</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+            <li>21</li>
+            <li>22</li>
+            <li>23</li>
+            <li>24</li>
+            <li>25</li>
+            <li>26</li>
+            <li>27</li>
+            <li>28</li>
+            <li>29</li>
+            <li>30</li>
+            <li>31</li>
+            <li>1</li>
+          </ul>
         </div>
-        <div class="datepicker-calendar">
-            <span class="day">Mo</span>
-            <span class="day">Tu</span>
-            <span class="day">We</span>
-            <span class="day">Th</span>
-            <span class="day">Fr</span>
-            <span class="day">Sa</span>
-            <span class="day">Su</span>
-            <button class="date faded">30</button>
-            <button class="date">1</button>
-            <button class="date">2</button>
-            <button class="date">3</button>
-            <button class="date">4</button>
-            <button class="date">5</button>
-            <button class="date">6</button>
-            <button class="date">7</button>
-            <button class="date">8</button>
-            <button class="date">9</button>
-            <button class="date">10</button>
-            <button class="date">11</button>
-            <button class="date">12</button>
-            <button class="date">13</button>
-            <button class="date">14</button>
-            <button class="date">15</button>
-            <button class="date">16</button>
-            <button class="date">17</button>
-            <button class="date">18</button>
-            <button class="date">19</button>
-            <button class="date">20</button>
-            <button class="date">21</button>
-            <button class="date">22</button>
-            <button class="date">23</button>
-            <button class="date">24</button>
-            <button class="date">25</button>
-            <button class="date">26</button>
-            <button class="date">27</button>
-            <button class="date">28</button>
-            <button class="date">29</button>
-            <button class="date">30</button>
-            <button class="date">31</button>
-            <button class="date faded">1</button>
-            <button class="date faded">2</button>
-            <button class="date faded">3</button>
-        </div>
-    </div>
+      </div>
     <div class="badges-title">
         <h2 id="badge-title">Badges</h2>
         <i class="bi bi-plus-lg clickable" id="plus-badge"></i>
@@ -94,3 +92,58 @@
         </button>
     </div>
 </div>
+<script>
+    const daysTag = document.querySelector(".days"),
+    currentDate = document.querySelector(".current-date"),
+    prevNextIcon = document.querySelectorAll(".icon span");
+    
+    // getting new date, current year and month
+    let date = new Date(),
+    currYear = date.getFullYear(),
+    currMonth = date.getMonth();
+    currDay = date.getDay;
+    // storing full name of all months in array
+    const months = ["January", "February", "March", "April", "May", "June", "July",
+                  "August", "September", "October", "November", "December"];
+    
+    const renderCalendar = () => {
+        let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+        lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+        lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+        lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+        let liTag = "";
+    
+        for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;        }
+
+        for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+            // adding active class to li if the current day, month, and year matched
+            let isToday = i === currDay && currMonth === new Date().getMonth() 
+                         && currYear === new Date().getFullYear() ? "active" : "inactive";
+            liTag += `<li class="${isToday}">${i}</li>`;
+        }
+    
+        for (let i = lastDayofMonth; i < 1; i++) { // creating li of next month first days
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+        }
+        currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+        daysTag.innerHTML = liTag;
+    }
+    renderCalendar();
+    
+    prevNextIcon.forEach(icon => { // getting prev and next icons
+        icon.addEventListener("click", () => { // adding click event on both icons
+            // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+            currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+    
+            if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                // creating a new date of current year & month and pass it as date value
+                date = new Date(currYear, currMonth, new Date().getDate());
+                currYear = date.getFullYear(); // updating current year with new date year
+                currMonth = date.getMonth(); // updating current month with new date month
+            } else {
+                date = new Date(); // pass the current date as date value
+            }
+            renderCalendar(); // calling renderCalendar function
+        });
+    });</script>

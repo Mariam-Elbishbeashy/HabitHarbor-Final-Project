@@ -37,9 +37,7 @@ function toggle(component, clickedBtn) {
     });
 }
 
-function updateTotalHabits(){
-    const usernameDiv = document.querySelector('.square-row');
-    const username = usernameDiv.getAttribute('username');
+function updateTotalHabits(username){
     document.addEventListener("DOMContentLoaded", function() {
         fetch(`/analysis/countHabits/${username}`)
         .then(response => response.json())
@@ -75,9 +73,7 @@ function fetchUserHabits(username) {
         .catch(error => console.error('Error fetching user habits:', error));
 }
 
-function fetchTotalHabitsPerMonth() {
-    const usernameDiv = document.querySelector('.square-row');
-    const username = usernameDiv.getAttribute('username');
+function fetchTotalHabitsPerMonth(username) {
 
     fetch(`/analysis/totalHabitsPerMonth/${username}`)
     .then(response => response.json())
@@ -89,7 +85,7 @@ function fetchTotalHabitsPerMonth() {
         // Function to convert month number to name
         function getMonthName(month) {
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return months[month - 1]; // Month number is 1-based in Date object, adjust if needed
+            return months[month - 1]; 
         }
         
         function drawChart() {

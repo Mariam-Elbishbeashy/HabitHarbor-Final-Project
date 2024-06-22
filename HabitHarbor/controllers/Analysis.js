@@ -47,8 +47,25 @@ const getTotalHabitsPerMonth = (req, res) => {
         res.status(500).send('Error fetching total habits per month');
     });
 };
+const getHabitsByUserAndDate = (req, res) => {
+    const { username, month, day } = req.params;
+
+    if (!month || !day) {
+        return res.status(400).send('Month and day are required');
+    }
+
+    ActivityRecords.find({ username: username, monthOfCompletion: parseInt(month), dayOfCompletion: parseInt(day) })
+        .then(habits => {
+            res.json(habits);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).send('Error fetching user habits for the specified date');
+        });
+};
 module.exports = {
     countUserHabits, 
     getUserHabits,
-    getTotalHabitsPerMonth
+    getTotalHabitsPerMonth,
+    getHabitsByUserAndDate
 };

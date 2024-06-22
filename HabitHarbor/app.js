@@ -17,9 +17,9 @@ const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
 
 //importing routes
-const adminRoutes = require('./routes/admin')
+const adminRoutes = require('./routes/admin');
 const indexRoutes = require('./routes/index');
-
+const analysisRoutes = require('./routes/analysisRoute');
 // express app
 const app = express();
 const port = 3000;
@@ -74,6 +74,7 @@ app.use((req, res, next) => {
  app.use("/", userRoutes);
  app.use("/", indexRoutes);
  app.use("/", adminRoutes);
+ app.use("/", analysisRoutes);
 
 //get requests
 app.get('/home', (req, res) => {
@@ -99,7 +100,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/analysis', (req, res) => {
-  res.render('analysis');
+  res.render('analysis',{user: req.session.user});
 });
 
 app.get('/login', (req, res) => {

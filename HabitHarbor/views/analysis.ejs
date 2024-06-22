@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 </head>
 <body>
     <div class="container">
@@ -44,8 +45,8 @@
             <br>
             <div class = "content">
                 <div class = "analysis">
-                    <div class = "square-row" username = "<%= user.Username %>">
-                        <div class = 'square' onload="updateTotalHabits()">
+                    <div class = "square-row">
+                        <div class = 'square' onload="updateTotalHabits('Ahmed2004')">
                             
                             <p style = "color: white;" class = "square-text">Total Habits</p>
                             <p class = "square-text" id = "num">0</p>
@@ -53,17 +54,19 @@
                         </div>
                         
 
-                        <div class = 'square1' onload = "fetchUserHabits(this.parentNode.getAttribute('username'))">
+                        <div class = 'square1' onload = "fetchUserHabits('Ahmed2004')">
 
                             <p style = "font-style: black;" class = "square-text">Chart</p>
-                            <div id="donut_chart" style="width: 120%; height: auto;"></div>
+                            <iframe style="background: #FFFFFF;border: none;border-radius: 20px;" width="200" height="200" src="https://charts.mongodb.com/charts-habitharbordb-oqwwulr/embed/charts?id=66758eb7-67e0-4b66-8d17-0e07ad1f59a0&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                            <!--<div id="donut_chart" style="width: 120%; height: auto;"></div>-->
                         </div>
                     
                     </div>
-                    <div class = 'square2' onload = "fetchTotalHabitsPerMonth()">
+                    <div class = 'square2' onload = "fetchTotalHabitsPerMonth('Ahmed2004')">
             
                         <p style = "font-style: black;" class = "square-text">Habits/Month</p>
-                        <div id="line_chart" style="width: 150%; height: auto;"></div>
+                        <iframe style="background: #FFFFFF;border: none;border-radius: 20px;" width="500" height="280" src="https://charts.mongodb.com/charts-habitharbordb-oqwwulr/embed/charts?id=66774fa6-0cb9-432d-8a6f-9c11c04c37d4&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
+                        <!--<div id="line_chart" style="width: 150%; height: auto;"></div>-->
                 
                     </div>
                 </div>
@@ -143,24 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="activity-container">
-                            <div class="activity activity-fourh">
-                                <div class="front">Add your Custom challenge</div>
-                                <div class="back">
-        
-                                    <div class="daily-plus-container">
-                                        <button class="plus" onclick="dailyValidate()">
-                                            <i class="bi bi-plus-lg clickable" id="daily-plus-btn"></i>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <input type="text" placeholder="Type a title here ..." class="custom-input" id="input-title">
-                                    <textarea placeholder="type the challenge here ..." class="custom-input" id="input-content"></textarea>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="ttitle">
                         <h2>Weekly Challenges</h2>
@@ -195,22 +181,6 @@
                                 <div class="progress">20%</div>
                             </div>
                         </div>
-        
-                        <div class="activity-container">
-                            <div class="wactivity wactivity-four">
-                                <div class="wchallenge-content">
-                                    Add Weekly challenge
-                                    <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>        
-                                </div>
-                                <button class="plus" onclick="weeklyMonthlyValidate()">
-                                    <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                    </svg>
-                                </button>
-                                
-                            </div>
-                        </div>
                     </div>
                     <div class="Title">
                         <h2>Monthly Challenges</h2>
@@ -238,20 +208,6 @@
                                 </div>
                             </div>
                         </div>
-        
-                        <div class="activity-container">
-                            <div class="mactivity activity3">
-                                <div class="mchallenge-content">
-                                    Add Monthly challenge
-                                    <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>
-                                </div>
-                            <button class="plus">
-                                <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                     </div>
                     <div class="footer"></div>
@@ -261,10 +217,8 @@
 
         <div class="footer"></div>
     </div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="/js/analysis.js"  charset="UTF-8"></script>
-    <script src="/routes/analysisRoute.js" charset="UTF-8"></script>
-    <script src="/scripts/home.js" charset="UTF-8"></script> 
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/analysis.js" charset="UTF-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
