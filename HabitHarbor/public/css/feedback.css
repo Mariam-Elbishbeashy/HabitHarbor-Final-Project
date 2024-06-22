@@ -292,3 +292,27 @@ input[type="submit"] {
     background-color: #689f3d;
   }
   
+  @media only screen and (max-width: 390px) {
+    .rate-title {
+      font-size: 20px; 
+  }
+  
+  .rating .fas {
+      font-size: 15px; 
+  }
+
+  label
+  {
+    font-size: 20px;
+  }
+  button, input[type="submit"] {
+    margin-bottom: 10px; 
+    font-size: 16px; 
+}
+
+textarea {
+    padding: 10px; 
+    font-size: 14px; 
+}
+  }
+

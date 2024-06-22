@@ -1045,12 +1045,51 @@ body {
     }
     
     .content {
-      padding: 70px;
+      padding-bottom: 200px;
     }
   
     .checkbox-label {
       font-size: 15px;
       }
+
+      .edit-btn {
+        position: absolute;
+        bottom: 85px; 
+        right: 150px; 
+      }
+      
+      #country {
+        font-size: 15px;
+      }
+
+      .widget {
+        max-width: 90px; 
+      }
+
+      #widget-width {
+        height: 150px;
+        padding-bottom: 0px;
+      }
+
+      .widget-image img {
+        width: 90px;
+        height: 150px;
+      }
+
+      .widget-text h3 {
+        font-size: 15px;
+        padding-left: 20px;
+      }
+      
+      .widget-text p {
+        font-size: 12px; 
+        padding-left: 20px;
+      }
+
+      .widget-image {
+        height: 150px; 
+      }
+      
   }
   
   
