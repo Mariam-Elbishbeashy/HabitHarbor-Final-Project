@@ -53,53 +53,6 @@ const savePost = (req, res) => {
             });
     });
 };
-// function removeDuplicates(user) {
-//     // Check if user.customChallenge exists and is an array
-//     if (!user.customChallenge || !Array.isArray(user.customChallenge)) {
-//         return user; // Return user object as is if customChallenge is not valid
-//     }
-
-//     // Filter out duplicates based on unique identifiers (e.g., _id)
-//     user.customChallenge = user.customChallenge.filter((challenge, index, self) =>
-//         index === self.findIndex((t) => (
-//             t._id === challenge._id
-//         ))
-//     );
-
-//     return user;
-// }
-
-const customActivity = (req, res) => {
-    const { id } = req.params;
-    const { Title, Content } = req.body;
-
-    Users.findByIdAndUpdate(
-        id,
-        { $push: { customChallenge: { Title, Content } } },
-        { new: true }
-    )
-    .then(updatedUser => {
-        Activities.find()
-        .then(activities => {
-            console.log("Custom activity added successfully");
-
-            // Clear input fields after successful submission
-            req.body.Title = '';
-            req.body.Content = '';
-            // const uniqueActivities = removeDuplicates(user);
-            // console.log(uniqueActivities);
-             res.redirect("/home");
-        })
-        .catch(err => {
-            console.error("Failed to fetch activities:", err);
-            res.status(500).json({ error: 'Failed to fetch activities' });
-        });
-    })
-    .catch(err => {
-        console.error("Error saving custom activity:", err);
-        res.status(500).send("Error saving custom activity");
-    });
-};
 
 
 
@@ -156,11 +109,165 @@ const getResources = async (req, res) => {
     } catch (err) {
       res.status(500).send(err);
     }
-  };
+};
+
+const selectActivity = async (req, res) => {
+    try {
+        const user = req.session.user;
+        if (!user) {
+            return res.status(401).send('User not logged in');
+        }
+        
+        const userBMI = ((user.Weight/(user.Height * user.Height ))*10000);
+        const activities = await Activities.find();
+        let selectedPhysicalActivity = null;
+        let selectedNutritionActivity = null;
+        let selectedWellBeingActivity = null;
+        for (let i = 0; i < activities.length; i++) {
+            if (activities[i].category === "physical" &&
+                activities[i].bmiRange.min <= userBMI && activities[i].bmiRange.max >= userBMI &&
+                activities[i].ageRange.min <= user.age && activities[i].ageRange.max >= user.age) {
+                selectedPhysicalActivity = activities[i];
+                break;
+            }
+        }
+        for (let j = 0; j < activities.length; j++){
+            if (activities[j].category === "nutrition" &&
+                activities[j].bmiRange.min <= userBMI && activities[j].bmiRange.max >= userBMI &&
+                activities[j].ageRange.min <= user.age && activities[j].ageRange.max >= user.age) {
+                selectedNutritionActivity = activities[j];
+                break;
+            }
+        }
+        for (let k = 0; k < activities.length; k++){
+            if (activities[k].category === "well-being" &&
+                activities[k].bmiRange.min <= userBMI && activities[k].bmiRange.max >= userBMI &&
+                activities[k].ageRange.min <= user.age && activities[k].ageRange.max >= user.age) {
+                selectedWellBeingActivity = activities[k];
+                break;
+            }
+        }
+        const badges = await Badgesdb.find();
+        res.render("home", { selectedPhysicalActivity, selectedNutritionActivity, selectedWellBeingActivity, badges, user: req.session.user });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Failed to select an activity' });
+    }
+};
+
+// Function to add and display custom activity
+const AddcustomActivity = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).send('User not logged in');
+    } 
+    
+    const { id } = req.params;
+    const { Title, Content } = req.body;
+    const Type = "daily";
+    if (Title==='' || Content===''){
+        return;
+    }
+
+    try {
+        const updatedUser = await Users.findByIdAndUpdate(
+            id,
+            { $push: { customChallenge: { Type, Title, Content } } },
+            { new: true }
+        );
+
+        // Update session user
+        req.session.user = updatedUser;
+
+        // Fetch all activities
+        const activities = await Activities.find();
+
+        console.log("Custom activity added successfully");
+
+        res.redirect("/home");
+    } catch (err) {
+        console.error("Error saving custom activity:", err);
+        res.status(500).send("Error saving custom activity");
+    }
+};
+const AddcustomWeeklyActivity = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).send('User not logged in');
+    } 
+    
+    const { id } = req.params;
+    const { Content } = req.body;
+    const Type = "weekly";
+    const Progress = 0;
+    if ( Content===''){
+        console.log("empty");
+        return;
+    }
+
+    try {
+        const updatedUser = await Users.findByIdAndUpdate(
+            id,
+            { $push: { customChallenge: { Type, Content, Progress } } },
+            { new: true }
+        );
+
+        // Update session user
+        req.session.user = updatedUser;
+
+        // Fetch all activities
+        const activities = await Activities.find();
+
+        console.log("Custom activity added successfully");
+
+        res.redirect("/home");
+    } catch (err) {
+        console.error("Error saving custom activity:", err);
+        res.status(500).send("Error saving custom activity");
+    }
+};
+const AddcustomMonthlyActivity = async (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).send('User not logged in');
+    } 
+    
+    const { id } = req.params;
+    const { Content } = req.body;
+    const Type = "monthly";
+    const Progress = 0;
+    if ( Content===''){
+        console.log("empty");
+        return;
+    }
+
+    try {
+        const updatedUser = await Users.findByIdAndUpdate(
+            id,
+            { $push: { customChallenge: { Type, Content, Progress } } },
+            { new: true }
+        );
+
+        // Update session user
+        req.session.user = updatedUser;
+
+        // Fetch all activities
+        const activities = await Activities.find();
+
+        console.log("Custom activity added successfully");
+
+        res.redirect("/home");
+    } catch (err) {
+        console.error("Error saving custom activity:", err);
+        res.status(500).send("Error saving custom activity");
+    }
+};
 module.exports = {
    getResources,
    savePost,
    commentPost,
    getPosts,
-   customActivity
+   AddcustomActivity,
+   checkCustomActivity,
+   addActivityToUser,
+   selectActivity,
+   AddcustomWeeklyActivity,
+   AddcustomMonthlyActivity
 };

@@ -8,6 +8,13 @@ indexRoutes.post('/posts/saveposts', UserController.savePost);
 indexRoutes.post('/posts/:id/comment', UserController.commentPost);
 indexRoutes.get('/posts', UserController.getPosts);
 indexRoutes.get('/resources', UserController.getResources);
-indexRoutes.post('/home/:id/custom', UserController.customActivity);
+indexRoutes.get('/home', UserController.selectActivity);
+indexRoutes.post('/home/:id/custom', UserController.AddcustomActivity);
+indexRoutes.post('/home/:id/weeklycustom', UserController.AddcustomWeeklyActivity);
+indexRoutes.post('/home/:id/monthlycustom', UserController.AddcustomMonthlyActivity);
 
+// add activity to user's array of activities
+indexRoutes.post('/home/addactivitytouser', UserController.addActivityToUser);
+// update the user custom activity array when an activity is checked (Done:true)
+indexRoutes.put('/home/checkcustomactivity', UserController.checkCustomActivity);
 module.exports = indexRoutes;

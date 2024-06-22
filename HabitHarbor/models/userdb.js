@@ -1,12 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const customSchema = new Schema({
+  Type: {
+    type: String,
+    required: false,
+  },
   Title: {
     type: String,
     required: false,
   },
   Content: {
     type: String,
+    required: false,
+  },
+  Done: {  //for daily activities
+    type: Boolean,
+    required: false,
+  },
+  Progress: { //for weekely & monthly activities
+    type: Number,
     required: false,
   },
 }, { timestamps: true });
@@ -64,6 +76,11 @@ const userSchema = new Schema({
     required: false,
   },
   customChallenge: [customSchema],
+
+  activities: [{
+    type: Schema.Types.ObjectId,
+    ref: 'activitiesdb'
+  }]
   
 }, { timestamps: true });
 

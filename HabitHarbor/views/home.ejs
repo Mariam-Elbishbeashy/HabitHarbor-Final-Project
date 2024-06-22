@@ -15,7 +15,7 @@
         <%- include("partials/header.ejs") %>
         <%- include("partials/sidebar.ejs") %>
         <%- include("partials/navbar.ejs") %>
-        <% const userBMI = ((user.Weight/(user.Height * user.Height ))*10000); %>
+        <!-- const userBMI = ((user.Weight/(user.Height * user.Height ))*10000);  -->
         <div class="main">
             <div class="title">
                 <h2>Daily Challenges</h2>
@@ -39,30 +39,11 @@
                                 </button>
                             </div>
                             <div class="description">
-                                <% 
-                                const now = new Date();
-                                const currentMinute = now.getMinutes();
-                            
-                                let filteredActivities = activities.filter(activity => 
-                                    activity.category === "nutrition" && 
-                                    activity.bmiRange.min <= userBMI && 
-                                    activity.bmiRange.max >= userBMI && 
-                                    activity.ageRange.min <= user.age && 
-                                    activity.ageRange.max >= user.age
-                                );
-                            
-                                if (filteredActivities.length > 0) {
-                                    const index = currentMinute % filteredActivities.length;
-                                    const selectedActivity = filteredActivities[index];
-                                    %>
-                                    <%= selectedActivity.content %>
-                                    <% 
-                                }
-                                %>
+                                <%= selectedNutritionActivity.content %>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
+                                    <input type="checkbox" id="checkbox1" data-user-id="<%= user._id %>" data-activity-id="<%= selectedNutritionActivity._id %>" />
                                     <label for="checkbox1"></label>
                                 </div>
                             </div>
@@ -88,16 +69,11 @@
                                 </button>
                             </div>
                             <div class="description">
-                                <% for (let i=0;i<activities.length;i++){ %>
-                                    <% if(activities[i].category==="physical" && activities[i].bmiRange.min <= userBMI && activities[i].bmiRange.max >= userBMI && activities[i].ageRange.min <= user.age && activities[i].ageRange.max >= user.age){%>
-                                    <%= activities[i].content %>
-                                    <% break %>
-                                     <%}%>
-                                 <% }%>
+                              <%= selectedPhysicalActivity.content %> 
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
-                                    <input type="checkbox" id="checkbox2" />
+                                    <input type="checkbox" id="checkbox2" data-user-id="<%= user._id %>" data-activity-id="<%= selectedWellBeingActivity._id %>" />
                                     <label for="checkbox2"></label>
                                 </div>
                             </div>
@@ -122,16 +98,11 @@
                                 </button>
                             </div>
                             <div class="description">
-                                <% for (let i=0;i<activities.length;i++){ %>
-                                    <% if(activities[i].category==="well-being" && activities[i].bmiRange.min <= userBMI && activities[i].bmiRange.max >= userBMI && activities[i].ageRange.min <= user.age && activities[i].ageRange.max >= user.age){%>
-                                    <%= activities[i].content %>
-                                    <% break %>
-                                     <%}%>
-                                 <% }%>
+                                <%= selectedWellBeingActivity.content %>
                             </div>
                             <div class="checkbox-wrapper">
                                 <div class="round">
-                                    <input type="checkbox" id="checkbox3" />
+                                    <input type="checkbox" id="checkbox3" onclick="updateActivity('<%= user._id %>', '<%= selectedWellBeingActivity._id %>')" />
                                     <label for="checkbox3"></label>
                                 </div>
                             </div>
@@ -139,34 +110,36 @@
                     </div>
                 </div>
                  <% for(let j = 0; j < user.customChallenge.length; j++){ %>
-                <div class="activity-container">
-                    <div class="activity activity-two">
-                        <div class="front">
-                            <%=user.customChallenge[j].Title%>
-                        </div>
+                    <%if(user.customChallenge[j].Type === "daily"){%>
+                    <div class="activity-container">
+                        <div class="activity activity-two">
+                            <div class="front">
+                                <%=user.customChallenge[j].Title%>
+                            </div>
 
-                        <div class="back">
-                            <div>
-                                <button class="trash-btn" onClick="return deleteForm(this);">
-                                    <i class="bi bi-trash"></i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="description">
-                                <%=user.customChallenge[j].Content%>
-                            </div>
-                            <div class="checkbox-wrapper">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox3" />
-                                    <label for="checkbox3"></label>
+                            <div class="back">
+                                <div>
+                                    <button class="trash-btn" onClick="return deleteForm(this);">
+                                        <i class="bi bi-trash"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="description">
+                                    <%=user.customChallenge[j].Content%>
+                                </div>
+                                <div class="checkbox-wrapper">
+                                    <div class="round">
+                                        <input type="checkbox" id="checkbox<%= j + 4 %>" onclick="updateCustomChallenge('<%= user._id %>', '<%= user.customChallenge[j]._id %>')" />
+                                        <label for="checkbox<%= j + 4 %>"></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <%}%>
                 <%}%>
                 <div class="activity-container">
                     <div class="activity activity-fourh">
@@ -221,21 +194,35 @@
                         <div class="progress">20%</div>
                     </div>
                 </div>
-
-                <div class="activity-container">
-                    <div class="wactivity wactivity-four">
-                        <div class="wchallenge-content">
-                            Add Weekly challenge
-                            <textarea placeholder="type here.." class="custom-input" id="custom-activity"></textarea>        
+                <% for(let j = 0; j < user.customChallenge.length; j++){ %>
+                    <%if(user.customChallenge[j].Type==="weekly"){%>
+                        <div class="activity-container">
+                            <div class="wactivity wactivity-three" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
+                                <div class="wchallenge-content"> <%=user.customChallenge[j].Content%> </div>
+                                <button class="activity-btn" id="start-btn">Let's go!!</button>
+                                <button class="activity-btn" id="completion-btn">Day 1</button>
+                                <div class="loader"></div>
+                                <div class="progress"><%=user.customChallenge[j].Progress%>%</div>
+                            </div>
                         </div>
-                        <button class="plus" onclick="weeklyMonthlyValidate(); addWeeklyCustomChallenge()">
-                            <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                            </svg>
-                        </button>
-                        
-                    </div>
+                    <%}%>
+                <%}%>
+                <div class="activity-container">
+                    <form method="post" action="/home/<%= user._id %>/weeklycustom" style="width: 100%;">
+                        <div class="wactivity wactivity-four">
+                            <div class="wchallenge-content">
+                                Add Weekly challenge
+                                <textarea name="Content" placeholder="type here.." class="custom-input" id="custom-activity"></textarea>        
+                            </div>
+                            <button type="submit" class="plus" onclick="weeklyMonthlyValidate(); addWeeklyCustomChallenge()">
+                                <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                </svg>
+                            </button>
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="Title">
@@ -263,19 +250,35 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="activity-container">
-                    <div class="mactivity activity3">
-                        <div class="mchallenge-content">
-                            Add Monthly challenge
-                            <textarea placeholder="type here.." class="custom-input" id="custom-activitym"></textarea>
+                <% for(let j = 0; j < user.customChallenge.length; j++){ %>
+                    <%if(user.customChallenge[j].Type==="monthly"){%>
+                        <div class="activity-container">
+                            <div class="mactivity activity2">
+                                <div class="mactivity activity2" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
+                                    <div class="mchallenge-content"><%=user.customChallenge[j].Content%> </div>
+                                    <button class="activity-btn" id="start-btn">Let's go!!</button>
+                                    <button class="activity-btn" id="completion-btn">Day 1</button>
+                                    <div class="loader"></div>
+                                    <div class="progress"><%=user.customChallenge[j].Progress%>%</div>
+                                </div>
+                            </div>
                         </div>
-                    <button class="plus" onclick="addMonthlyCustomChallenge()">
-                        <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                        </svg>
-                    </button>
+                    <%}%>
+                <%}%>
+                <div class="activity-container">
+                    <form method="post" action="/home/<%= user._id %>/monthlycustom" style="width: 100%;">
+                        <div class="mactivity activity3">
+                            <div class="mchallenge-content">
+                                Add Monthly challenge
+                                <textarea placeholder="type here.." name="Content" class="custom-input" id="custom-activitym"></textarea>
+                            </div>
+                        <button class="plus" type="submit" onclick="addMonthlyCustomChallenge()">
+                            <i class="bi bi-plus-lg clickable" id="plus-btn"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

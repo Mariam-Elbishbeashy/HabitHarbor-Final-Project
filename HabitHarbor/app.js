@@ -44,6 +44,9 @@ mongoose.connect(dbURI)
     const result4 = await Users.insertMany(Userdata);
     console.log(`${result4.length} documents inserted successfully`);
 
+    await Activities.deleteMany({}); 
+    const result5 = await Activities.insertMany(Activitydata);
+    console.log(`${result5.length} documents inserted successfully`);
   
 
     // Start express server after inserting data
@@ -86,9 +89,6 @@ app.get('/home', async (req, res) => {
   }
 });
 
-app.get('/home', (req, res) => {
-  res.render('home',{user:req.session.user});
-});
 
 app.get('/admin', (req, res) => {
   res.render('admin');

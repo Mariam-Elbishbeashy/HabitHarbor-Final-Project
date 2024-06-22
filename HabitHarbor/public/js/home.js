@@ -193,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function () {
 function addDailyCustomChallenge() {
     const title = document.getElementById('input-title').value.trim();
     const content = document.getElementById('input-content').value.trim();
+    if(title === '' || content === ' '){
+        return;
+    }
 
     const newActivityContainer = document.createElement('div');
     newActivityContainer.classList.add('activity-container');
@@ -258,9 +261,6 @@ function addDailyCustomChallenge() {
     const addCustomChallengeContainer = dailyChallengesContainer.querySelector('.activity-container:last-child');
 
     dailyChallengesContainer.insertBefore(newActivityContainer, addCustomChallengeContainer);
-
-    // document.getElementById('input-title').value = '';
-    // document.getElementById('input-content').value = '';
 }
 
 function addWeeklyCustomChallenge() {
@@ -338,8 +338,7 @@ function addWeeklyCustomChallenge() {
 
     weeklyChallengesContainer.insertBefore(newActivityContainer, addWeeklyChallengeContainer);
 
-    // Clear the input field
-    document.getElementById('custom-activity').value = '';
+
 }
 
 function addMonthlyCustomChallenge() {
@@ -403,19 +402,10 @@ function addMonthlyCustomChallenge() {
 
     monthlyChallengesContainer.insertBefore(newActivityContainer, addMonthlyChallengeContainer);
 
-    // Clear the input field
-    document.getElementById('custom-activity').value = '';
+
 }
 
 
-// fetch('/api/activities')
-//         .then(response => response.json())
-//         .then(activities => {
-//             activities.forEach(activity => {
-                
-//             });
-//         })
-//         .catch(err => console.error('Error fetching users:', err));
 
 function logout(){
     window.location.href = "../index.html";
