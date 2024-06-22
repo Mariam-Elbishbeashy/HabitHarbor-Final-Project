@@ -12,9 +12,11 @@ indexRoutes.get('/home', UserController.selectActivity);
 indexRoutes.post('/home/:id/custom', UserController.AddcustomActivity);
 indexRoutes.post('/home/:id/weeklycustom', UserController.AddcustomWeeklyActivity);
 indexRoutes.post('/home/:id/monthlycustom', UserController.AddcustomMonthlyActivity);
+indexRoutes.put('/home/addprogress/:id', UserController.Addprogress);
+indexRoutes.put('/home/addprogressM/:id', UserController.AddprogressM);
 
 // add activity to user's array of activities
-indexRoutes.post('/home/addactivitytouser', UserController.addActivityToUser);
+//indexRoutes.post('/home/addactivitytouser', UserController.addActivityToUser);
 // update the user custom activity array when an activity is checked (Done:true)
-indexRoutes.put('/home/checkcustomactivity', UserController.checkCustomActivity);
+//indexRoutes.put('/home/checkcustomactivity', UserController.checkCustomActivity);
 module.exports = indexRoutes;

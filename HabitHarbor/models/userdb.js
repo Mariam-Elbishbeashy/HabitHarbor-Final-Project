@@ -21,6 +21,10 @@ const customSchema = new Schema({
     type: Number,
     required: false,
   },
+  daysOfProgress: {
+    type: Number,
+    required: false,
+  }
 }, { timestamps: true });
 
 const userSchema = new Schema({

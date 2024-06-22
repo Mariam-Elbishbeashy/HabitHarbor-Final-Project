@@ -705,9 +705,7 @@ h2:nth-child(1) {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.wactivity-three .loader,.wactivity-three .loader::before,.wactivity-three .progress,.wactivity-three #completion-btn{
-    visibility: hidden;
-}
+
 .wactivity-four{
     background-color: #CAF746;
 }
@@ -820,9 +818,7 @@ h2:nth-child(1) {
     color: #CAF746;
     background-color: black;
 }
-.activity2 .loader,.activity2 .loader::before,.activity2 .progress, .activity2 #completion-btn{
-    visibility: hidden;
-}
+
 .mactivity .activity-btn{
    margin-left:215px ;  
 }

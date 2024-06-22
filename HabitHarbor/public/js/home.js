@@ -1,41 +1,35 @@
 //event listener that shows the progress bar after clicking on the start button
+// Event listener that shows the progress bar after clicking on the start button
+// Event listener that shows the progress bar after clicking on the start button
 document.addEventListener("click", function(event) {
-    if (event.target.id === "start-btn") {
+    // Check if the clicked element is a start button with an ID starting with "start-btn-"
+    if (event.target.matches('button[id^="start-btn-"]')) {
         var button = event.target;
+        // Hide the start button
         button.style.display = "none";
-        var activityContainer = button.closest(".wactivity");
-        var activityContainer2 = button.closest(".mactivity");
+
+        // Find the activity container
+        var activityContainer = button.closest(".wactivity") || button.closest(".mactivity");
 
         if (activityContainer) {
             var loader = activityContainer.querySelector(".loader");
             var progress = activityContainer.querySelector(".progress");
-            var completionBtn = activityContainer.querySelector("#completion-btn");
+            var completionBtn = activityContainer.querySelector(".completion-btn");
 
-            loader.style.visibility = "visible";
-            progress.style.visibility = "visible";
-            completionBtn.style.visibility = "visible";
+            // Show the elements
+            if (loader) loader.style.visibility = "visible";
+            if (progress) progress.style.visibility = "visible";
+            if (completionBtn) completionBtn.style.visibility = "visible";
 
             var progressValue = 0;
             activityContainer.style.setProperty("--progress-value", progressValue + "%");
-            progress.innerHTML = progressValue + "%";
-            loader.style.setProperty("--progress-value", progressValue + "%");
-        }
-        else if(activityContainer2){
-            var loader = activityContainer2.querySelector(".loader");
-            var progress = activityContainer2.querySelector(".progress");
-            var completionBtn = activityContainer2.querySelector("#completion-btn");
-
-            loader.style.visibility = "visible";
-            progress.style.visibility = "visible";
-            completionBtn.style.visibility = "visible";
-
-            var progressValue = 0;
-            activityContainer2.style.setProperty("--progress-value", progressValue + "%");
-            progress.innerHTML = progressValue + "%";
-            loader.style.setProperty("--progress-value", progressValue + "%");
+            if (progress) progress.innerHTML = progressValue + "%";
+            if (loader) loader.style.setProperty("--progress-value", progressValue + "%");
         }
     }
 });
+
+
 function dailyValidate() {
     var inputTitle = document.querySelector("#input-title");
     var inputContent = document.querySelector("#input-content");

@@ -166,44 +166,19 @@
                 <h2>Weekly Challenges</h2>
             </div>
             <div class="weekly-challenges">
-
-                <div class="activity-container">
-                    <div class="wactivity wactivity-one" style="--progress-value: 85%;">
-                        <div class="wchallenge-content">Drink 8 cups of water</div>
-                        <button class="activity-btn" id="completion-btn">Day 5</button>
-                        <div class="loader"></div>
-                        <div class="progress">85%</div>
-                    </div>
-                </div>
-
-                <div class="activity-container">
-                    <div class="wactivity wactivity-two" style="--progress-value: 50%;">
-                        <div class="wchallenge-content">Read 30 pages of a book</div>
-                        <button class="activity-btn" id="completion-btn">Day 4</button>
-                        <div class="loader"></div>
-                        <div class="progress">50%</div>
-                    </div>
-                </div>
-
-                <div class="activity-container">
-                    <div class="wactivity wactivity-three" style="--progress-value: 20%;">
-                        <div class="wchallenge-content"> Try a new activity</div>
-                        <button class="activity-btn" id="start-btn">Let's go!!</button>
-                        <button class="activity-btn" id="completion-btn">Day 1</button>
-                        <div class="loader"></div>
-                        <div class="progress">20%</div>
-                    </div>
-                </div>
                 <% for(let j = 0; j < user.customChallenge.length; j++){ %>
                     <%if(user.customChallenge[j].Type==="weekly"){%>
                         <div class="activity-container">
-                            <div class="wactivity wactivity-three" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
-                                <div class="wchallenge-content"> <%=user.customChallenge[j].Content%> </div>
-                                <button class="activity-btn" id="start-btn">Let's go!!</button>
-                                <button class="activity-btn" id="completion-btn">Day 1</button>
-                                <div class="loader"></div>
-                                <div class="progress"><%=user.customChallenge[j].Progress%>%</div>
-                            </div>
+                            <form method="post" action="/home/addprogress/<%=user._id%>?_method=PUT">
+                                <input type="hidden" name="challengeIndex" value="<%= j %>">
+                                <div class="wactivity wactivity-three" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
+                                    <div class="wchallenge-content"> <%=user.customChallenge[j].Content%> </div>
+                                     <%let wholeProgress = Math.round(user.customChallenge[j].Progress)%>
+                                    <button type="submit" class="activity-btn completion-btn">Day <%=user.customChallenge[j].daysOfProgress%></button>
+                                    <div class="loader"></div>
+                                    <div class="progress"><%=wholeProgress%>%</div>
+                                </div>
+                            </form>
                         </div>
                     <%}%>
                 <%}%>
@@ -229,39 +204,21 @@
                 <h2>Monthly Challenges</h2>
             </div>
             <div class="monthly-challenges">
-
-                <div class="activity-container">
-                    <div class="mactivity activity1" style="--progress-value: 90%;">
-                        <div class="mchallenge-content"> Start your day with a healthy breakfast</div>
-                        <button class="activity-btn" id="completion-btn">Day 27</button>
-                        <div class="loader"></div>
-                        <div class="progress">90%</div>
-                    </div>
-                </div>
-
-                <div class="activity-container">
-                    <div class="mactivity activity2">
-                        <div class="mactivity activity2" style="--progress-value: 10%;">
-                            <div class="mchallenge-content"> Write down 5 things you're thankful for </div>
-                            <button class="activity-btn" id="start-btn">Let's go!!</button>
-                            <button class="activity-btn" id="completion-btn">Day 1</button>
-                            <div class="loader"></div>
-                            <div class="progress">10%</div>
-                        </div>
-                    </div>
-                </div>
                 <% for(let j = 0; j < user.customChallenge.length; j++){ %>
                     <%if(user.customChallenge[j].Type==="monthly"){%>
                         <div class="activity-container">
-                            <div class="mactivity activity2">
-                                <div class="mactivity activity2" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
-                                    <div class="mchallenge-content"><%=user.customChallenge[j].Content%> </div>
-                                    <button class="activity-btn" id="start-btn">Let's go!!</button>
-                                    <button class="activity-btn" id="completion-btn">Day 1</button>
-                                    <div class="loader"></div>
-                                    <div class="progress"><%=user.customChallenge[j].Progress%>%</div>
+                            <form method="post" action="/home/addprogressM/<%=user._id%>?_method=PUT">
+                                <input type="hidden" name="challengeIndex" value="<%= j %>">
+                                <div class="mactivity activity2">
+                                    <div class="mactivity activity2" style="--progress-value: <%=user.customChallenge[j].Progress%>%;">
+                                        <div class="mchallenge-content"><%=user.customChallenge[j].Content%> </div>
+                                        <%let wholeProgress = Math.round(user.customChallenge[j].Progress)%>
+                                        <button type="submit" class="activity-btn completion-btn">Day <%=user.customChallenge[j].daysOfProgress%></button>
+                                        <div class="loader"></div>
+                                        <div class="progress"><%=wholeProgress%>%</div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     <%}%>
                 <%}%>

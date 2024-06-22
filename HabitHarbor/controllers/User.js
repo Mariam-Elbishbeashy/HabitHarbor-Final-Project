@@ -197,7 +197,8 @@ const AddcustomWeeklyActivity = async (req, res) => {
     const { id } = req.params;
     const { Content } = req.body;
     const Type = "weekly";
-    const Progress = 0;
+    const daysOfProgress = 1;
+    const Progress = ((daysOfProgress-1)/7)*100 ;
     if ( Content===''){
         console.log("empty");
         return;
@@ -206,7 +207,7 @@ const AddcustomWeeklyActivity = async (req, res) => {
     try {
         const updatedUser = await Users.findByIdAndUpdate(
             id,
-            { $push: { customChallenge: { Type, Content, Progress } } },
+            { $push: { customChallenge: { Type, Content, Progress, daysOfProgress } } },
             { new: true }
         );
 
@@ -232,7 +233,8 @@ const AddcustomMonthlyActivity = async (req, res) => {
     const { id } = req.params;
     const { Content } = req.body;
     const Type = "monthly";
-    const Progress = 0;
+    const daysOfProgress = 1;
+    const Progress = ((daysOfProgress-1)/30)*100 ;
     if ( Content===''){
         console.log("empty");
         return;
@@ -241,7 +243,7 @@ const AddcustomMonthlyActivity = async (req, res) => {
     try {
         const updatedUser = await Users.findByIdAndUpdate(
             id,
-            { $push: { customChallenge: { Type, Content, Progress } } },
+            { $push: { customChallenge: { Type, Content, Progress, daysOfProgress } } },
             { new: true }
         );
 
@@ -259,15 +261,73 @@ const AddcustomMonthlyActivity = async (req, res) => {
         res.status(500).send("Error saving custom activity");
     }
 };
+const Addprogress = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const challengeIndex = req.body.challengeIndex;
+
+        // Find the user by ID
+        const user = await Users.findById(userId);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        // Increment the daysOfProgress for the specific challenge
+        if (user.customChallenge[challengeIndex].Type === "weekly") {
+            user.customChallenge[challengeIndex].daysOfProgress += 1;
+            user.customChallenge[challengeIndex].Progress = ((user.customChallenge[challengeIndex].daysOfProgress - 1) / 7) * 100;
+        }
+
+        // Save the updated user
+        await user.save();
+        req.session.user = user;
+
+        // Redirect or respond as needed
+        res.redirect('/home'); // Adjust the redirect URL as needed
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+};
+const AddprogressM = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const challengeIndex = req.body.challengeIndex;
+
+        // Find the user by ID
+        const user = await Users.findById(userId);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        // Increment the daysOfProgress for the specific challenge
+        if (user.customChallenge[challengeIndex].Type === "monthly") {
+            user.customChallenge[challengeIndex].daysOfProgress += 1;
+            user.customChallenge[challengeIndex].Progress = ((user.customChallenge[challengeIndex].daysOfProgress - 1) / 30) * 100;
+        }
+
+        // Save the updated user
+        await user.save();
+        req.session.user = user;
+
+        // Redirect or respond as needed
+        res.redirect('/home'); // Adjust the redirect URL as needed
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+};
 module.exports = {
    getResources,
    savePost,
    commentPost,
    getPosts,
    AddcustomActivity,
-   checkCustomActivity,
-   addActivityToUser,
    selectActivity,
    AddcustomWeeklyActivity,
-   AddcustomMonthlyActivity
+   AddcustomMonthlyActivity,
+   Addprogress,
+   AddprogressM
 };
