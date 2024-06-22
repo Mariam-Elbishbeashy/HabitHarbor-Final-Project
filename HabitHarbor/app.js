@@ -21,7 +21,7 @@ const indexRoutes = require('./routes/index');
 // express app
 const app = express();
 const port = 3000;
-const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
+const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
@@ -34,9 +34,9 @@ mongoose.connect(dbURI)
     const result2 = await Activities.insertMany(Activitydata);
     console.log(`${result2.length} documents inserted successfully`);
 
-    await Posts.deleteMany({}); 
-    const result3 = await Posts.insertMany(Postdata);
-    console.log(`${result3.length} documents inserted successfully`);
+    //await Posts.deleteMany({}); 
+    //const result3 = await Posts.insertMany(Postdata);
+    //console.log(`${result3.length} documents inserted successfully`);
 
     // Start express server after inserting data
     app.listen(port, () => {
@@ -52,9 +52,9 @@ app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
    secret: 'Your_Secret_Key',
-  resave:false,
+  resave:true,
 saveUninitialized:false,
-cookie:{maxAge:60000} }));
+cookie:{maxAge:7200000} }));
 app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {

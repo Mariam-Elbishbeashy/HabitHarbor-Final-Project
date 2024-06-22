@@ -6,23 +6,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <!-- Google Fonts  -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/foregtpass.css">
 
-    <title>Forgot Password UI Using CSS - @code.scientist x @codingtorque</title>
+    <title>Forgot Password form</title>
 </head>
 
 <body>
-    <div class="card">
+    <form method="post" action="/forgetpass">
+    <div class="card" >
         <h2>Forgot Password?</h2>
-        <p>You can reset your Password here</p>
-        <input type="text" class="passInput" placeholder="Email address">
-        <button>Send My Password</button>
+        <p>Enter your email address and new password below to reset your password:</p>
+        <input type="email" id="emailInput" class="passInput" placeholder="Email address " name="Email">
+        <input type="password" id="newPassInput" class="passInput" placeholder="New Password" name="Password">
+        <button type="submit"  onsubmit="resetPassword()">Reset password</button>
     </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/forgetpassAJAX.js" ></script>
 </body>
 
 </html>

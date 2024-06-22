@@ -2,7 +2,7 @@ const express = require('express');
 const userRoutes = express.Router();
 const UserController = require('../controllers/User');
 const Users=require('../models/userdb');
-
+//signup
 userRoutes.post('/login', async (req, res) => {
   try {
     console.log(req.body);
@@ -14,6 +14,7 @@ userRoutes.post('/login', async (req, res) => {
     res.status(500).send("Failed to save user");
   }
 })
+//login
 userRoutes.post('/home', async (req, res) => {
   try {
     const { Email, Password } = req.body; // Destructure Email and Password from req.body
@@ -57,4 +58,30 @@ userRoutes.post('/logout', (req, res) => {
     res.redirect('/');
   });
 });
+
+// POST route for reset password
+userRoutes.post('/forgetpass', async (req, res) => {
+  try {
+    const { Email, Password } = req.body;
+
+    // Find the user in the database
+    const user = await Users.findOne({ Email: Email });
+    console.log(user);
+    if (!user) {
+       return res.status(404).json({ success: false, message: 'Email not found.' });
+    }else{
+       // Update the user's password
+    user.Password = Password;
+    await user.save();
+res.redirect('/login');
+   
+    }
+  } catch (err) {
+    console.error("Error resetting password:", err);
+    res.status(500).json("Failed to reset password.");
+  }
+});
+
+
+
 module.exports = userRoutes;
