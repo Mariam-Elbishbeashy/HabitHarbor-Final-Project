@@ -44,26 +44,26 @@
             <br>
             <div class = "content">
                 <div class = "analysis">
-                    <div class = "square-row">
-                        <div class = 'square'>
-            
+                    <div class = "square-row" username = "<%= user.Username %>">
+                        <div class = 'square' onload="updateTotalHabits()">
+                            
                             <p style = "color: white;" class = "square-text">Total Habits</p>
                             <p class = "square-text" id = "num">0</p>
                 
                         </div>
-            
-                        <div class = 'square1'>
-            
+                        
+
+                        <div class = 'square1' onload = "fetchUserHabits(this.parentNode.getAttribute('username'))">
+
                             <p style = "font-style: black;" class = "square-text">Chart</p>
-                            <img src = "/images/Image_01-05-2024_at_1.08_PM-removebg-preview.png" id = "image">
-                    
+                            <div id="donut_chart" style="width: 120%; height: auto;"></div>
                         </div>
                     
                     </div>
-                    <div class = 'square2'>
+                    <div class = 'square2' onload = "fetchTotalHabitsPerMonth()">
             
                         <p style = "font-style: black;" class = "square-text">Habits/Month</p>
-                        <img src = "https://www.cvsc.org.uk/images/Red_Modern_Line_Chart_Diagram_Produt_Data_Graph.png" id = "image1">
+                        <div id="line_chart" style="width: 150%; height: auto;"></div>
                 
                     </div>
                 </div>
@@ -93,12 +93,6 @@
                                     <div class="description">
                                         No sugar for today
                                     </div>
-                                    <div class="checkbox-wrapper">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox1" />
-                                            <label for="checkbox1"></label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -123,12 +117,6 @@
                                     <div class="description">
                                         Run for an hour
                                     </div>
-                                    <div class="checkbox-wrapper">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox2" />
-                                            <label for="checkbox2"></label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -151,12 +139,6 @@
                                     </div>
                                     <div class="description">
                                         Meditate for 20 minutes
-                                    </div>
-                                    <div class="checkbox-wrapper">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox3" />
-                                            <label for="checkbox3"></label>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -279,6 +261,7 @@
 
         <div class="footer"></div>
     </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/analysis.js"  charset="UTF-8"></script>
     <script src="/routes/analysisRoute.js" charset="UTF-8"></script>
     <script src="/scripts/home.js" charset="UTF-8"></script> 

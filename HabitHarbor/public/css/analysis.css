@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    width: 50%; /* Adjusted to percentage */
+    width: 30%; /* Adjusted to percentage */
     height: auto; /* Maintain aspect ratio */
     background-color: #0f1312;
     box-shadow: 5px 5px 10px black;
@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: row;
     background-color: white;
-    width: 50%; /* Adjusted to percentage */
+    width: 55%; /* Adjusted to percentage */
     height: auto; /* Maintain aspect ratio */
     border-radius: 30px;
     box-shadow: 5px 5px 10px black;
@@ -93,8 +93,8 @@
 
 #num.square-text {
     position: absolute;
-    margin-top: 2.2%;
-    margin-left: 10%; /* Adjusted to percentage */
+    margin-top: 1%;
+    margin-left: 8.5%; /* Adjusted to percentage */
     font-size: 8vw; /* Adjusted to viewport width for responsiveness */
     font-style: normal;
     color: white; 

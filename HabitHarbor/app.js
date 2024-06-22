@@ -11,6 +11,8 @@ const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
+const ActivityRecords = require('./models/activityRecordsdb');
+const ActivityRecordsdata = require('./config/activityRecordsdata');
 const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
 
@@ -21,7 +23,7 @@ const indexRoutes = require('./routes/index');
 // express app
 const app = express();
 const port = 3000;
-const dbURI = 'mongodb://localhost:27017/HabitHarborDB';
+const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
@@ -33,7 +35,7 @@ mongoose.connect(dbURI)
     await Activities.deleteMany({}); 
     const result2 = await Activities.insertMany(Activitydata);
     console.log(`${result2.length} documents inserted successfully`);
-
+    
     await Posts.deleteMany({}); 
     const result3 = await Posts.insertMany(Postdata);
     console.log(`${result3.length} documents inserted successfully`);
@@ -41,6 +43,10 @@ mongoose.connect(dbURI)
     await Users.deleteMany({}); 
     const result4 = await Users.insertMany(Userdata);
     console.log(`${result4.length} documents inserted successfully`);
+
+    await ActivityRecords.deleteMany({}); 
+    const result5 = await ActivityRecords.insertMany(ActivityRecordsdata);
+    console.log(`${result5.length} documents inserted successfully`);
 
     // Start express server after inserting data
     app.listen(port, () => {

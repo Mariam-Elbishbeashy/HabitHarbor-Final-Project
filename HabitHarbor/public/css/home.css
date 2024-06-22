@@ -515,7 +515,7 @@ h2:nth-child(1) {
     -webkit-text-fill-color: transparent;
 }
 .activity .back .description {
-    flex: 0 0 200px;
+    flex: 0 0 90%;
     align-self: center;
 }
 @-webkit-keyframes tracking-in-expand {
