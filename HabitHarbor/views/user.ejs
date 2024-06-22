@@ -229,51 +229,49 @@
             </div>
             
 
-    <!--health info-->
-    <div id="healthInfoContent" class="content" style="display: none;">
-        <div class="user-profile">
-            <label for="healthIssues">Health Issues:</label>
-            <textarea id="health-issues" name="health-issues" rows="3" cols="50" placeholder="Enter your health issues here..."></textarea>
-        </div>
-        <div class="info2-section">
-            <label for="habits-goals">Health/Habit Goals:</label>
-        </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal1" name="goal1" class="checkbox-custom">
-                <label class="checkbox-label" for="goal1">Weight Loss</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal2" name="goal2" class="checkbox-custom">
-                <label class="checkbox-label" for="goal2">Healthy Eating</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal3" name="goal3" class="checkbox-custom">
-                <label class="checkbox-label" for="goal3">Hydration Goals</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal4" name="goal4" class="checkbox-custom">
-                <label class="checkbox-label" for="goal4">Healthy Sleep Patterns</label>
-            </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="goal5" name="goal5" class="checkbox-custom" onchange="toggleOtherTextArea()">
-                <label class="checkbox-label" for="goal5">Other</label>
-            </div>
+            <div id="healthInfoContent" class="content" style="display: none;">
+                <form id="healthForm">
+                    <div class="user-profile">
+                        <label for="healthIssues">Health Issues:</label>
+                        <textarea id="health-issues" name="healthIssues" rows="3" cols="50" placeholder="Enter your health issues here..."></textarea>
+                    </div>
+                    <div class="info2-section">
+                        <label for="habits-goals">Health/Habit Goals:</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="goal1" name="healthGoals" value="Weight Loss" class="checkbox-custom">
+                        <label class="checkbox-label" for="goal1">Weight Loss</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="goal2" name="healthGoals" value="Healthy Eating" class="checkbox-custom">
+                        <label class="checkbox-label" for="goal2">Healthy Eating</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="goal3" name="healthGoals" value="Hydration Goals" class="checkbox-custom">
+                        <label class="checkbox-label" for="goal3">Hydration Goals</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="goal4" name="healthGoals" value="Healthy Sleep Patterns" class="checkbox-custom">
+                        <label class="checkbox-label" for="goal4">Healthy Sleep Patterns</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="goal5" name="healthGoals" value="Other" class="checkbox-custom" onchange="toggleOtherTextArea()">
+                        <label class="checkbox-label" for="goal5">Other</label>
+                    </div>
+                    <div class="user-profile" id="otherGoalTextArea" style="display: none;">
+                        <label for="otherGoal">Other Goal:</label>
+                        <textarea id="otherGoal" name="otherGoal" rows="2" cols="50" placeholder="Write here"></textarea>
+                    </div>
+                    <div class="user-profile custom-info">
+                        <p>Please check the boxes for the health goals needed and click "Save Changes" to ensure they are saved.</p>
+                    </div>
+                    <div class="user-profile">
+                        <button type="button" onclick="submitHealthForm()">Save Changes</button>
+                        <button id="editHealthInfoButton" onclick="editHealthInfo()" style="display: none;">Edit Health Info</button>
+                    </div>
+                </form>
+            </div>          
             
-            <div class="user-profile" id="otherGoalTextArea" style="display: none;">
-                <label for="otherGoal">Other Goal:</label>
-                <textarea id="otherGoal" name="otherGoal" rows="2" cols="50" placeholder="Write here"></textarea>
-            </div>
-           
-            <div class="user-profile custom-info">
-                <p>Please check the boxes for the health goals needed and click "Save Changes" to ensure they are saved.</p>
-              </div>
-
-              <div class="user-profile">
-                <button onclick="saveHealthInfoChanges()">Save Changes</button>
-                <button id="editHealthInfoButton" onclick="editHealthInfo()" style="display: none;">Edit Health Info</button>
-            </div> 
-    </div>
-    
     <!--social links-->
  <div id="socialLinksContent" class="content">
     <div class="user-profile">

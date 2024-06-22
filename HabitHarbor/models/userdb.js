@@ -52,6 +52,14 @@ const userSchema = new Schema({
   Image: {
     type: String,
     required: true,
+  },
+  healthIssues: {
+    type: String,
+    default: ''
+  },
+  healthGoals: {
+    type: [String],
+    default: []
   }
 }, { timestamps: true });
 
