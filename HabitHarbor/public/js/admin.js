@@ -807,7 +807,8 @@ async function displayResources() {
 
             const resourceName = document.createElement('a');
             resourceName.href = resource.URL; 
-            resourceName.textContent = resource.URL; 
+            resourceName.textContent = resource.Title; 
+            resourceName.style.color = "black";
             resourceName.target = '_blank';
             resourceDiv.appendChild(resourceName);
 

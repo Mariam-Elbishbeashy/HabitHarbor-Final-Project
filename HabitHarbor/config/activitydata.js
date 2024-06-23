@@ -17,7 +17,7 @@ activityData =[
     "category": "nutrition",
     "content": "Healthy breakfast recipe with oats and fruits.",
     "ageRange": { "min": 5, "max": 70 },
-    "bmiRange": { "min": 16.0, "max": 40.0 },
+    "bmiRange": { "min": 16.0, "max": 70.0 },
     "intensity": "low"
     },
     {
@@ -101,7 +101,7 @@ activityData =[
     "category": "nutrition",
     "content": "Smoothie recipe: Spinach and banana smoothie.",
     "ageRange": { "min": 5, "max": 60 },
-    "bmiRange": { "min": 16.0, "max": 40.0 },
+    "bmiRange": { "min": 16.0, "max": 70.0 },
     "intensity": "low"
     },
     {
@@ -143,7 +143,7 @@ activityData =[
     "category": "nutrition",
     "content": "Healthy snack recipe: Greek yogurt with berries and nuts.",
     "ageRange": { "min": 5, "max": 70 },
-    "bmiRange": { "min": 16.0, "max": 40.0 },
+    "bmiRange": { "min": 16.0, "max": 70.0 },
     "intensity": "low"
     },
     {
@@ -173,7 +173,48 @@ activityData =[
     "ageRange": { "min": 20, "max": 45 },
     "bmiRange": { "min": 18.0, "max": 28.0 },
     "intensity": "high"
+    },
+    {
+    "category": "physical",
+    "content": "20-minute chair yoga session to improve flexibility and relaxation.",
+    "ageRange": { "min": 20, "max": 80 },
+    "bmiRange": { "min": 20.0, "max": 70.0 },
+    "duration": 20,
+    "intensity": "low"
+    },
+    {
+    "category": "well-being",
+    "content": "15-minute guided relaxation meditation.",
+    "ageRange": { "min": 10, "max": 80 },
+    "bmiRange": { "min": 20.0, "max": 60.0 },
+    "duration": 15,
+    "intensity": "low"
+    },
+    {
+    "category": "nutrition",
+    "content": "Prepare a nutritious smoothie with spinach, banana, and almond milk.",
+    "ageRange": { "min": 10, "max": 80 },
+    "bmiRange": { "min": 20.0, "max": 60.0 },
+    "duration": 10,
+    "intensity": "low"
+    },
+    {
+    "category": "physical",
+    "content": "30-minute aqua therapy session for joint-friendly exercise.",
+    "ageRange": { "min": 18, "max": 75 },
+    "bmiRange": { "min": 20.0, "max": 60.0 },
+    "duration": 30,
+    "intensity": "medium"
+    },
+    {
+    "category": "well-being",
+    "content": "10-minute gratitude practice: write down three things you are grateful for.",
+    "ageRange": { "min": 10, "max": 80 },
+    "bmiRange": { "min": 20.0, "max": 60.0 },
+    "duration": 10,
+    "intensity": "low"
     }
+      
 ]
 
 module.exports = activityData;
