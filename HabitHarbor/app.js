@@ -25,7 +25,7 @@ const analysisRoutes = require('./routes/analysisRoute');
 // express app
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
 
 // Connect to MongoDB
