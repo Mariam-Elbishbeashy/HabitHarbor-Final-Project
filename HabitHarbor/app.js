@@ -30,15 +30,7 @@ const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongod
 
 // Connect to MongoDB
 mongoose.connect(dbURI)
-  .then(async () => {
-    await Users.deleteMany({}); 
-    const result4 = await Users.insertMany(Userdata);
-    console.log(`${result4.length} documents inserted successfully`);
-
-    await Activities.deleteMany({}); 
-    const result5 = await Activities.insertMany(Activitydata);
-    console.log(`${result5.length} documents inserted successfully`);
-  
+  .then(async () => { 
     // Start express server after inserting data
     app.listen(port, () => {
       console.log(`App listening on port ${port}`);

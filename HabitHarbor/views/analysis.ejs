@@ -45,7 +45,7 @@
             <div class = "content">
                 <div class = "analysis">
                     <div class = "square-row">
-                        <div class = 'square' onload="updateTotalHabits('Ahmed2004')">
+                        <div class = 'square' onload="updateTotalHabits('<%=user.Username%>')">
                             
                             <p style = "color: white;" class = "square-text">Total Habits</p>
                             <p class = "square-text" id = "num">0</p>
@@ -53,7 +53,7 @@
                         </div>
                         
 
-                        <div class = 'square1' onload = "fetchUserHabits('Ahmed2004')">
+                        <div class = 'square1' onload = "fetchUserHabits('<%=user.Username%>')">
 
                             <p style = "font-style: black;" class = "square-text">Chart</p>
                             <iframe style="background: #FFFFFF;border: none;border-radius: 20px;" width="200" height="200" src="https://charts.mongodb.com/charts-habitharbordb-oqwwulr/embed/charts?id=66777d91-5fba-440e-808e-1c6aac902ba0&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
@@ -61,7 +61,7 @@
                         </div>
                     
                     </div>
-                    <div class = 'square2' onload = "fetchTotalHabitsPerMonth('Ahmed2004')">
+                    <div class = 'square2' onload = "fetchTotalHabitsPerMonth('<%=user.Username%>')">
             
                         <p style = "font-style: black;" class = "square-text">Habits/Month</p>
                         <iframe style="background: #FFFFFF;border: none;border-radius: 20px;" width="500" height="280" src="https://charts.mongodb.com/charts-habitharbordb-oqwwulr/embed/charts?id=66777fec-df4a-4ae1-83bf-f01d236be803&maxDataAge=3600&theme=light&autoRefresh=true"></iframe>
