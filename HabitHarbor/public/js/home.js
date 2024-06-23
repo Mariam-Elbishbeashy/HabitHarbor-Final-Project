@@ -1,6 +1,4 @@
 //event listener that shows the progress bar after clicking on the start button
-// Event listener that shows the progress bar after clicking on the start button
-// Event listener that shows the progress bar after clicking on the start button
 document.addEventListener("click", function(event) {
     // Check if the clicked element is a start button with an ID starting with "start-btn-"
     if (event.target.matches('button[id^="start-btn-"]')) {
@@ -46,7 +44,7 @@ function dailyValidate() {
 function weeklyMonthlyValidate(){
     var input = document.querySelector("#custom-activity");
     if(input.value === ""){
-        alert("The challenge content can not be ampty")
+        alert("The challenge content can not be empty")
     }
 }
 
@@ -263,7 +261,6 @@ function addWeeklyCustomChallenge() {
 
     // Validate input
     if (content === '') {
-        alert('Please enter the content for your custom weekly challenge.');
         return;
     }
 

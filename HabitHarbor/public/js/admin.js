@@ -170,192 +170,327 @@ function displayAdmins() {
         })
         .catch(err => console.error('Error fetching admins:', err));
 }
-function addUser(form) {
-    Swal.fire({
-        title: "Add User",
-        html: `
-            <form id="user-form">
-                <label>Select User Type:</label>
-                <select id="type-select" class="swal2-select" style="width: 80%;">
-                    <option value="user">Select</option>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-                <label>First name:</label>
-                <input id="fname" class="swal2-input" style="width: 80%;">
-                <label>Last name:</label>
-                <input id="lname" class="swal2-input" style="width: 80%;">
-                <label>Email:</label>
-                <input id="email" class="swal2-input" style="width: 80%;">
-                <label>Phone Number:</label>
-                <input id="phoneNumber" name="phoneNumber" type="tel" class="swal2-input" placeholder="ex:..+201234567890" style="width: 45%;">
-                <label>Date of birth:</label>
-                <input id="dateOfBirth" name="dateOfBirth" class="swal2-input" placeholder="DD/MM/YYY" style="width: 45%;">
-                <label>Gender:</label>
-                <select id="gender-select" class="swal2-select" style="width: 45%;"">
-                    <option value="male">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <label>Weight (Kg):</label>
-                <input id="weight" name="weight" type="number" class="swal2-input" style="width: 45%;">
-                <label>Height (cm):</label>
-                <input id="height" name="height" type="number" class="swal2-input" style="width: 45%;">
-                <label>Username:</label>
-                <input id="username" class="swal2-input" style="width: 80%;">
-                <label>Password:</label>
-                <input id="password" type="password" class="swal2-input" style="width: 80%;">
-                <label>Confirm password:</label>
-                <input id="cpassword" type="password" class="swal2-input" style="width: 80%;">
-            </form>
-        `,
-        
-        showCancelButton: true,
-        confirmButtonText: '<swal-button type="confirm">Add</swal-button>',
-        cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
-        focusConfirm: false,
-        preConfirm: () => {
-            const type = document.getElementById("type-select").value;
-            const fname = document.getElementById("fname").value;
-            const lname = document.getElementById("lname").value;
-            const email = document.getElementById("email").value;
-            const phoneNumber = document.getElementById("phoneNumber").value;
-            const dateOfBirth = document.getElementById("dateOfBirth").value;
-            const gender = document.getElementById("gender-select").value;
-            const weight = document.getElementById("weight").value;
-            const height = document.getElementById("height").value;
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            const cpassword = document.getElementById("cpassword").value;
+document.addEventListener('DOMContentLoaded', function () {
+    const formFields = {
+        type: 'type-select',
+        fname: 'fname',
+        lname: 'lname',
+        email: 'email',
+        phoneNumber: 'phoneNumber',
+        dateOfBirth: 'dateOfBirth',
+        gender: 'gender-select',
+        weight: 'weight',
+        height: 'height',
+        username: 'username',
+        password: 'password',
+        cpassword: 'cpassword'
+    };
 
-            if (!type || !fname || !lname || !email || !phoneNumber || !dateOfBirth|| !gender || !weight || !height || !username || !password) {
-                Swal.showValidationMessage("Please fill in all fields.");
-                return false;
-            } 
-            if(cpassword!==password){
-                Swal.showValidationMessage("Passwords do not match!");
-                return false;
+    const errorMessages = {
+        type: 'type-error',
+        fname: 'fname-error',
+        lname: 'lname-error',
+        email: 'email-error',
+        phoneNumber: 'phone-error',
+        dateOfBirth: 'dob-error',
+        gender: 'gender-error',
+        weight: 'weight-error',
+        height: 'height-error',
+        username: 'username-error',
+        password: 'password-error',
+        cpassword: 'cpassword-error'
+    };
+
+    function addUser() {
+        Swal.fire({
+            title: "Add User",
+            html: `
+                <style>
+                    .error-message {
+                    color: red;
+                    font-size: 0.875em;
+                    }
+                </style>
+                <form id="user-form">
+                    <div id="validation-summary"></div>
+                    <label>Select User Type:</label>
+                    <select id="type-select" class="swal2-select" style="width: 80%;">
+                        <option value="">Select</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <div id="type-error" class="error-message"></div>
+                    <label>First name:</label>
+                    <input id="fname" class="swal2-input" style="width: 80%;">
+                    <div id="fname-error" class="error-message"></div>
+                    <label>Last name:</label>
+                    <input id="lname" class="swal2-input" style="width: 80%;">
+                    <div id="lname-error" class="error-message"></div>
+                    <label>Email:</label>
+                    <input id="email" class="swal2-input" style="width: 80%;">
+                    <div id="email-error" class="error-message"></div>
+                    <label>Phone Number:</label>
+                    <input id="phoneNumber" name="phoneNumber" type="tel" class="swal2-input" placeholder="ex:..+201234567890" style="width: 45%;">
+                    <div id="phone-error" class="error-message"></div>
+                    <label>Date of birth:</label>
+                    <input id="dateOfBirth" name="dateOfBirth" class="swal2-input" placeholder="DD/MM/YYY" style="width: 45%;">
+                    <div id="dob-error" class="error-message"></div>
+                    <label>Gender:</label>
+                    <select id="gender-select" class="swal2-select" style="width: 45%;">
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <div id="gender-error" class="error-message"></div>
+                    <label>Weight (Kg):</label>
+                    <input id="weight" name="weight" type="number" class="swal2-input" style="width: 45%;">
+                    <div id="weight-error" class="error-message"></div>
+                    <label>Height (cm):</label>
+                    <input id="height" name="height" type="number" class="swal2-input" style="width: 45%;">
+                    <div id="height-error" class="error-message"></div>
+                    <label>Username:</label>
+                    <input id="username" class="swal2-input" style="width: 80%;">
+                    <div id="username-error" class="error-message"></div>
+                    <label>Password:</label>
+                    <input id="password" type="password" class="swal2-input" style="width: 80%;">
+                    <div id="password-error" class="error-message"></div>
+                    <label>Confirm password:</label>
+                    <input id="cpassword" type="password" class="swal2-input" style="width: 80%;">
+                    <div id="cpassword-error" class="error-message"></div>
+                </form>
+            `,
+            showCancelButton: true,
+            confirmButtonText: '<swal-button type="confirm">Add</swal-button>',
+            cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
+            focusConfirm: false,
+            preConfirm: () => {
+                const type = document.getElementById("type-select").value;
+                const fname = document.getElementById("fname").value;
+                const lname = document.getElementById("lname").value;
+                const email = document.getElementById("email").value;
+                const phoneNumber = document.getElementById("phoneNumber").value;
+                const dateOfBirth = document.getElementById("dateOfBirth").value;
+                const gender = document.getElementById("gender-select").value;
+                const weight = document.getElementById("weight").value;
+                const height = document.getElementById("height").value;
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                const cpassword = document.getElementById("cpassword").value;
+
+                const validationSummary = document.getElementById("validation-summary");
+                validationSummary.innerHTML = "";
+
+                let isValid = true;
+
+                for (const [field, inputId] of Object.entries(formFields)) {
+                    validateField(field, document.getElementById(inputId).value);
+                    if (document.getElementById(errorMessages[field]).textContent !== '') {
+                        isValid = false;
+                    }
+                }
+
+                if (!isValid) {
+                    Swal.showValidationMessage('Please correct the errors in the form.');
+                    return false;
+                }
+
+                if (cpassword !== password) {
+                    Swal.showValidationMessage("Passwords do not match!");
+                    return false;
+                }
+
+                return { type, fname, lname, email, phoneNumber, dateOfBirth, gender, weight, height, username, password };
             }
-    
-            return { type, fname, lname, email, phoneNumber, dateOfBirth, gender, weight, height, username, password };
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { type, fname, lname, email, phoneNumber, dateOfBirth, gender, weight, height, username, password } = result.value;
+
+                const form = document.createElement('form');
+                form.action = '/admin/adduser';
+                form.method = 'post';
+                form.style.display = 'none';
+
+                const addInputToForm = (name, value) => {
+                    const input = document.createElement('input');
+                    input.name = name;
+                    input.value = value;
+                    form.appendChild(input);
+                };
+
+                addInputToForm('DataType', type);
+                addInputToForm('Firstname', fname);
+                addInputToForm('Lastname', lname);
+                addInputToForm('Email', email);
+                addInputToForm('phone', phoneNumber);
+                addInputToForm('DateofBirth', dateOfBirth);
+                addInputToForm('Gender', gender);
+                addInputToForm('Weight', weight);
+                addInputToForm('Height', height);
+                addInputToForm('Username', username);
+                addInputToForm('Password', password);
+                addInputToForm('Image', "images/contact icon.png");
+
+                document.body.appendChild(form);
+                form.submit();
+
+            } else if (result.isDenied) {
+                Swal.fire("Changes discarded", "", "info");
+            }
+        });
+
+        for (const [field, inputId] of Object.entries(formFields)) {
+            document.getElementById(inputId).addEventListener('input', () => {
+                validateField(field, document.getElementById(inputId).value);
+            });
         }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const {  type, fname, lname, email, phoneNumber, dateOfBirth, gender, weight, height, username, password } = result.value;
+    }
 
-            //Swal.fire(`Category: ${category}, Challenge: ${challenge}, Age Range ${ageMin}-${ageMax}, BMI Range ${bmiMin}-${bmiMax}, Intensity: ${intensity}`, "", "success");
-            const form = document.createElement('form');
-            form.action = '/admin/adduser';
-            form.method = 'post';
-            form.style.display = 'none';
+    function validateField(field, value) {
+        let isValid = true;
+        let errorMessage = '';
 
-            const typeInput = document.createElement('input');
-            typeInput.name = 'DataType';
-            typeInput.value = type;
-            form.appendChild(typeInput);
-
-            const fnameInput = document.createElement('input');
-            fnameInput.name = 'Firstname';
-            fnameInput.value = fname;
-            form.appendChild(fnameInput);
-
-            const lnameInput = document.createElement('input');
-            lnameInput.name = 'Lastname';
-            lnameInput.value = lname;
-            form.appendChild(lnameInput);
-
-            const emailInput = document.createElement('input');
-            emailInput.name = 'Email';
-            emailInput.value = email;
-            form.appendChild(emailInput);
-
-            const phoneNumberInput = document.createElement('input');
-            phoneNumberInput.name = 'phone';
-            phoneNumberInput.value = phoneNumber;
-            form.appendChild(phoneNumberInput);
-
-            const dateOfBirthInput = document.createElement('input');
-            dateOfBirthInput.name = 'DateofBirth';
-            dateOfBirthInput.value = dateOfBirth;
-            form.appendChild(dateOfBirthInput);
-
-            const genderInput = document.createElement('input');
-            genderInput.name = 'Gender';
-            genderInput.value = gender;
-            form.appendChild(genderInput);
-
-            const weightInput = document.createElement('input');
-            weightInput.name = 'Weight';
-            weightInput.value = weight;
-            form.appendChild(weightInput);
-
-            const heightInput = document.createElement('input');
-            heightInput.name = 'Height';
-            heightInput.value = height;
-            form.appendChild(heightInput);
-
-            const usernameInput = document.createElement('input');
-            usernameInput.name = 'Username';
-            usernameInput.value = username;
-            form.appendChild(usernameInput);
-
-            const passwordInput = document.createElement('input');
-            passwordInput.name = 'Password';
-            passwordInput.value = password;
-            form.appendChild(passwordInput);
-
-            const imageInput = document.createElement('input');
-            imageInput.name = 'Image';
-            imageInput.value = "images/contact icon.png";
-            form.appendChild(imageInput);
-
-            document.body.appendChild(form);
-            form.submit();
-
-        } else if (result.isDenied) {
-            Swal.fire("Changes discarded", "", "info");
+        switch (field) {
+            case 'email':
+                if (!isValidEmail(value)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid email address.';
+                }
+                break;
+            case 'phoneNumber':
+                if (!isValidPhoneNumber(value)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid phone number.';
+                }
+                break;
+            case 'dateOfBirth':
+                if (!isValidDateOfBirth(value)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid date of birth (DD/MM/YYYY).';
+                }
+                break;
+            case 'weight':
+                if (!isValidWeight(value)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid weight (greater than 0).';
+                }
+                break;
+            case 'height':
+                if (!isValidHeight(value)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid height (greater than 0).';
+                }
+                break;
+            case 'password':
+                if (!isValidPassword(value)) {
+                    isValid = false;
+                    errorMessage = 'Password must be at least 8 characters long.';
+                }
+                break;
+            case 'cpassword':
+                const password = document.getElementById(formFields.password).value;
+                if (value !== password) {
+                    isValid = false;
+                    errorMessage = 'Passwords do not match!';
+                }
+                break;
+            default:
+                if (!value.trim()) {
+                    isValid = false;
+                    errorMessage = 'This field is required.';
+                }
+                break;
         }
-    });
-}
+
+        const errorElement = document.getElementById(errorMessages[field]);
+        if (isValid) {
+            errorElement.textContent = '';
+        } else {
+            errorElement.textContent = errorMessage;
+        }
+    }
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function isValidPhoneNumber(phoneNumber) {
+        return /^\+?\d{11,}$/.test(phoneNumber);
+    }
+
+    function isValidDateOfBirth(dateOfBirth) {
+        return /^\d{2}\/\d{2}\/\d{4}$/.test(dateOfBirth);
+    }
+
+    function isValidWeight(weight) {
+        return weight > 0;
+    }
+
+    function isValidHeight(height) {
+        return height > 0;
+    }
+
+    function isValidPassword(password) {
+        return password.length >= 8;
+    }
+
+    window.addUser = addUser;
+
 
 function editUser(user) {
     Swal.fire({
         title: "Edit User",
         html: `
+            <style>
+                .error-message {
+                 color: red;
+                font-size: 0.875em;
+                }
+            </style>
             <form id="user-form">
                 <label>User Type:</label>
                 <select value="${user.DataType}" id="type-select" class="swal2-select" style="width: 80%;">
                     <option value="user"  ${user.DataType === 'user' ? 'selected' : ''}>User</option>
                     <option value="admin"  ${user.DataType === 'admin' ? 'selected' : ''}>Admin</option>
                 </select>
+                <div id="type-error" class="error-message"></div>
                 <label>First name:</label>
                 <input value="${user.Firstname}" id="fname" class="swal2-input" style="width: 80%;">
+                <div id="fname-error" class="error-message"></div>
                 <label>Last name:</label>
                 <input value="${user.Lastname}" id="lname" class="swal2-input" style="width: 80%;">
+                <div id="lname-error" class="error-message"></div>
                 <label>Email:</label>
                 <input value="${user.Email}" id="email" class="swal2-input" style="width: 80%;">
+                <div id="email-error" class="error-message"></div>
                 <label>Phone Number:</label>
                 <input value="${user.phone}" id="phoneNumber" name="phoneNumber" type="tel" class="swal2-input" placeholder="ex:..+201234567890" style="width: 45%;">
+                <div id="phone-error" class="error-message"></div>
                 <label>Date of birth:</label>
                 <input value="${user.DateofBirth}" id="dateOfBirth" name="dateOfBirth" class="swal2-input" placeholder="DD/MM/YYY" style="width: 45%;">
+                <div id="dob-error" class="error-message"></div>
                 <label>Gender:</label>
                 <select value="${user.Gender}" id="gender-select" class="swal2-select" style="width: 45%;">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
+                <div id="gender-error" class="error-message"></div>
                 <label>Weight (Kg):</label>
                 <input value="${user.Weight}" id="weight" name="weight" type="number" class="swal2-input" style="width: 45%;">
+                <div id="weight-error" class="error-message"></div>
                 <label>Height (cm):</label>
                 <input value="${user.Height}" id="height" name="height" type="number" class="swal2-input" style="width: 45%;">
+                <div id="height-error" class="error-message"></div>
                 <label>Username:</label>
                 <input value="${user.Username}" id="username" class="swal2-input" style="width: 80%;">
+                <div id="username-error" class="error-message"></div>
                 <label>Password:</label>
                 <input value="${user.Password}" id="password" type="password" class="swal2-input" style="width: 80%;">
+                <div id="password-error" class="error-message"></div>
                 <label>Confirm password:</label>
                 <input value="${user.Password}" id="cpassword" type="password" class="swal2-input" style="width: 80%;">
+                <div id="cpassword-error" class="error-message"></div>
             </form>
         `,
-        
         showCancelButton: true,
         confirmButtonText: '<swal-button type="confirm">Save</swal-button>',
         cancelButtonText: '<swal-button type="cancel">Cancel</swal-button>',
@@ -374,15 +509,28 @@ function editUser(user) {
             const password = document.getElementById("password").value;
             const cpassword = document.getElementById("cpassword").value;
 
-            if (!type || !fname || !lname || !email || !phoneNumber || !dateOfBirth|| !gender || !weight || !height || !username || !password) {
-                Swal.showValidationMessage("Please fill in all fields.");
+            const validationSummary = document.getElementById("validation-summary");
+            validationSummary.innerHTML = "";
+
+            let isValid = true;
+
+            for (const [field, inputId] of Object.entries(formFields)) {
+                validateField(field, document.getElementById(inputId).value);
+                if (document.getElementById(errorMessages[field]).textContent !== '') {
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                Swal.showValidationMessage('Please correct the errors in the form.');
                 return false;
-            } 
-            if(cpassword!==password){
+            }
+
+            if (cpassword !== password) {
                 Swal.showValidationMessage("Passwords do not match!");
                 return false;
             }
-    
+
             return { type, fname, lname, email, phoneNumber, dateOfBirth, gender, weight, height, username, password };
         }
     }).then((result) => {
@@ -426,7 +574,105 @@ function editUser(user) {
             Swal.fire("Changes discarded", "", "info");
         }
     });
+
+    for (const [field, inputId] of Object.entries(formFields)) {
+        document.getElementById(inputId).addEventListener('input', () => {
+            validateField(field, document.getElementById(inputId).value);
+        });
+    }
 }
+
+function validateField(field, value) {
+    let isValid = true;
+    let errorMessage = '';
+
+    switch (field) {
+        case 'email':
+            if (!isValidEmail(value)) {
+                isValid = false;
+                errorMessage = 'Invalid email format.';
+            }
+            break;
+        case 'phoneNumber':
+            if (!isValidPhoneNumber(value)) {
+                isValid = false;
+                errorMessage = 'Invalid phone number format.';
+            }
+            break;
+        case 'dateOfBirth':
+            if (!isValidDateOfBirth(value)) {
+                isValid = false;
+                errorMessage = 'Invalid date format (DD/MM/YYYY).';
+            }
+            break;
+        case 'weight':
+            if (!isValidWeight(value)) {
+                isValid = false;
+                errorMessage = 'Invalid weight.';
+            }
+            break;
+        case 'height':
+            if (!isValidHeight(value)) {
+                isValid = false;
+                errorMessage = 'Invalid height.';
+            }
+            break;
+        case 'password':
+            if (!isValidPassword(value)) {
+                isValid = false;
+                errorMessage = 'Password must be at least 8 characters.';
+            }
+            break;
+        case 'cpassword':
+            const password = document.getElementById(formFields['password']).value;
+            if (value !== password) {
+                isValid = false;
+                errorMessage = 'Passwords do not match!';
+            }
+            break;
+        default:
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'This field is required.';
+            }
+            break;
+    }
+
+    const errorElement = document.getElementById(errorMessages[field]);
+    if (isValid) {
+        errorElement.textContent = '';
+    } else {
+        errorElement.textContent = errorMessage;
+    }
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhoneNumber(phoneNumber) {
+    return /^\+?\d{8,}$/.test(phoneNumber);
+}
+
+function isValidDateOfBirth(dateOfBirth) {
+    return /^\d{2}\/\d{2}\/\d{4}$/.test(dateOfBirth);
+}
+
+function isValidWeight(weight) {
+    return weight > 0;
+}
+
+function isValidHeight(height) {
+    return height > 0;
+}
+
+function isValidPassword(password) {
+    return password.length >= 8;
+}
+
+window.addUser = addUser;
+window.editUser = editUser;
+});
 
 function deleteUserForm(user) {
     Swal.fire({
@@ -546,28 +792,41 @@ function addChallenge(form) {
     Swal.fire({
         title: "Add challenge",
         html: `
+            <style>
+                .error-message {
+                 color: red;
+                font-size: 0.875em;
+                }
+            </style>
             <form id="challenge-form">
+                <div id="validation-summary"></div>
                 <label>Select a category:</label>
                 <select id="category-select" class="swal2-select" style="width: 80%;">
-                    <option value="physical">Select</option>
+                    <option value="">Select</option>
                     <option value="physical">Physical</option>
                     <option value="well-being">Well-being</option>
                     <option value="nutrition">Nutrition</option>
                 </select>
+                <div id="category-error" class="error-message"></div>
+
                 <label>Challenge:</label>
                 <input id="swal-input1" class="swal2-input" style="width: 80%;">
+                <div id="challenge-error" class="error-message"></div>
+
                 <label>Age Range:</label>
-                <div style="display: flex; justify-content: centre; width: 80%;">
+                <div style="display: flex; justify-content: center; width: 80%;">
                     <input id="age-min" name="age_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
                     <input id="age-max" name="age_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
                 </div>
-                
+                <div id="age-range-error" class="error-message"></div>
+
                 <label>BMI Range:</label>
-                <div style="display: flex; justify-content: centre; width: 80%;">
+                <div style="display: flex; justify-content: center; width: 80%;">
                     <input id="bmi-min" name="bmi_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
                     <input id="bmi-max" name="bmi_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
                 </div>
-                
+                <div id="bmi-range-error" class="error-message"></div>
+
                 <label>Intensity:</label>
                 <select id="intensity-select" name="intensity" class="swal2-select" style="width: 80%;">
                     <option value="" disabled selected>Select</option>
@@ -575,6 +834,7 @@ function addChallenge(form) {
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                 </select>
+                <div id="intensity-error" class="error-message"></div>
             </form>
         `,
         
@@ -591,11 +851,26 @@ function addChallenge(form) {
             const bmiMax = document.getElementById("bmi-max").value;
             const intensity = document.getElementById("intensity-select").value;
 
-            if (!category || !challenge || !ageMin || !ageMax || !bmiMin || !bmiMax || !intensity) {
-                Swal.showValidationMessage("Please fill in all fields.");
+            const validationSummary = document.getElementById("validation-summary");
+            validationSummary.innerHTML = "";
+
+            let isValid = true;
+
+            validateField('category', category);
+            validateField('challenge', challenge);
+            validateField('age-range', { min: ageMin, max: ageMax });
+            validateField('bmi-range', { min: bmiMin, max: bmiMax });
+            validateField('intensity', intensity);
+
+            if (document.querySelector('.error-message:not(:empty)')) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                Swal.showValidationMessage('Please correct the errors in the form.');
                 return false;
-            } 
-    
+            }
+
             return { category, challenge, ageMin, ageMax, bmiMin, bmiMax, intensity };
         }
     }).then((result) => {
@@ -645,43 +920,136 @@ function addChallenge(form) {
 
             document.body.appendChild(form);
             form.submit();
-
         } else if (result.isDenied) {
             Swal.fire("Changes discarded", "", "info");
         }
     });
+
+    document.getElementById('age-min').addEventListener('input', () => {
+        validateField('age-range', {
+            min: document.getElementById('age-min').value,
+            max: document.getElementById('age-max').value
+        });
+    });
+
+    document.getElementById('age-max').addEventListener('input', () => {
+        validateField('age-range', {
+            min: document.getElementById('age-min').value,
+            max: document.getElementById('age-max').value
+        });
+    });
+
+    document.getElementById('bmi-min').addEventListener('input', () => {
+        validateField('bmi-range', {
+            min: document.getElementById('bmi-min').value,
+            max: document.getElementById('bmi-max').value
+        });
+    });
+
+    document.getElementById('bmi-max').addEventListener('input', () => {
+        validateField('bmi-range', {
+            min: document.getElementById('bmi-min').value,
+            max: document.getElementById('bmi-max').value
+        });
+    });
 }
+
+function validateField(field, value) {
+    let isValid = true;
+    let errorMessage = '';
+
+    switch (field) {
+        case 'category':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please select a category.';
+            }
+            break;
+        case 'challenge':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please enter a challenge.';
+            }
+            break;
+        case 'age-range':
+            if (!value.min || !value.max) {
+                isValid = false;
+                errorMessage = 'Age range cannot be empty.';
+            } else if (parseFloat(value.min) >= parseFloat(value.max)) {
+                isValid = false;
+                errorMessage = 'Age min must be less than age max.';
+            }
+            break;
+        case 'bmi-range':
+            if (!value.min || !value.max) {
+                isValid = false;
+                errorMessage = 'BMI range cannot be empty.';
+            } else if (parseFloat(value.min) >= parseFloat(value.max)) {
+                isValid = false;
+                errorMessage = 'BMI min must be less than BMI max.';
+            }
+            break;
+        case 'intensity':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please select an intensity level.';
+            }
+            break;
+    }
+
+    const errorElement = document.getElementById(`${field}-error`);
+    if (isValid) {
+        errorElement.textContent = '';
+    } else {
+        errorElement.textContent = errorMessage;
+    }
+}
+
 function editChallenge(activity) {
     Swal.fire({
         title: "Edit Activity",
         html: `
+            <style>
+                .error-message {
+                    color: red;
+                    font-size: 0.875em;
+                }
+            </style>
             <form id="activity-form">
+                <div id="validation-summary"></div>
                 <label>Category:</label>
-                <select id="category-select" value="${activity.category}" class="swal2-select" style="width: 80%;">
+                <select id="category-select" class="swal2-select" style="width: 80%;">
                     <option value="physical" ${activity.category === 'physical' ? 'selected' : ''}>Physical</option>
                     <option value="well-being" ${activity.category === 'well-being' ? 'selected' : ''}>Well-being</option>
                     <option value="nutrition" ${activity.category === 'nutrition' ? 'selected' : ''}>Nutrition</option>
                 </select>
+                <div id="category-error" class="error-message"></div>
+
                 <label>Challenge:</label>
                 <input id="swal-input1" value="${activity.content}" class="swal2-input" style="width: 80%;">
+                <div id="challenge-error" class="error-message"></div>
+
                 <label>Age Range:</label>
                 <div style="display: flex; justify-content: center; width: 80%;">
                     <input id="age-min" value="${activity.ageRange.min}" name="age_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
                     <input id="age-max" value="${activity.ageRange.max}" name="age_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
                 </div>
-                
+                <div id="age-range-error" class="error-message"></div>
+
                 <label>BMI Range:</label>
                 <div style="display: flex; justify-content: center; width: 80%;">
                     <input id="bmi-min" value="${activity.bmiRange.min}" name="bmi_min" type="number" class="swal2-input" placeholder="Min" style="width: 45%;">
                     <input id="bmi-max" value="${activity.bmiRange.max}" name="bmi_max" type="number" class="swal2-input" placeholder="Max" style="width: 45%;">
                 </div>
-                
+                <div id="bmi-range-error" class="error-message"></div>
+
                 <label>Intensity:</label>
                 <select id="intensity-select" name="intensity" class="swal2-select" style="width: 80%;">
                     <option value="low"  ${activity.intensity === 'low' ? 'selected' : ''}>Low</option>
                     <option value="medium" ${activity.intensity === 'medium' ? 'selected' : ''}>Medium</option>
                     <option value="high" ${activity.intensity === 'high' ? 'selected' : ''}>High</option>
                 </select>
+                <div id="intensity-error" class="error-message"></div>
             </form>
         `,
         
@@ -698,11 +1066,26 @@ function editChallenge(activity) {
             const maxBMI = document.getElementById("bmi-max").value;
             const intensity = document.getElementById("intensity-select").value;
 
-            if (!category || !content || !minAge || !maxAge || !minBMI || !maxBMI || !intensity) {
-                Swal.showValidationMessage("Please fill in all fields.");
+            const validationSummary = document.getElementById("validation-summary");
+            validationSummary.innerHTML = "";
+
+            let isValid = true;
+
+            validateField('category', category);
+            validateField('challenge', content);
+            validateField('age-range', { min: minAge, max: maxAge });
+            validateField('bmi-range', { min: minBMI, max: maxBMI });
+            validateField('intensity', intensity);
+
+            if (document.querySelector('.error-message:not(:empty)')) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                Swal.showValidationMessage('Please correct the errors in the form.');
                 return false;
-            } 
-    
+            }
+
             return { category, content, ageRange: { min: minAge, max: maxAge }, bmiRange: { min: minBMI, max: maxBMI }, intensity };
         }
     }).then((result) => {
@@ -742,8 +1125,86 @@ function editChallenge(activity) {
             Swal.fire("Changes discarded", "", "info");
         }
     });
+
+    document.getElementById('age-min').addEventListener('input', () => {
+        validateField('age-range', {
+            min: document.getElementById('age-min').value,
+            max: document.getElementById('age-max').value
+        });
+    });
+
+    document.getElementById('age-max').addEventListener('input', () => {
+        validateField('age-range', {
+            min: document.getElementById('age-min').value,
+            max: document.getElementById('age-max').value
+        });
+    });
+
+    document.getElementById('bmi-min').addEventListener('input', () => {
+        validateField('bmi-range', {
+            min: document.getElementById('bmi-min').value,
+            max: document.getElementById('bmi-max').value
+        });
+    });
+
+    document.getElementById('bmi-max').addEventListener('input', () => {
+        validateField('bmi-range', {
+            min: document.getElementById('bmi-min').value,
+            max: document.getElementById('bmi-max').value
+        });
+    });
 }
 
+function validateField(field, value) {
+    let isValid = true;
+    let errorMessage = '';
+
+    switch (field) {
+        case 'category':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please select a category.';
+            }
+            break;
+        case 'challenge':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please enter a challenge.';
+            }
+            break;
+        case 'age-range':
+            if (!value.min || !value.max) {
+                isValid = false;
+                errorMessage = 'Age range cannot be empty.';
+            } else if (parseFloat(value.min) >= parseFloat(value.max)) {
+                isValid = false;
+                errorMessage = 'Age min must be less than age max.';
+            }
+            break;
+        case 'bmi-range':
+            if (!value.min || !value.max) {
+                isValid = false;
+                errorMessage = 'BMI range cannot be empty.';
+            } else if (parseFloat(value.min) >= parseFloat(value.max)) {
+                isValid = false;
+                errorMessage = 'BMI min must be less than BMI max.';
+            }
+            break;
+        case 'intensity':
+            if (!value.trim()) {
+                isValid = false;
+                errorMessage = 'Please select an intensity level.';
+            }
+            break;
+    }
+
+    const errorElement = document.getElementById(`${field}-error`);
+    if (isValid) {
+        errorElement.textContent = '';
+    } else {
+        errorElement.textContent = errorMessage;
+    }
+}
 function deleteActivityForm(activity) {
     Swal.fire({
         title: "Are you sure?",
@@ -1091,6 +1552,7 @@ function activateButton(buttonId) {
     const activeButton = document.getElementById(buttonId);
     activeButton.classList.add('active');
 }
+
 
 
 
