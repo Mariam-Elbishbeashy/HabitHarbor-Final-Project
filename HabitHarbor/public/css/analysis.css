@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
-    width: 50%; /* Adjusted to percentage */
+    width: 30%; /* Adjusted to percentage */
     height: auto; /* Maintain aspect ratio */
     background-color: #0f1312;
     box-shadow: 5px 5px 10px black;
@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: row;
     background-color: white;
-    width: 50%; /* Adjusted to percentage */
+    width: 55%; /* Adjusted to percentage */
     height: auto; /* Maintain aspect ratio */
     border-radius: 30px;
     box-shadow: 5px 5px 10px black;
@@ -78,7 +78,7 @@
     height: auto; /* Maintain aspect ratio */
     border-radius: 30px;
     box-shadow: 5px 5px 10px black;
-    justify-content: left;
+    justify-content: space-between;
     margin: 2%; /* Adjusted to percentage */
 }
 
@@ -86,7 +86,6 @@
     font-family: "Oswald", sans-serif;
     font-weight: 500;
     max-height: 5%;
-    font-size: 1.5vw; /* Adjusted to viewport width for responsiveness */
     font-style: normal;
     margin-left: 5%; /* Adjusted to percentage */
     margin-right: 5%; /* Adjusted to percentage */
@@ -94,13 +93,33 @@
 
 #num.square-text {
     position: absolute;
-    margin-top: 2.2%;
-    margin-left: 8%; /* Adjusted to percentage */
+    margin-top: 1%;
+    margin-left: 8.5%; /* Adjusted to percentage */
     font-size: 8vw; /* Adjusted to viewport width for responsiveness */
     font-style: normal;
+    color: white; 
+    text-shadow: 5px 5px 0px #cdfb47;
 }
 
 #image1 {
     width: 50%; /* Maintain aspect ratio */
     height: auto; /* Maintain aspect ratio */
+}
+
+@media (min-width: 768px) {
+    /* Adjust font size and alignment for medium screens */
+    .square-text {
+        font-size: 24px; /* Adjust as needed */
+        width: 70px; /* Adjust as needed */
+        height: auto; /* Adjust as needed */
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Adjust font size and alignment for large screens */
+    .square-text {
+        font-size: 28px; /* Adjust as needed */
+        width: 80px; /* Adjust as needed */
+        height: auto; /* Adjust as needed */
+    }
 }

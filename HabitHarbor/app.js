@@ -12,15 +12,18 @@ const Users = require('./models/userdb');
 const Userdata = require('./config/userdata');
 const Activities = require('./models/activitydb');
 const Activitydata = require('./config/activitydata');
+const ActivityRecords = require('./models/activityRecordsdb');
+const ActivityRecordsdata = require('./config/activityRecordsdata');
 const Posts = require('./models/postsdb');
 const Postdata = require('./config/postsdata');
 const multer = require('multer');
 
-// Importing routes
+//importing routes
 const adminRoutes = require('./routes/admin');
 const indexRoutes = require('./routes/index');
+const analysisRoutes = require('./routes/analysisRoute');
+// express app
 
-// Express app
 const app = express();
 const port = 3000;
 const dbURI = 'mongodb+srv://mariam2206043:Mariam%401234@cluster0.gcqt1qk.mongodb.net/';
@@ -63,6 +66,8 @@ app.use((req, res, next) => {
 app.use("/", userRoutes);
 app.use("/", indexRoutes);
 app.use("/", adminRoutes);
+app.use("/", analysisRoutes);
+
 
 //get requests
 app.get('/home', async (req, res) => {
@@ -85,6 +90,7 @@ app.get('/admin', (req, res) => {
 app.get('/', (req, res) => {
   res.render('front');
 });
+
 
 app.get('/analysis', async (req, res) => {
   const badges = await Badgesdb.find();
