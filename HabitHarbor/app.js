@@ -3,25 +3,25 @@ const mongoose = require('mongoose');
 const path = require('path');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const Resource = require('./HabitHarbor/models/resourcedb');
-const Badgesdb = require('./HabitHarbor/models/badgesdb');
-const badgesData = require('./HabitHarbor/config/badgesdata');
-const data = require('./HabitHarbor/config/resourcedata');
-const userRoutes = require('./HabitHarbor/routes/user');
-const Users = require('./HabitHarbor/models/userdb');
-const Userdata = require('./HabitHarbor/config/userdata');
-const Activities = require('./HabitHarbor/models/activitydb');
-const Activitydata = require('./HabitHarbor/config/activitydata');
-const ActivityRecords = require('./HabitHarbor/models/activityRecordsdb');
-const ActivityRecordsdata = require('./HabitHarbor/config/activityRecordsdata');
-const Posts = require('./HabitHarbor/models/postsdb');
-const Postdata = require('./HabitHarbor/config/postsdata');
+const Resource = require('./models/resourcedb');
+const Badgesdb = require('./models/badgesdb');
+const badgesData = require('./config/badgesdata');
+const data = require('./config/resourcedata');
+const userRoutes = require('./routes/user');
+const Users = require('./models/userdb');
+const Userdata = require('./config/userdata');
+const Activities = require('./models/activitydb');
+const Activitydata = require('./config/activitydata');
+const ActivityRecords = require('./models/activityRecordsdb');
+const ActivityRecordsdata = require('./config/activityRecordsdata');
+const Posts = require('./models/postsdb');
+const Postdata = require('./config/postsdata');
 const multer = require('multer');
 
 //importing routes
-const adminRoutes = require('./HabitHarbor/routes/admin');
-const indexRoutes = require('./HabitHarbor/routes/index');
-const analysisRoutes = require('./HabitHarbor/routes/analysisRoute');
+const adminRoutes = require('./routes/admin');
+const indexRoutes = require('./routes/index');
+const analysisRoutes = require('./routes/analysisRoute');
 // express app
 
 const app = express();
